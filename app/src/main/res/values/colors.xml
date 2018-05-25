@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorMainBackground">#ebedf4</color>
+    <color name="colorFloatingButton">#37c6c0</color>
+    <color name="colorFloatingButton1">#ff534d</color>
+    <color name="colorFloatingButton2">#f6d6ff</color>
+    <color name="colorFloatingButton3">#5af580</color>
+    <color name="colorFloatingButton4">#111212</color>
+    <color name="colorFloatingButton_press">#32c6e8</color>
+    <color name="colorItemViewPageCardText">#000</color>
+    <color name="colordiary">#1296ab</color>
+    <color name="colorlive">#1afa29</color>
+    <color name="colorstudy">#d81e06</color>
+    <color name="colortravel">#d4237a</color>
+    <color name="colorwork">#f4ea2a</color>
+    <color name="colorfirst">#1296ab</color>
+    <color name="colorfirsr_1">#f17c67</color>
+    <color name="colorfirst_2">#c3bed4</color>
+    <color name="colorfirst_3">#ddf0ed</color>
+    <color name="colorfirst_4">#1f1f1f</color>
+    <color name="colorsecond">#00697d</color>
+    <color name="coloethird">#1db0b8</color>
+    <color name="colorfourth">#1f8784</color>
+    <color name="colortagtext">#ffff</color>
+    <color name="colortoolbartitle">#ffff</color>
+    <color name="colorpopumenubackground">#453e3c</color>
+</resources>

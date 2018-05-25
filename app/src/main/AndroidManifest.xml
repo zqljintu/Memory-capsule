@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="zql.app_jinnang">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name=".UserSeting"
+        android:allowBackup="true"
+        android:icon="@drawable/icon_jiaonangxx"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon_jiaonangxx"
+        android:supportsRtl="true"
+        android:theme="@style/Zql_theme_fullScreen"
+        tools:ignore="InnerclassSeparator">
+        <activity android:name=".View.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".View.ListActivity"
+            android:theme="@style/Zql_theme_fullScreen" />
+        <activity
+            android:name=".View.AddActivity"
+            android:theme="@style/Zql_theme_fullScreen" />
+        <activity
+            android:name=".View.NoteinfoActivity"
+            android:theme="@style/Zql_theme_fullScreen" />
+        <activity
+            android:name=".View.SearchActivity"
+            android:theme="@style/Zql_theme_fullScreen" />
+        <activity android:name=".View.CalendarActivity" />
+        <activity android:name=".View.AboutActivity"></activity>
+    </application>
+
+</manifest>
