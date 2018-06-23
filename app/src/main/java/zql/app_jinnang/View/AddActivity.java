@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.jaeger.library.StatusBarUtil;
 import com.joaquimley.faboptions.FabOptions;
 import com.joaquimley.faboptions.FabOptionsAnimationStateListener;
+import com.kyleduo.switchbutton.SwitchButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
@@ -48,6 +49,7 @@ import static zql.app_jinnang.Bean.Means.isphotouri;
 
 public class AddActivity extends AppCompatActivity implements AddActivityImp,View.OnClickListener{
     private FabOptions fabOptions;
+    private SwitchButton switchButton_secret;
     private Toolbar toolbar_add;
     private TagGroup tagGroup;
     private List<String>tags;
@@ -78,6 +80,7 @@ public class AddActivity extends AppCompatActivity implements AddActivityImp,Vie
         inittagegroup();
         initsaveview();
         initEdittextView();
+        initSwitchbutton();
         ISNav.getInstance().init(new ImageLoader() {
             @Override
             public void displayImage(Context context, String path, ImageView imageView) {
@@ -87,6 +90,9 @@ public class AddActivity extends AppCompatActivity implements AddActivityImp,Vie
     }
     private void initEdittextView(){//实例化一个edittext
         materialEditText=(MaterialEditText)this.findViewById(R.id.add_noteinfoedittext);
+    }
+    private void initSwitchbutton(){
+        switchButton_secret=(SwitchButton)this.findViewById(R.id.add_switchbutton_secret);
     }
     private void initsaveview(){//实例化保存按钮
         TextView saveview=this.findViewById(R.id.add_savefile);
@@ -609,6 +615,9 @@ public class AddActivity extends AppCompatActivity implements AddActivityImp,Vie
             case 1:
                 Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
                 break;
+            case 3:
+                Toast.makeText(this, "修改成功", Toast.LENGTH_SHORT).show();
+                break;
             default:
                 break;
         }
@@ -622,5 +631,10 @@ public class AddActivity extends AppCompatActivity implements AddActivityImp,Vie
     @Override
     public Application getAddApplication() {
         return getApplication();
+    }
+
+    @Override
+    public boolean getIsCheckedSwitchbuttonSecret() {
+        return switchButton_secret.isChecked();
     }
 }

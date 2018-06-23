@@ -22,4 +22,5 @@ public interface AddActivityImp {
     public Context getAddActivityContext();
     public Application getAddApplication();
     public void setBackgroundcolorfromSeting(List<Integer>colorlist);
+    public boolean getIsCheckedSwitchbuttonSecret();//获取switchbutton的状态
 }

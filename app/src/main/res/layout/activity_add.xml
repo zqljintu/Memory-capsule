@@ -42,8 +42,30 @@
         android:textSize="17sp"
         android:lineSpacingExtra="3dp"
         android:hint="输入信息"/>
+    <LinearLayout
+        android:id="@+id/linearlayout_serect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/add_noteinfoedittext">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:textSize="17dp"
+            android:text="    设置为私密状态："/>
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/add_switchbutton_secret"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:checked="false"
+            style="@style/SwitchButtonMD" />
+    </LinearLayout>
     <me.gujun.android.taggroup.TagGroup
         android:id="@+id/add_tag_group"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         app:atg_inputHint="添加标签"
@@ -55,7 +77,7 @@
         app:atg_horizontalSpacing="5dp"
         app:atg_verticalSpacing="2dp"
         app:atg_pressedBackgroundColor="@color/colorFloatingButton_press"
-        android:layout_below="@id/add_noteinfoedittext"
+        android:layout_below="@id/linearlayout_serect"
         android:layout_width="match_parent"
         android:layout_height="150dp">
     </me.gujun.android.taggroup.TagGroup>

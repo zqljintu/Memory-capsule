@@ -85,17 +85,28 @@ public class Prestener_add implements PrestenerImp_add{
     public void addnotetoData(String noteinfo) {
         int SAVESUCCESS=1;
         int SAVEFAIL=0;
+        int CHANGESUCCESS=2;
         noteBean.setId(null);
         noteBean.setNoteinfo(noteinfo);
         noteBean.setNotetype(notetype);
         noteBean.setCreatetime(Means.getCreatetime());
-        if (DELETEID.equals(0)){
-            noteInfoModelImp.InsertNotetoData(noteBean);
+        if (DELETEID.equals(0)){//判断是不是修改的文件，如果是的话，先删除这个文件，再重新插入文件到开头
+            if (addActivityImp.getIsCheckedSwitchbuttonSecret()){
+                noteInfoModelImp.InsertNotetoData(noteBean);
+            }else {
+                noteInfoModelImp.InsertNotetoData(noteBean);
+            }
+            addActivityImp.showmessageAbout_savenote(SAVESUCCESS);
         }else {
-            noteInfoModelImp.DeleteNotefromDataByid(DELETEID);
-            noteInfoModelImp.InsertNotetoData(noteBean);
+            if (addActivityImp.getIsCheckedSwitchbuttonSecret()){//判断switchButton的状态来判断存入哪个数据库文件中
+                noteInfoModelImp.DeleteNotefromDataByid(DELETEID);
+                noteInfoModelImp.InsertNotetoData_secret(noteBean);
+            }else {
+                noteInfoModelImp.DeleteNotefromDataByid(DELETEID);
+                noteInfoModelImp.InsertNotetoData(noteBean);
+            }
+            addActivityImp.showmessageAbout_savenote(CHANGESUCCESS);
         }
-        addActivityImp.showmessageAbout_savenote(SAVESUCCESS);
     }
 
     /**

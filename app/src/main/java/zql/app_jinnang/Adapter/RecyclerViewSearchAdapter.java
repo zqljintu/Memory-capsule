@@ -68,4 +68,5 @@ public class RecyclerViewSearchAdapter extends RecyclerView.Adapter<RecyclerView
             }
         });
     }
+
 }

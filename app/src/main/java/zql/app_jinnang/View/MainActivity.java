@@ -1,5 +1,6 @@
 package zql.app_jinnang.View;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
@@ -20,23 +22,28 @@ import android.transition.TransitionInflater;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.jaeger.library.StatusBarUtil;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
 import com.yuyh.library.imgsel.config.ISCameraConfig;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import zql.app_jinnang.Adapter.ViewPagerCardAdapter;
@@ -135,6 +142,28 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         });
 
     }
+    private void initEditpassworddialog(){//实例化一个重新编辑密码的dialog
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        LayoutInflater layoutInflater=LayoutInflater.from(this);
+        View centerview=layoutInflater.inflate(R.layout.activity_set_editpassworddialog,null);
+        final MaterialEditText materialEditText_password=(MaterialEditText)centerview.findViewById(R.id.set_dialog_password_edit_password);
+        final TextView texttitle=(TextView)centerview.findViewById(R.id.title_text_password);
+        Button button_ok=(Button)centerview.findViewById(R.id.set_dialog_password_ok_password);
+        final AlertDialog alertDialog_editpassword=builder.setView(centerview).create();
+        texttitle.setText("请输入密码");
+        button_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (prestenerImpMain.iscurrentthepasswordfromSeting(materialEditText_password.getText().toString())){
+                    startListSecretActivity();
+                    alertDialog_editpassword.dismiss();
+                }else {
+                    Toast.makeText(MainActivity.this, "输入密码有误", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        alertDialog_editpassword.show();
+    }
     private void initCameraView(){//初始化图片加载器
         ISNav.getInstance().init(new ImageLoader() {
             @Override
@@ -145,8 +174,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     }
     private void initphototakActivity(){
         ISCameraConfig config=new ISCameraConfig.Builder()
-                //.needCrop(true)
-                //.cropSize(0,0,500,500)
+                .needCrop(true)
+                .cropSize(0,0,500,500)
                 .build();
         ISNav.getInstance().toCameraActivity(this,config,REQUEST_CAMERA_CODE);
     }
@@ -234,6 +263,21 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         return super.onCreatePanelMenu(featureId, menu);
     }
 
+    @SuppressLint("RestrictedApi")
+    @Override
+    protected boolean onPrepareOptionsPanel(View view, Menu menu) {
+        if (menu.getClass() == MenuBuilder.class) {
+            try {
+                Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
+                method.setAccessible(true);
+                method.invoke(menu, true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return super.onPrepareOptionsPanel(view, menu);
+    }
+
     @Override//设置监听菜单
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -247,6 +291,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
                 prestenerImpMain.openSearchActivity();
                 return true;
             case R.id.action_serect:
+                initEditpassworddialog();
                 return true;
             case R.id.action_camera:
                 initphototakActivity();
@@ -320,6 +365,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     @Override//打开新的ListActivity
     public void startListActivity() {
         Intent mintent=new Intent(MainActivity.this,ListActivity.class);
+        this.startActivity(mintent);
+    }
+
+    @Override//打开秘密ListActivity
+    public void startListSecretActivity() {
+        Intent mintent=new Intent(MainActivity.this,ListSecretActivity.class);
         this.startActivity(mintent);
     }
 

@@ -4,21 +4,26 @@
     <item
         android:id="@+id/action_list"
         android:orderInCategory="100"
+        android:icon="@drawable/list_note_01"
+
         android:title="@string/menu_listabout"></item>
     <item
         android:id="@+id/action_serect"
         android:orderInCategory="100"
+        android:icon="@drawable/secret_not_01"
         android:title="@string/menu_serect">
     </item>
     <item
         android:id="@+id/action_camera"
         android:orderInCategory="100"
-        android:title="拍摄 创建">
+        android:icon="@drawable/camera_note_01"
+        android:title="拍摄创建">
     </item>
     <item
         android:id="@+id/action_seting"
         android:orderInCategory="100"
         android:title="@string/menu_userseting"
+        android:icon="@drawable/seting_note01"
         app:showAsAction="never">
     </item>
     <item

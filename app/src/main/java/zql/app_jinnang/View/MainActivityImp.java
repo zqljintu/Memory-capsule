@@ -19,6 +19,7 @@ public interface MainActivityImp {
     public void startAddActivity(int type);
     public void startAddActivityS(String path);
     public void startListActivity();
+    public void startListSecretActivity();
     public void startCalendarActivity();
     public void startSetingActivity();
     public void startSearchActivity();

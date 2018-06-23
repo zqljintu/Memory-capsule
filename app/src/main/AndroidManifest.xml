@@ -36,7 +36,8 @@
             android:name=".View.SearchActivity"
             android:theme="@style/Zql_theme_fullScreen" />
         <activity android:name=".View.CalendarActivity" />
-        <activity android:name=".View.AboutActivity"></activity>
+        <activity android:name=".View.AboutActivity" />
+        <activity android:name=".View.ListSecretActivity"></activity>
     </application>
 
 </manifest>

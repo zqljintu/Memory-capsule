@@ -23,21 +23,29 @@ import zql.app_jinnang.greendao.db.NoteBeanDao;
  */
 
 public class NoteInfoModel implements NoteInfoModelImp {
-    private NoteBeanDao noteBeanDao;
-    private SQLiteDatabase db;
-    private DaoSession daoSession;
+    private NoteBeanDao noteBeanDao,noteBeanDao_secret;
+    private SQLiteDatabase db,db_secret;
+    private DaoSession daoSession,daoSession_secret;
     private Context mcontext;
 
     public NoteInfoModel(Context context){
         this.mcontext=context;
         initGreendao();
+        initGreendao_serect();
     }
-    void initGreendao(){
+    void initGreendao(){//创建公开数据库
         DaoMaster.DevOpenHelper helper=new DaoMaster.DevOpenHelper(mcontext,"recluse-db",null);
         db=helper.getWritableDatabase();
         DaoMaster daoMaster=new DaoMaster(db);
         daoSession=daoMaster.newSession();
         noteBeanDao=daoSession.getNoteBeanDao();
+    }
+    void initGreendao_serect(){//创建私密数据库
+        DaoMaster.DevOpenHelper helper=new DaoMaster.DevOpenHelper(mcontext,"serect-db",null);
+        db_secret=helper.getWritableDatabase();
+        DaoMaster daoMaster=new DaoMaster(db_secret);
+        daoSession_secret=daoMaster.newSession();
+        noteBeanDao_secret=daoSession_secret.getNoteBeanDao();
     }
 
 
@@ -47,8 +55,18 @@ public class NoteInfoModel implements NoteInfoModelImp {
     }
 
     @Override
+    public void InsertNotetoData_secret(NoteBean noteBean) {
+        noteBeanDao_secret.insert(noteBean);
+    }
+
+    @Override
     public void DeleteNotefromData(NoteBean noteBean) {
         noteBeanDao.delete(noteBean);
+    }
+
+    @Override
+    public void DeleteNotefromData_secret(NoteBean noteBean) {
+        noteBeanDao_secret.delete(noteBean);
     }
 
     @Override
@@ -78,6 +96,13 @@ public class NoteInfoModel implements NoteInfoModelImp {
     public List<NoteBean> QueryAllNotefromData() {
         List mlist=noteBeanDao.loadAll();
         Collections.reverse(mlist);//倒序
+        return mlist;
+    }
+
+    @Override
+    public List<NoteBean> QueryAllNotefromData_secret() {
+        List mlist=noteBeanDao_secret.loadAll();
+        Collections.reverse(mlist);
         return mlist;
     }
 

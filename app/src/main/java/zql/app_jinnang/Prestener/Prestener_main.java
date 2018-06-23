@@ -24,6 +24,11 @@ public class Prestener_main implements PrestenerImp_main {
     }
 
     @Override
+    public boolean iscurrentthepasswordfromSeting(String password) {
+        return userSeting.iscurrentthePassword(password);
+    }
+
+    @Override
     public void openCalendarActivity() {
         mainActivityImp.startCalendarActivity();
     }
@@ -46,6 +51,11 @@ public class Prestener_main implements PrestenerImp_main {
     @Override
     public void openListActivity() {
         mainActivityImp.startListActivity();
+    }
+
+    @Override
+    public void openListSecretActivity() {
+        mainActivityImp.startListSecretActivity();
     }
 
     @Override
