@@ -28,6 +28,12 @@ public class Prestener_list implements PrestenerImp_list {
     }
 
     @Override
+    public void changeNotetoPasswordFile(NoteBean noteBean) {
+        noteInfoModelImp.InsertNotetoData_secret(noteBean);
+        noteInfoModelImp.DeleteNotefromData(noteBean);
+    }
+
+    @Override
     public void readNotefromDatatoList(int READ_TYPE) {
         switch (READ_TYPE){
             case 0:

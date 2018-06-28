@@ -4,6 +4,8 @@ import android.database.Cursor;
 
 import java.util.List;
 
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
 import zql.app_jinnang.Bean.NoteBean;
 
 /**
@@ -18,10 +20,14 @@ public interface NoteInfoModelImp {
     public List<NoteBean> QueryAllNotefromData();
     public List<NoteBean> QueryAllNotefromData_secret();
     public List<NoteBean> QueryNoyefromDataByType(String READ_TYPE);
+    public int QueryEveryTypeSumfromDataByType(String READ_TYPE);
+    public int QueryAllNoteSumfromfromData();
     public List<String> QueryNotecreatetime();
     public List<NoteBean> QueryNotebeanBycreatetime(String creaetime);
     public void ChangeNotetoData(NoteBean noteBean);
     public void DeleteNotefromDataByid(Long id);
     public Cursor getCursorfromData(String search);
     public List<NoteBean> getSearchfromData(String search);
+    public List<SliceValue> getPieChartNumberfromData();
+    public List<Integer> getPieChartTypeListfromData();//获取各类型数据
 }

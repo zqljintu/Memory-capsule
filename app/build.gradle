@@ -46,4 +46,5 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.2' // add library数据库
     compile 'cn.aigestudio.datepicker:DatePicker:2.2.0'
     compile 'com.kyleduo.switchbutton:library:2.0.0'//switchbutton开源库
+    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'//chart图表开源库
 }

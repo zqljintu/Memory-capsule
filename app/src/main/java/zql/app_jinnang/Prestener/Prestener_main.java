@@ -74,6 +74,12 @@ public class Prestener_main implements PrestenerImp_main {
     }
 
     @Override
+    public void changeNotetoPasswordFile(NoteBean noteBean) {
+        noteInfoModelImp.InsertNotetoData_secret(noteBean);
+        noteInfoModelImp.DeleteNotefromData(noteBean);
+    }
+
+    @Override
     public void setBackgroundcolorfromSeting() {
         mainActivityImp.setBackgroundcolorfromSeting(userSeting.getcurrentColor());
     }

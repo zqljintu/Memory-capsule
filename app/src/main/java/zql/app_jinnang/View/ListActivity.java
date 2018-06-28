@@ -207,7 +207,25 @@ public class ListActivity extends AppCompatActivity implements ListActivityImp {
         bottomSheetDialog.setContentView(dialogview);
         bottomSheetDialog.show();
     }
-
+    private void initPasswordFileDialog(final NoteBean noteBean){
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("隐藏");
+        builder.setMessage("确认隐藏？");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                prestenerImp_list.changeNotetoPasswordFile(noteBean);
+                prestenerImp_list.readNotefromDatatoList(0);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

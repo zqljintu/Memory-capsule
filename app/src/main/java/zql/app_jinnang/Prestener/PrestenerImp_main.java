@@ -21,4 +21,5 @@ public interface PrestenerImp_main {
     public void setBackgroundcolorfromSeting();//改变主题
     public int getBackgroundcolorNumfromSering();//获取
     public boolean iscurrentthepasswordfromSeting(String password);//判断密码是否正确
+    public void changeNotetoPasswordFile(NoteBean noteBean);//将文件转入秘密文件夹
 }

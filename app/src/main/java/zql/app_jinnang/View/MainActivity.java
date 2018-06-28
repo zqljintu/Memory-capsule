@@ -206,6 +206,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         main_dialog_linear_hide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                initPasswordFileDialog(noteBean);
                 bottomSheetDialog.dismiss();
             }
         });
@@ -231,6 +232,25 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         main_dialog.setBackgroundColor(maincolor);
         bottomSheetDialog.setContentView(dialogview);
         bottomSheetDialog.show();
+    }
+    private void initPasswordFileDialog(final NoteBean noteBean){
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("隐藏");
+        builder.setMessage("确认隐藏？");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                prestenerImpMain.changeNotetoPasswordFile(noteBean);
+                prestenerImpMain.readNotefromDatatoMain();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
     }
     private void initDeleteDialog(final NoteBean noteBean){
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -296,6 +316,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
             case R.id.action_camera:
                 initphototakActivity();
                 return true;
+            case R.id.action_chart:
+                initChartActiviy();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -304,6 +327,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     public void startSearchActivity() {
         Intent mintent=new Intent(this,SearchActivity.class);
         startActivity(mintent);
+    }
+    //打开数据图表分析界面
+    private void initChartActiviy(){
+        Intent mintent=new Intent(MainActivity.this,DataChartActivity.class);
+        this.startActivity(mintent);
     }
 
 

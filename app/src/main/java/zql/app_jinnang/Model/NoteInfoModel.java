@@ -3,17 +3,19 @@ package zql.app_jinnang.Model;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 
-import org.greenrobot.greendao.query.CursorQuery;
-import org.greenrobot.greendao.query.Query;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
 import zql.app_jinnang.Bean.Means;
 import zql.app_jinnang.Bean.NoteBean;
+import zql.app_jinnang.R;
 import zql.app_jinnang.greendao.db.DaoMaster;
 import zql.app_jinnang.greendao.db.DaoSession;
 import zql.app_jinnang.greendao.db.NoteBeanDao;
@@ -84,7 +86,7 @@ public class NoteInfoModel implements NoteInfoModelImp {
         return Means.removeDuplicate(slist);//去除重复的元素
     }
 
-    @Override
+    @Override//通过创建时间查询
     public List<NoteBean> QueryNotebeanBycreatetime(String creaetime) {
         QueryBuilder<NoteBean> queryBuilder=noteBeanDao.queryBuilder();
         queryBuilder.where(NoteBeanDao.Properties.Createtime.like(creaetime))
@@ -133,5 +135,59 @@ public class NoteInfoModel implements NoteInfoModelImp {
         List list=queryBuilder.list();
         Collections.reverse(list);//倒序
         return list;
+    }
+
+    @Override
+    public int QueryAllNoteSumfromfromData() {
+        List mlist=noteBeanDao.loadAll();
+        return mlist.size();
+    }
+
+    @Override
+    public int QueryEveryTypeSumfromDataByType(String READ_TYPE) {
+        QueryBuilder<NoteBean> queryBuilder=noteBeanDao.queryBuilder();
+        queryBuilder.where(NoteBeanDao.Properties.Notetype.like(READ_TYPE))
+                .orderAsc(NoteBeanDao.Properties.Notetype);
+        List list=queryBuilder.list();
+        return list.size();
+    }
+
+    @Override
+    public List<Integer> getPieChartTypeListfromData() {
+        List<String> types=new ArrayList<>();
+        List<Integer> list=new ArrayList<>();
+        types.add(0,"工作");
+        types.add(1,"学习");
+        types.add(2,"生活");
+        types.add(3,"日记");
+        types.add(4,"旅行");
+        for (int i=0;i<5;i++){
+            list.add(i,QueryEveryTypeSumfromDataByType(types.get(i)));
+        }
+        return list;
+    }
+
+    @Override
+    public List<SliceValue> getPieChartNumberfromData() {//获取饼状图的数据
+        List<SliceValue>mlist=new ArrayList<>();
+        List<Integer> colors=new ArrayList<>();
+        List<String> types=new ArrayList<>();
+        types.add(0,"生活");
+        types.add(1,"工作");
+        types.add(2,"学习");
+        types.add(3,"日记");
+        types.add(4,"旅行");
+        colors.add(0,R.color.colorlive);
+        colors.add(1,R.color.colorwork);
+        colors.add(2,R.color.colorstudy);
+        colors.add(3,R.color.colordiary);
+        colors.add(4,R.color.colortravel);
+        for (int i=0;i<5;i++){
+            SliceValue sliceValue=new SliceValue();
+            sliceValue.setColor(colors.get(i));
+            sliceValue.setLabel(types.get(i));
+            sliceValue.setValue(QueryEveryTypeSumfromDataByType(types.get(i)));
+        }
+        return mlist;
     }
 }

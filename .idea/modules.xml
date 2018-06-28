@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/App_jinnang.iml" filepath="$PROJECT_DIR$/App_jinnang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Memory-capsule.iml" filepath="$PROJECT_DIR$/Memory-capsule.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -37,7 +37,8 @@
             android:theme="@style/Zql_theme_fullScreen" />
         <activity android:name=".View.CalendarActivity" />
         <activity android:name=".View.AboutActivity" />
-        <activity android:name=".View.ListSecretActivity"></activity>
+        <activity android:name=".View.ListSecretActivity" />
+        <activity android:name=".View.DataChartActivity"></activity>
     </application>
 
 </manifest>

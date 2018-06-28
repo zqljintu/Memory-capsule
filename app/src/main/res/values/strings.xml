@@ -8,6 +8,7 @@
     <string name="note_diary">日记</string>
     <string name="menu_listabout">列表清单</string>
     <string name="menu_userseting">用户设置</string>
+    <string name="menu_datachart">数据分析</string>
     <string name="menu_serect">我的秘密</string>
     <string name="menu_noteabout">详情</string>
     <string name="menu_notehide">隐藏</string>
