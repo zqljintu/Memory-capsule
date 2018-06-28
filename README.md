@@ -6,6 +6,12 @@ This is a sample memorandum,but I named it Memory-capsule.//这只是一个简�
 
 这只是一个简单的备忘录程序，给她取了一个名字叫“记忆胶囊”，来记录我的一些想法，回忆，行程等等。同时通过写个App,开阔了眼界，丰富了知识，很高兴能把它开源出来，为开源世界做出自己的一点小贡献。
 
+
+    更新版本说明（v1.02）
+    1，添加了数据分析模块，用户可以查看创建类型数据分布。
+    2，完成上一版本中主界面添加入私密文件夹功能。
+    3，优化了相应的界面设计，使界面整体风格更加统一协调。
+
     更新版本说明（V1.01）
     1，添加了密码模块，用户可以自由添加个人备忘录于密码文件夹中。
     2，密码文件夹采用了另一个数据库文件，与普通备忘录文件隔离开，加强了安全可靠性。
@@ -36,9 +42,11 @@ This is a sample memorandum,but I named it Memory-capsule.//这只是一个简�
     floatingbutton库：compile 'com.github.joaquimley:faboptions:1.2.0'
     标签库：'me.gujun.android.taggroup:library:1.4@aar'
     switchbutton库：compile 'com.kyleduo.switchbutton:library:2.0.0'
+    chart图表开源库：compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
     等。
     在此，感谢各位大神的轮子。
     
- 程序采用了mvp架构的设计，新手所写，还有许多不足之处，如果喜欢，欢迎给个Star,若有什么问题，欢迎issue。
+ 程序采用了mvp架构的设计，新手所写，还有诸多不足之处，如果喜欢，欢迎给个Star,若有什么问题，欢迎issue。
+ 联系请关注知乎账号：番茄炒蛋不要蛋
  
     
