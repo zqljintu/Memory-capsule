@@ -182,6 +182,7 @@ public class ListActivity extends AppCompatActivity implements ListActivityImp {
         list_dialog_linear_hide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                initPasswordFileDialog(noteBean);
                 bottomSheetDialog.dismiss();
             }
         });

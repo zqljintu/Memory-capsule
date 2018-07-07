@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:layout_width="match_parent"
+<RelativeLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -15,13 +16,24 @@
         style="@style/Zql_theme_toolbar"
         app:title="">
     </android.support.v7.widget.Toolbar>
-    <lecho.lib.hellocharts.view.PieChartView
-        android:id="@+id/piechart"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+    <RelativeLayout
+        android:id="@+id/chart_relativelayout"
+        android:layout_below="@id/chart_spinner"
+        android:layout_above="@id/chart_lineaer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/chart_spinner"
+        android:layout_gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_chart"
+        android:layout_marginTop="5dp"
+        android:textSize="16sp">
+    </org.angmarch.views.NiceSpinner>
     <LinearLayout
+        android:id="@+id/chart_lineaer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"

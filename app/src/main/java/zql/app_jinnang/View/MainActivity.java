@@ -52,6 +52,8 @@ import zql.app_jinnang.Bean.NoteBean;
 import zql.app_jinnang.Prestener.Prestener_main;
 import zql.app_jinnang.Prestener.PrestenerImp_main;
 import zql.app_jinnang.R;
+import zql.app_jinnang.Service.PasswordView.KeyPasswordView;
+import zql.app_jinnang.Service.PasswordView.KeynumberDialog;
 
 
 public class MainActivity extends AppCompatActivity implements MainActivityImp{
@@ -66,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     private RelativeLayout relativeLayout;
     private PopupMenu popupMenu;
     private Integer maincolor;
+    private String password="";
+    private int count_delete;
     private static final int REQUEST_LIST_CODE = 0;
     private static final int REQUEST_CAMERA_CODE = 1;
     private static final int REQUEST_UPDATE=2;
@@ -143,26 +147,45 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
 
     }
     private void initEditpassworddialog(){//实例化一个重新编辑密码的dialog
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        LayoutInflater layoutInflater=LayoutInflater.from(this);
-        View centerview=layoutInflater.inflate(R.layout.activity_set_editpassworddialog,null);
-        final MaterialEditText materialEditText_password=(MaterialEditText)centerview.findViewById(R.id.set_dialog_password_edit_password);
-        final TextView texttitle=(TextView)centerview.findViewById(R.id.title_text_password);
-        Button button_ok=(Button)centerview.findViewById(R.id.set_dialog_password_ok_password);
-        final AlertDialog alertDialog_editpassword=builder.setView(centerview).create();
-        texttitle.setText("请输入密码");
-        button_ok.setOnClickListener(new View.OnClickListener() {
+        if (!password.isEmpty()){
+            password="";
+        }
+        final BottomSheetDialog passwordbottomsheetdialog=new BottomSheetDialog(MainActivity.this);
+        View dialogview=LayoutInflater.from(MainActivity.this)
+                .inflate(R.layout.sheetdialog_password,null);
+        final KeynumberDialog keynumberDialog=(KeynumberDialog)dialogview.findViewById(R.id.main_sheetdialog_keynumber);
+        final KeyPasswordView keyPasswordView=(KeyPasswordView)dialogview.findViewById(R.id.main_sheetdialog_passwordview);
+        keyPasswordView.setRouldRectcolor(maincolor);
+        keynumberDialog.setOnNumberClickListener(new KeynumberDialog.OnNumberClickListener() {
             @Override
-            public void onClick(View view) {
-                if (prestenerImpMain.iscurrentthepasswordfromSeting(materialEditText_password.getText().toString())){
-                    startListSecretActivity();
-                    alertDialog_editpassword.dismiss();
-                }else {
-                    Toast.makeText(MainActivity.this, "输入密码有误", Toast.LENGTH_SHORT).show();
+            public void onNumberReturn(String number) {
+                password+=number;
+                if (password.length()==6){
+                    if (prestenerImpMain.iscurrentthepasswordfromSeting(password)){
+                        startListSecretActivity();
+                        password="";
+                        passwordbottomsheetdialog.dismiss();
+                    }else {
+                        Toast.makeText(MainActivity.this, "输入密码有误", Toast.LENGTH_SHORT).show();
+                        password="";
+                    }
                 }
+                keyPasswordView.changeTheNum(password.length());
+            }
+
+            @Override
+            public void onNumberDelete() {
+                if (password.length()<=1){
+                    password="";
+                }else {
+                    password=password.substring(0,password.length()-1);
+                }
+                keyPasswordView.changeTheNum(password.length());
             }
         });
-        alertDialog_editpassword.show();
+        passwordbottomsheetdialog.setContentView(dialogview);
+        passwordbottomsheetdialog.show();
+
     }
     private void initCameraView(){//初始化图片加载器
         ISNav.getInstance().init(new ImageLoader() {
@@ -259,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                count_delete=viewPagercard.getCurrentItem();//做一个跳转优化
                 prestenerImpMain.deleteNoteBean(noteBean);
                 prestenerImpMain.readNotefromDatatoMain();
             }
@@ -342,6 +366,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
 
     @Override//打开新的AddActivity
     public void startAddActivity(int type) {
+        count_delete=0;//创建新的事件只需跳转到第一位
         floatingActionsmenu_add.collapseImmediately();
         Intent addintent=new Intent(MainActivity.this,AddActivity.class);
         Bundle bundle=new Bundle();
@@ -354,6 +379,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
 
     @Override//通过拍照打开新的AddActivity
     public void startAddActivityS(String path) {
+        count_delete=0;//创建新的事件只需跳转到第一位
         Intent addintent=new Intent(MainActivity.this,AddActivity.class);
         Bundle bundle=new Bundle();
         bundle.putInt("addtype",EDIT);
@@ -443,6 +469,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         viewPagercard.removeAllViews();
         ViewPagerCardAdapter adapter=new ViewPagerCardAdapter(this,noteBeanList,this);
         viewPagercard.setAdapter(adapter);
+
+        if (count_delete>=1){//优化删除（删除完成后跳转到上一个事件界面）
+            viewPagercard.setCurrentItem(count_delete-1);
+        }else {
+            viewPagercard.setCurrentItem(0);
+        }
+
         viewPagercard.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,24,getResources().getDisplayMetrics()));
         viewPagercard.setPageTransformer(false,new ScaleTransformer0(this));
     }
@@ -455,7 +488,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void setBackgroundcolorfromSeting(List<Integer>mlist) {
-        maincolor=mlist.get(0);
+        maincolor=mlist.get(0);//设置主体颜色
         StatusBarUtil.setColor(this, mlist.get(0));
         toolbar_main.setBackgroundColor(mlist.get(0));
         relativeLayout.setBackgroundColor(mlist.get(1));

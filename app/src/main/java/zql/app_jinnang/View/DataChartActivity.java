@@ -2,25 +2,38 @@ package zql.app_jinnang.View;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 
 import com.jaeger.library.StatusBarUtil;
 
+import org.angmarch.views.NiceSpinner;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Column;
+import lecho.lib.hellocharts.model.ColumnChartData;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.SliceValue;
+import lecho.lib.hellocharts.model.SubcolumnValue;
+import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.LineChartView;
 import lecho.lib.hellocharts.view.PieChartView;
 import zql.app_jinnang.Prestener.PrestenerImp_datachart;
@@ -29,9 +42,11 @@ import zql.app_jinnang.R;
 
 public class DataChartActivity extends AppCompatActivity implements DataChartActivityImp {
     private PrestenerImp_datachart prestenerImp_datachart;
-    private PieChartView pieChartView;
+    private RelativeLayout relativeLayout;
+    private PieChartView pieChartView;//饼状图
+    private ColumnChartView columnChartView;//柱状图
     private Integer integer0,integer1;
-    private List<SliceValue> values = new ArrayList<SliceValue>();
+    private NiceSpinner niceSpinner;
     private List<Integer>typesNum=new ArrayList<>();
     private int notesum;
     private int[] colorData = {Color.parseColor("#f4ea2a"),
@@ -49,9 +64,39 @@ public class DataChartActivity extends AppCompatActivity implements DataChartAct
         prestenerImp_datachart=new Prestener_datachart(this);
         prestenerImp_datachart.setBackgroundcolorfromSeting();
         StatusBarUtil.setColor(this,integer0);
-        initToolbar();
+        typesNum=prestenerImp_datachart.getPieChartListfromData();
+        notesum=prestenerImp_datachart.getPieChartSumfromDatatoActivity();
+        initView();
         initPieChart();
-    }    private void initToolbar(){
+    }
+    private void initView(){
+        relativeLayout=(RelativeLayout)this.findViewById(R.id.chart_relativelayout);
+        initToolbar();
+        initNicespinner();
+    }
+    private void initNicespinner(){//创建一个筛选器
+        niceSpinner=(NiceSpinner)findViewById(R.id.chart_spinner);
+        List<String> data=new LinkedList<>(Arrays.asList("饼状图","柱状图"));
+        niceSpinner.attachDataSource(data);
+        niceSpinner.addOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        relativeLayout.removeAllViews();
+                        initPieChart();
+                        break;
+                    case 1:
+                        relativeLayout.removeAllViews();
+                        initColumnChart();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+    private void initToolbar(){
         Toolbar toolbar_chart=(Toolbar) this.findViewById(R.id.toolbar_chart);
         toolbar_chart.setBackgroundColor(integer0);
         setSupportActionBar(toolbar_chart);
@@ -67,13 +112,17 @@ public class DataChartActivity extends AppCompatActivity implements DataChartAct
     }
 
     private void initPieChart(){//设置饼状图
-        typesNum=prestenerImp_datachart.getPieChartListfromData();
-        notesum=prestenerImp_datachart.getPieChartSumfromDatatoActivity();
+        pieChartView=new PieChartView(this);
+        List<SliceValue> values = new ArrayList<SliceValue>();
+        int pieWidth=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,400, getResources().getDisplayMetrics());
+        int pieHeigth=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,400, getResources().getDisplayMetrics());
+        RelativeLayout.LayoutParams pieChartParams=new RelativeLayout.LayoutParams(pieWidth,pieHeigth);
+        pieChartParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        pieChartParams.addRule(RelativeLayout.CENTER_VERTICAL);
         for (int i = 0; i < 5; ++i) {
             SliceValue sliceValue = new SliceValue((float) typesNum.get(i), colorData[i]);
             values.add(sliceValue);
         }
-        pieChartView=(PieChartView)this.findViewById(R.id.piechart);
         pieChartView.setViewportCalculationEnabled(true);
         pieChartView.setChartRotationEnabled(false);
         pieChartView.setAlpha(0.9f);
@@ -105,6 +154,39 @@ public class DataChartActivity extends AppCompatActivity implements DataChartAct
 
             }
         });
+        relativeLayout.addView(pieChartView,pieChartParams);
+    }
+    private void initColumnChart(){//创建柱状图
+        columnChartView=new ColumnChartView(this);
+        int columnWidth=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,400, getResources().getDisplayMetrics());
+        int columnHeigth=(int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,400, getResources().getDisplayMetrics());
+        RelativeLayout.LayoutParams columnChartParams=new RelativeLayout.LayoutParams(columnWidth,columnHeigth);
+        columnChartParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        columnChartParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        List<Column>columnList=new ArrayList<>();
+        List<SubcolumnValue> values;
+        for (int i=0;i<5;++i){
+            values=new ArrayList<SubcolumnValue>();
+            values.add(new SubcolumnValue((float)typesNum.get(i),colorData[i]));
+            Column column=new Column(values);
+            column.setHasLabels(false);
+            column.setHasLabelsOnlyForSelected(true);
+            columnList.add(column);
+        }
+        ColumnChartData columnChartData=new ColumnChartData(columnList);
+        Axis axis=new Axis();
+        Axis axiy=new Axis().setHasLines(true);
+        List<AxisValue>axisValues=new ArrayList<>();
+        for (int j=0;j<5;++j){
+            axisValues.add(new AxisValue(j).setLabel(stateChar[j]));
+        }
+        axis.setValues(axisValues);
+        axis.setName("类别");
+        axiy.setName("数量");
+        columnChartData.setAxisXBottom(axis);
+        columnChartData.setAxisYLeft(axiy);
+        columnChartView.setColumnChartData(columnChartData);
+        relativeLayout.addView(columnChartView,columnChartParams);
     }
     private String getCenterStringfromData(int i){
         String result="";
