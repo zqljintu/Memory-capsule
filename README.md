@@ -7,6 +7,11 @@ This is a sample memorandum,but I named it Memory-capsule.//这只是一个简�
 这只是一个简单的备忘录程序，给她取了一个名字叫“记忆胶囊”，来记录我的一些想法，回忆，行程等等。同时通过写个App,开阔了眼界，丰富了知识，很高兴能把它开源出来，为开源世界做出自己的一点小贡献。
 
     
+    更新版本说明（v1.10）
+    1，添加文本分享模块，调用手机系统分享模块实现，能分享到多个软件。（注：微信朋友圈，QQ空间不能被分享）
+    2，添加动画属性，对详情界面添加了两个动画效果，在以后的更新中将添加更多的动画效果。
+    3，更改了被多人吐槽的图标，扁平化效果，借鉴了网上的一些素材。
+    
     更新版本说明（v1.03）
     1，数据分析模块添加了一个新的项目，完成了饼状图和柱状图的双设计！
     2，重新设计了密码输入界面，使密码输入更加安全，并且统一了界面。
@@ -50,6 +55,9 @@ This is a sample memorandum,but I named it Memory-capsule.//这只是一个简�
     switchbutton库：compile 'com.kyleduo.switchbutton:library:2.0.0'
     chart图表开源库：compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
     等。
+    动画开源库：implementation 'com.android.support:support-compat:26.1.0'
+               implementation 'com.daimajia.easing:library:2.0@aar'
+               implementation 'com.daimajia.androidanimations:library:2.3@aar'
     在此，感谢各位大神的轮子。
     
  程序采用了mvp架构的设计，新手所写，还有诸多不足之处，如果喜欢，欢迎给个Star,若有什么问题，欢迎issue。
