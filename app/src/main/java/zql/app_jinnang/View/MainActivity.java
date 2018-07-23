@@ -17,15 +17,12 @@ import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
-import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -34,11 +31,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.jaeger.library.StatusBarUtil;
-import com.rengwuxian.materialedittext.MaterialEditText;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
 import com.yuyh.library.imgsel.config.ISCameraConfig;
@@ -70,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     private Integer maincolor;
     private String password="";
     private int count_delete;
+
     private static final int REQUEST_LIST_CODE = 0;
     private static final int REQUEST_CAMERA_CODE = 1;
     private static final int REQUEST_UPDATE=2;
@@ -84,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         StatusBarUtil.setColor(this, getColor(R.color.colorFloatingButton));
         prestenerImpMain =new Prestener_main(this);
         initview();
-        setupwindowAnimations();
         prestenerImpMain.readNotefromDatatoMain();
         prestenerImpMain.setBackgroundcolorfromSeting();
     }
@@ -98,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         relativeLayout=(RelativeLayout)this.findViewById(R.id.relativeLayout_main);
         toolbar_main=(Toolbar)this.findViewById(R.id.toolbar_main);
         title_toolbar_main=(TextView)findViewById(R.id.title_toolbar_main);
+        YoYo.with(Techniques.DropOut)
+                .duration(700)
+                .playOn(findViewById(R.id.title_toolbar_main));
         setSupportActionBar(toolbar_main);
     }
     private void initFloatingActionButton(){//实现FloatingActionButton的生成
@@ -209,9 +210,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         final BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(MainActivity.this);
         View dialogview= LayoutInflater.from(MainActivity.this)
                 .inflate(R.layout.activity_main_dialog,null);
-        LinearLayout main_dialog_linear_about,main_dialog_linear_hide,main_dialog_linear_delete,main_dialog_linear_change,main_dialog;
+        LinearLayout main_dialog_linear_about,main_dialog_linear_hide,main_dialog_linear_delete,main_dialog_linear_change,main_dialog_friendspace,main_dialog;
         main_dialog=(LinearLayout)dialogview.findViewById(R.id.main_dialog);
         main_dialog_linear_about=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_about);
+        main_dialog_friendspace=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_friendspace);
         main_dialog_linear_hide=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_hide);
         main_dialog_linear_delete=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_delete);
         main_dialog_linear_change=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_change);
@@ -223,6 +225,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
                 bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
                 mintent.putExtras(bundle);
                 startActivity(mintent);
+                bottomSheetDialog.dismiss();
+            }
+        });
+        main_dialog_friendspace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sharedNotetexttoWeChart(noteBean.getNoteinfo());
                 bottomSheetDialog.dismiss();
             }
         });
@@ -256,7 +265,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         bottomSheetDialog.setContentView(dialogview);
         bottomSheetDialog.show();
     }
-    private void initPasswordFileDialog(final NoteBean noteBean){
+    private void sharedNotetexttoWeChart(String text){//将便签文字分享到微信朋友圈
+        Intent intent=new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT,text);
+        startActivity(Intent.createChooser(intent,"share"));
+    }
+    private void initPasswordFileDialog(final NoteBean noteBean){//将便签加入到私密文件夹中
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("隐藏");
         builder.setMessage("确认隐藏？");
@@ -275,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         });
         builder.create().show();
     }
-    private void initDeleteDialog(final NoteBean noteBean){
+    private void initDeleteDialog(final NoteBean noteBean){//删除选定的便签
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("删除");
         builder.setMessage("确定删除？");
@@ -294,11 +309,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
             }
         });
         builder.create().show();
-    }
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void setupwindowAnimations(){
-        Slide slide= (Slide) TransitionInflater.from(this).inflateTransition(R.transition.activity_slide);
-        getWindow().setExitTransition(slide);
     }
 
     @Override//创建菜单目录
@@ -469,6 +479,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         viewPagercard.removeAllViews();
         ViewPagerCardAdapter adapter=new ViewPagerCardAdapter(this,noteBeanList,this);
         viewPagercard.setAdapter(adapter);
+        /**
+         * 当为删除事件时，count_delete为大于1，否则为0，在进入界面初始化的时候，我们会把count_delete设置为0
+         * */
 
         if (count_delete>=1){//优化删除（删除完成后跳转到上一个事件界面）
             viewPagercard.setCurrentItem(count_delete-1);

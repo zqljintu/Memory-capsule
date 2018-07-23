@@ -407,7 +407,6 @@ public class AddActivity extends AppCompatActivity implements AddActivityImp,Vie
         if (requestCode==REQUEST_CAMERA_CODE&&resultCode==RESULT_OK&&data!=null){
             List<String>pathlist=data.getStringArrayListExtra("result");
             prestenerImp_add.addphotoTagtoTaggroupandData(pathlist.get(0).toString());//调用接口实现标签加载
-            Toast.makeText(this, pathlist.get(0).toString(), Toast.LENGTH_SHORT).show();
         }
     }
 

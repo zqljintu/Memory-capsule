@@ -14,6 +14,7 @@
     <string name="menu_notehide">隐藏</string>
     <string name="menu_notedelete">删除</string>
     <string name="menu_notechange">修改</string>
+    <string name="menu_friendspace">分享</string>
     <string name="listactivity_toolbar_title">列表清单</string>
     <string name="listactivity_toolbar_title_secret">秘密</string>
     <string name="addactivity_title">编辑备忘录</string>
@@ -41,4 +42,5 @@
     <string name="searchtexthint">搜索...</string>
     <string name="sharedImageView">sharedimageview</string>
     <string name="sharedTextView">sharedtextview</string>
+    <string name="about_application">code by 尽途\ndesign by 尽途\n如有问题请联系 zqlsw@qq.com</string>
 </resources>

@@ -131,8 +131,8 @@
                 android:id="@+id/text_aboutcoder"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="关于开发"
-                android:textStyle="bold"/>
+                android:text="@string/about_application"
+                android:textStyle="italic"/>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 </RelativeLayout>

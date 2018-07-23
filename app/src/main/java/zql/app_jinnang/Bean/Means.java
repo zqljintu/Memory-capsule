@@ -42,6 +42,9 @@ public abstract class Means {
                 return null;
         }
     }
+    public static String buildTransaction(final String type) {//微信分享使用到的功能
+        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+    }
     public static void setViewonlick(View view,float X,float Y){
         long dowmTime= SystemClock.uptimeMillis();
         MotionEvent dowmEvent=MotionEvent.obtain(dowmTime,dowmTime,MotionEvent.ACTION_DOWN,X,Y,0);
@@ -54,17 +57,25 @@ public abstract class Means {
     }
     public static String getNotetextOnSearchCard(String note){
         int length=note.length();
-        if (length>20){
+        if (length>=20){
             return note.substring(0,20)+"...";
         }else {
             return note+"...";
         }
     }
+    public static String getNoteTitleOnNoteinfoActivity(String note){
+        int length=note.length();
+        if (length<=5){
+            return note;
+        }else {
+            return note.substring(0,5)+"...";
+        }
+    }
     public static String getNotetextOnRecyclerCard(String note){
         int length=note.length();
-        if (length<20){
+        if (length<=20){
             return note;
-        }else if (length<40){
+        }else if (length<=40){
             return note+"\n";
         }else {
             return note.substring(0,40)+"...";
@@ -72,16 +83,16 @@ public abstract class Means {
     }
     public static String getNotetextOnViewPagerCard(String note){
         int length=note.length();
-        if (length<20){
+        if (length<=20){
             return note+"\n"+"\n"+"\n";
-        }else if (length<50){
+        }else if (length<=50){
             return note+"\n"+"\n";
         }else {
             return note.substring(0,50)+"..."+"\n";
         }
     }
     public static boolean isphotouri(String path){//判定是不是图片地址
-        if (path.length()>10){
+        if (path.length()>=10){
             String str1=".jpg";
             String str2=path.substring(path.length()-4,path.length());
             if (str1.equals(str2)){

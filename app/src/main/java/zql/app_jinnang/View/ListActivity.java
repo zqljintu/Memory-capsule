@@ -163,11 +163,12 @@ public class ListActivity extends AppCompatActivity implements ListActivityImp {
         final BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(ListActivity.this);
         final View dialogview= LayoutInflater.from(ListActivity.this)
                 .inflate(R.layout.activity_main_dialog,null);
-        LinearLayout list_dialog_linear_about,list_dialog_linear_hide,list_dialog_linear_delete,list_dialog_linear_change;
+        LinearLayout list_dialog_linear_about,list_dialog_linear_hide,list_dialog_linear_delete,list_dialog_linear_change,list_dialog_linear_share;
         list_dialog_linear_about=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_about);
         list_dialog_linear_hide=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_hide);
         list_dialog_linear_delete=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_delete);
         list_dialog_linear_change=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_change);
+        list_dialog_linear_share=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_friendspace);
         list_dialog_linear_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,10 +206,23 @@ public class ListActivity extends AppCompatActivity implements ListActivityImp {
                 bottomSheetDialog.dismiss();
             }
         });
+        list_dialog_linear_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sharedNotetexttoWeChart(noteBean.getNoteinfo());
+                bottomSheetDialog.dismiss();
+            }
+        });
         bottomSheetDialog.setContentView(dialogview);
         bottomSheetDialog.show();
     }
-    private void initPasswordFileDialog(final NoteBean noteBean){
+    private void sharedNotetexttoWeChart(String text){//将便签文字分享到微信或者QQ等，主要调用系统分享控件
+        Intent intent=new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT,text);
+        startActivity(Intent.createChooser(intent,"share"));
+    }
+    private void initPasswordFileDialog(final NoteBean noteBean){//将备忘录加入到私密文件夹中。
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("隐藏");
         builder.setMessage("确认隐藏？");

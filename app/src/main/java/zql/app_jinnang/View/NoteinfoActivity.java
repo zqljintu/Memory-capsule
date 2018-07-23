@@ -10,6 +10,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.transition.Transition;
@@ -21,11 +22,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.jaeger.library.StatusBarUtil;
 
 import java.util.List;
 
 import me.gujun.android.taggroup.TagGroup;
+import zql.app_jinnang.Bean.Means;
 import zql.app_jinnang.Bean.NoteBean;
 import zql.app_jinnang.Bean.Noteinfo;
 import zql.app_jinnang.Prestener.PrestenerImp_noteinfo;
@@ -38,6 +42,8 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
     private TextView textView_noteinfo;
     private ImageView imageview_noteinfo;
     private CoordinatorLayout coordinatorLayout_noteinfo;
+    private Integer maincolor;
+    private Toolbar toolbar;
 
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -47,7 +53,6 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
         setContentView(R.layout.activity_noteinfo);
         prestenerImpNoteinfo=new Prestener_noteinfo(this);
         initView();
-        setupwindowAnimations();
         getintentExtra();
         prestenerImpNoteinfo.setBackgroundcolorfromSeting();
     }
@@ -64,7 +69,7 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
         prestenerImpNoteinfo.readDatatoNoteinfo(noteinfo);
     }
     private void initToolbarSeting(){//toolbard的设置
-        Toolbar toolbar=(Toolbar)this.findViewById(R.id.toolbar_noteinfo);
+        toolbar=(Toolbar)this.findViewById(R.id.toolbar_noteinfo);
         coordinatorLayout_noteinfo=(CoordinatorLayout)this.findViewById(R.id.coordinator_noteinfo);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -86,13 +91,6 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
         imageview_noteinfo=(ImageView)this.findViewById(R.id.noteinfo_imageview);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void setupwindowAnimations(){
-        Explode explode=new Explode();
-        explode.setDuration(1000);
-        explode.setInterpolator(new LinearOutSlowInInterpolator());
-        getWindow().setEnterTransition(explode);
-    }
 
     @Override
     public void readNoteinfotoNotetext(String noteinfo) {
@@ -100,7 +98,14 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
             textView_noteinfo.setText("无内容");
         }else {
             textView_noteinfo.setText(noteinfo);
+            toolbar.setTitle(Means.getNoteTitleOnNoteinfoActivity(noteinfo));
         }
+        YoYo.with(Techniques.RubberBand)
+                .duration(1000)
+                .playOn(findViewById(R.id.card_text));
+        YoYo.with(Techniques.RubberBand)
+                .duration(1000)
+                .playOn(findViewById(R.id.card_taggroup));
     }
 
     @Override
@@ -149,5 +154,6 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
     @Override
     public void setBackgroundcolorfromSeting(List<Integer> colorlist) {
         StatusBarUtil.setColor(this, colorlist.get(0));
+        maincolor=colorlist.get(0);
     }
 }

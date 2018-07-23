@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -35,6 +37,7 @@ import zql.app_jinnang.View.NoteinfoActivity;
  */
 
 public class ViewPagerCardAdapter extends PagerAdapter {
+    private View currentView;
     private MainActivityImp mainActivityImp;
     public static ImageView menu_item_viewpagercard;
     private ImageView imageview_item_viewpagercard,lableview_item_viewpagercard;
@@ -69,6 +72,7 @@ public class ViewPagerCardAdapter extends PagerAdapter {
 
     @Override
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        currentView=(View)object;
         super.setPrimaryItem(container, position, object);
     }
 
@@ -89,12 +93,16 @@ public class ViewPagerCardAdapter extends PagerAdapter {
         startNoteinfoActivity(imageview_item_viewpagercard,list.get(position));
         textview_item_viewpagercard.setText(Means.getNotetextOnViewPagerCard(noteinfo));
         createtime_item_viewpagercard.setText("——创建于:"+createtime);
+        if (photopath.equals("<图片>")){
+            imageview_item_viewpagercard.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        }else {
+            imageview_item_viewpagercard.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
         switch (type){
             case "生活":
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_live);
                 if (photopath.equals("<图片>")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_live);
-
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);
                 }
@@ -103,7 +111,6 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_work);
                 if (photopath.equals("<图片>")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_work);
-
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);
                 }
@@ -112,7 +119,6 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_diary);
                 if (photopath.equals("<图片>")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_dilary);
-
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);
                 }
@@ -121,7 +127,6 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_study);
                 if (photopath.equals("<图片>")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_study);
-
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);
                 }
@@ -130,7 +135,6 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_travel);
                 if (photopath.equals("<图片>")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_travel);
-
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);
                 }
@@ -168,6 +172,9 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 context.startActivity(mintent);
             }
         });
+    }
+    public View getPrimaryItem(){
+        return currentView;
     }
 
 }
