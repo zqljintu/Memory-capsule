@@ -15,8 +15,8 @@ import zql.app_jinnang.Bean.Noteinfo;
  */
 
 public interface MainActivityImp {
-    public Context getActivity_this();
-    public void startAddActivity(int type);
+    public Context getActivity_this();//获取此Activity的this
+    public void startAddActivity(int type);//开启一个新的Activity界面
     public void startAddActivityS(String path);
     public void startListActivity();
     public void startListSecretActivity();
@@ -24,6 +24,7 @@ public interface MainActivityImp {
     public void startSetingActivity();
     public void startSearchActivity();
     public void setMainBackground(Integer integer);
+    public void setMainBackgroundIcon();//如果数据库为空，界面加载一个图片显示。
     public void openSheetDialog(NoteBean noteBean);
     public void readNotefromData(List<NoteBean>noteBeanList);
     public Application getMainApplication();

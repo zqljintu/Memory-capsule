@@ -1,7 +1,9 @@
 package zql.app_jinnang.View;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -79,13 +81,31 @@ public class ListSecretActivity extends AppCompatActivity implements ListSecretA
         list_dialog_linear_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prestenerImp_listserect.deleteNotebeanserect(noteBean);
-                prestenerImp_listserect.readNoteserectfromDatatoList();
+                initDeleteDialog(noteBean);
                 bottomSheetDialog.dismiss();
             }
         });
         bottomSheetDialog.setContentView(dialogview);
         bottomSheetDialog.show();
+    }
+    private void initDeleteDialog(final NoteBean noteBean){//加入一个dialog，来询问是否要删除。
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("删除");
+        builder.setMessage("确定删除");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                prestenerImp_listserect.deleteNotebeanserect(noteBean);
+                prestenerImp_listserect.readNoteserectfromDatatoList();
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
     }
 
     @Override

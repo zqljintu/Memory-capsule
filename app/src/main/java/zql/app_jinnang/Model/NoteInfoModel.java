@@ -144,6 +144,12 @@ public class NoteInfoModel implements NoteInfoModelImp {
     }
 
     @Override
+    public int QueryAllSecretNoteSumfromSecretData() {
+        List mlist=noteBeanDao_secret.loadAll();
+        return mlist.size();
+    }
+
+    @Override
     public int QueryEveryTypeSumfromDataByType(String READ_TYPE) {
         QueryBuilder<NoteBean> queryBuilder=noteBeanDao.queryBuilder();
         queryBuilder.where(NoteBeanDao.Properties.Notetype.like(READ_TYPE))
@@ -189,5 +195,23 @@ public class NoteInfoModel implements NoteInfoModelImp {
             sliceValue.setValue(QueryEveryTypeSumfromDataByType(types.get(i)));
         }
         return mlist;
+    }
+
+    @Override
+    public boolean readDataSizeisEmpty() {
+        if (QueryAllNoteSumfromfromData()==0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean readSecretDataisEmpty() {
+        if (QueryAllSecretNoteSumfromSecretData()==0){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

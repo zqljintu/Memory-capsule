@@ -250,6 +250,12 @@ public class ListActivity extends AppCompatActivity implements ListActivityImp {
     }
 
     @Override
+    public void finish() {
+        setResult(REQUEST_UPDATE);
+        super.finish();
+    }
+
+    @Override
     public Application getListApplication() {
         return getApplication();
     }

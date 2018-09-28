@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Vibrator;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.view.ViewPager;
@@ -16,12 +17,11 @@ import android.os.Bundle;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Slide;
-import android.transition.TransitionInflater;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     private FloatingActionsMenu floatingActionsmenu_add;
     private FloatingActionButton floatingActionButton_work,floatingActionButton_study,floatingActionButton_live,floatingActionButton_diarly,floatingActionButton_travel,floatingActionButton_calendar;
     private AddFloatingActionButton addFloatingActionButton;
-    private LinearLayout mainbottomlinearlayout;
+    private LinearLayout mainbottomlinearlayout,voicebuttonlayout;
     private ViewPager viewPagercard;
     private Toolbar toolbar_main;
     private TextView title_toolbar_main;
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     private Integer maincolor;
     private String password="";
     private int count_delete;
+    private AlertDialog alertDialog;
 
     private static final int REQUEST_LIST_CODE = 0;
     private static final int REQUEST_CAMERA_CODE = 1;
@@ -429,7 +430,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     @Override//打开新的ListActivity
     public void startListActivity() {
         Intent mintent=new Intent(MainActivity.this,ListActivity.class);
-        this.startActivity(mintent);
+        this.startActivityForResult(mintent,REQUEST_UPDATE);
     }
 
     @Override//打开秘密ListActivity
@@ -476,6 +477,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
 
     @Override
     public void readNotefromData(List<NoteBean> noteBeanList) {
+        if (noteBeanList.size()!=0){
+            prestenerImpMain.setMainBackgrountIcon();//当读取的数据为空过的时候，加载一个提示。
+        }
         viewPagercard.removeAllViews();
         ViewPagerCardAdapter adapter=new ViewPagerCardAdapter(this,noteBeanList,this);
         viewPagercard.setAdapter(adapter);
@@ -510,5 +514,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         floatingActionButton_study.setColorNormal(mlist.get(0));
         floatingActionButton_travel.setColorNormal(mlist.get(0));
         floatingActionButton_work.setColorNormal(mlist.get(0));
+    }
+
+    @Override
+    public void setMainBackgroundIcon() {
+        LinearLayout linearlayout_listempty=(LinearLayout)findViewById(R.id.linearlayout_listEmpty);
+        linearlayout_listempty.setVisibility(View.GONE);
     }
 }

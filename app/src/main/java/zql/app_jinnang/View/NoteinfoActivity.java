@@ -100,11 +100,11 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
             textView_noteinfo.setText(noteinfo);
             toolbar.setTitle(Means.getNoteTitleOnNoteinfoActivity(noteinfo));
         }
-        YoYo.with(Techniques.RubberBand)
-                .duration(1000)
+        YoYo.with(Techniques.FadeIn)
+                .duration(1500)
                 .playOn(findViewById(R.id.card_text));
-        YoYo.with(Techniques.RubberBand)
-                .duration(1000)
+        YoYo.with(Techniques.FadeIn)
+                .duration(1500)
                 .playOn(findViewById(R.id.card_taggroup));
     }
 
@@ -115,7 +115,6 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
         }else {
             tagGroup_noteinfo.setTags(tags);
         }
-
     }
 
     @Override

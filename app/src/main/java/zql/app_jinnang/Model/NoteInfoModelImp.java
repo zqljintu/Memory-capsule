@@ -21,7 +21,8 @@ public interface NoteInfoModelImp {
     public List<NoteBean> QueryAllNotefromData_secret();
     public List<NoteBean> QueryNoyefromDataByType(String READ_TYPE);
     public int QueryEveryTypeSumfromDataByType(String READ_TYPE);
-    public int QueryAllNoteSumfromfromData();
+    public int QueryAllNoteSumfromfromData();//获取创建note的总数量
+    public int QueryAllSecretNoteSumfromSecretData();//获取创建私密note的总数量
     public List<String> QueryNotecreatetime();
     public List<NoteBean> QueryNotebeanBycreatetime(String creaetime);
     public void ChangeNotetoData(NoteBean noteBean);
@@ -30,4 +31,6 @@ public interface NoteInfoModelImp {
     public List<NoteBean> getSearchfromData(String search);
     public List<SliceValue> getPieChartNumberfromData();
     public List<Integer> getPieChartTypeListfromData();//获取各类型数据
+    public boolean readDataSizeisEmpty();//判断数据库是否为空
+    public boolean readSecretDataisEmpty();//判断密码数据库是否为空
 }

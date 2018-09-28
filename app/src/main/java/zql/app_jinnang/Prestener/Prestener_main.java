@@ -88,4 +88,9 @@ public class Prestener_main implements PrestenerImp_main {
     public int getBackgroundcolorNumfromSering() {
         return userSeting.getcurrentColorNum();
     }
+
+    @Override
+    public void setMainBackgrountIcon() {
+        mainActivityImp.setMainBackgroundIcon();
+    }
 }
