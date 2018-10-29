@@ -42,7 +42,7 @@ This is a sample memorandum,but I named it Memory-capsule.//这只是一个简�
     5，列表中的下拉菜单背景色无法随着toolbar颜色改变。
 
 相应界面设计如下：
-![](https://github.com/zqljintu/Memory-capsule/blob/master/ReadMe_Image/0001.jpg)
+![](https://github.com/zqljintu/Memory-capsule/blob/master/ReadMe_Image/0001.png)
 
 其中使用了许多开源库：
 
