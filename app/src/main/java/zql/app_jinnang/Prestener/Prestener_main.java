@@ -69,6 +69,34 @@ public class Prestener_main implements PrestenerImp_main {
     }
 
     @Override
+    public void readNotefromDtabyType(int READ_TYPE) {
+        switch (READ_TYPE){
+            case 0:
+                mainActivityImp.readNotefromData(noteInfoModelImp.QueryAllNotefromData());
+                break;
+            case 1:
+                mainActivityImp.readNotefromData(noteInfoModelImp.QueryNoyefromDataByType("工作"));
+                break;
+            case 2:
+                mainActivityImp.readNotefromData(noteInfoModelImp.QueryNoyefromDataByType("学习"));
+                break;
+            case 3:
+                mainActivityImp.readNotefromData(noteInfoModelImp.QueryNoyefromDataByType("生活"));
+                break;
+            case 4:
+                mainActivityImp.readNotefromData(noteInfoModelImp.QueryNoyefromDataByType("日记"));
+                break;
+            case 5:
+                mainActivityImp.readNotefromData(noteInfoModelImp.QueryNoyefromDataByType("旅行"));
+                break;
+            case 6:
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     public void deleteNoteBean(NoteBean noteBean) {
         noteInfoModelImp.DeleteNotefromData(noteBean);
     }

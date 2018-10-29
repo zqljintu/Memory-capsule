@@ -481,7 +481,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
             prestenerImpMain.setMainBackgrountIcon();//当读取的数据为空过的时候，加载一个提示。
         }
         viewPagercard.removeAllViews();
-        ViewPagerCardAdapter adapter=new ViewPagerCardAdapter(this,noteBeanList,this);
+        ViewPagerCardAdapter adapter=new ViewPagerCardAdapter(this,noteBeanList,this,prestenerImpMain);
         viewPagercard.setAdapter(adapter);
         /**
          * 当为删除事件时，count_delete为大于1，否则为0，在进入界面初始化的时候，我们会把count_delete设置为0

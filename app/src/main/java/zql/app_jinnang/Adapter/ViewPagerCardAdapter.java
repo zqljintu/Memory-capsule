@@ -1,22 +1,17 @@
 package zql.app_jinnang.Adapter;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.LinearSmoothScroller;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,9 +21,9 @@ import java.util.List;
 
 import zql.app_jinnang.Bean.Means;
 import zql.app_jinnang.Bean.NoteBean;
+import zql.app_jinnang.Prestener.PrestenerImp_main;
 import zql.app_jinnang.R;
 import zql.app_jinnang.UserSeting;
-import zql.app_jinnang.View.MainActivity;
 import zql.app_jinnang.View.MainActivityImp;
 import zql.app_jinnang.View.NoteinfoActivity;
 
@@ -47,8 +42,9 @@ public class ViewPagerCardAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private UserSeting userSeting;
+    private PrestenerImp_main prestenerImp_main;
 
-    public ViewPagerCardAdapter(Context mcontext,List<NoteBean>mlist,MainActivityImp mmainActivityImp){
+    public ViewPagerCardAdapter(Context mcontext,List<NoteBean>mlist,MainActivityImp mmainActivityImp,PrestenerImp_main mprestenerImp_main){
         this.context=mcontext;
         this.list=new ArrayList<NoteBean>();
         if (!this.list.isEmpty()){
@@ -56,6 +52,7 @@ public class ViewPagerCardAdapter extends PagerAdapter {
         }
         this.list=mlist;
         this.mainActivityImp=mmainActivityImp;
+        this.prestenerImp_main=mprestenerImp_main;
         userSeting=(UserSeting)mainActivityImp.getMainApplication();
         layoutInflater=LayoutInflater.from(context);
     }
@@ -98,6 +95,7 @@ public class ViewPagerCardAdapter extends PagerAdapter {
         }else {
             imageview_item_viewpagercard.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
+        readNoteonMainbyNotetype(lableview_item_viewpagercard);
         switch (type){
             case "生活":
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_live);
@@ -160,6 +158,71 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 mainActivityImp.openSheetDialog(noteBean);
             }
         });
+    }
+    private void readNoteonMainbyNotetype(View view){//通过标签来浏览信息
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openTypeDilog();
+            }
+        });
+    }
+    private void openTypeDilog(){
+        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+        LayoutInflater layoutInflater=LayoutInflater.from(context);
+        View centerview=layoutInflater.inflate(R.layout.dialog_main_type,null);
+        final AlertDialog alertDialog=builder.setView(centerview).create();
+        final LinearLayout add_dialog_typr_all,add_dialog_type_work,add_dialog_type_study,add_dialog_type_live,add_dialog_type_diary,add_dialog_type_travel;
+        add_dialog_typr_all=(LinearLayout)centerview.findViewById(R.id.main_dialog_typenote_all);
+        add_dialog_type_work=(LinearLayout)centerview.findViewById(R.id.main_dialog_typenote_work);
+        add_dialog_type_diary=(LinearLayout)centerview.findViewById(R.id.main_dialog_typenote_diary);
+        add_dialog_type_live=(LinearLayout)centerview.findViewById(R.id.main_dialog_typenote_live);
+        add_dialog_type_study=(LinearLayout)centerview.findViewById(R.id.main_dialog_typenote_study);
+        add_dialog_type_travel=(LinearLayout)centerview.findViewById(R.id.main_dialog_typenote_travel);
+        add_dialog_typr_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prestenerImp_main.readNotefromDtabyType(0);
+                alertDialog.dismiss();
+            }
+        });
+        add_dialog_type_work.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prestenerImp_main.readNotefromDtabyType(1);//调用接口实现标签加载
+                alertDialog.dismiss();
+            }
+        });
+        add_dialog_type_study.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prestenerImp_main.readNotefromDtabyType(2);//调用接口实现标签加载
+                alertDialog.dismiss();
+            }
+        });
+        add_dialog_type_live.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prestenerImp_main.readNotefromDtabyType(3);//调用接口实现标签加载
+                alertDialog.dismiss();
+            }
+        });
+        add_dialog_type_diary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prestenerImp_main.readNotefromDtabyType(4);//调用接口实现标签加载
+                alertDialog.dismiss();
+            }
+        });
+
+        add_dialog_type_travel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                prestenerImp_main.readNotefromDtabyType(5);//调用接口实现标签加载
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
     private void startNoteinfoActivity(View view,final NoteBean noteBean){
         view.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_ID">300011869943</string>
     <string name="app_name">记忆胶囊</string>
     <string name="text_save">保存</string>
     <string name="note_work">工作</string>
