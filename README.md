@@ -11,7 +11,7 @@ This is a sample memorandum,but I named it Memory-capsule.//这只是一个简�
     1，重构了EditActivity/(AddActivity),简化了代码设计，更加高效更加便捷。
     2，添加了滑动返回模块。
     3，优化了界面，解决了卡顿问题。
-    4，去除了拍摄模块。
+    4，去除了拍摄模块。                                                         ————2018/12/17
 
     解决了一些问题：
     1，为没有备忘文件下的界面添加了背景图片。
