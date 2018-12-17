@@ -30,7 +30,7 @@ import zql.app_jinnang.Prestener.Prestener_calendar;
 import zql.app_jinnang.R;
 import static zql.app_jinnang.R.color.colorFloatingButton;
 
-public class CalendarActivity extends AppCompatActivity implements CalendarActivityImp{
+public class CalendarActivity extends SwipeActivity implements CalendarActivityImp{
     private PrestenerImp_calendar prestenerImp_calendar;
     private Integer integer0,integer1;
     private DatePicker datePicker;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:background="@color/colorDaymain"
     android:id="@+id/coordinator_noteinfo"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/cool_noteinfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleMarginStart="48dp"
             app:expandedTitleMarginEnd="64dp">
-
             <ImageView
                 android:id="@+id/noteinfo_imageview"
                 android:layout_width="match_parent"
@@ -33,6 +34,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.NestedScrollView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -42,8 +44,6 @@
             android:orientation="vertical">
             <android.support.v7.widget.CardView
                 android:id="@+id/card_text"
-                app:cardElevation="8dp"
-                android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="5dp">
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/text_noteinfo_item"
-                        android:padding="10dp"
+                        android:padding="15dp"
                         android:textSize="18sp"
                         android:lineSpacingExtra="3dp"
                         android:layout_width="match_parent"
@@ -67,36 +67,25 @@
                         android:transitionName="@string/sharedTextView"/>
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                android:id="@+id/card_taggroup"
-                app:cardElevation="8dp"
-                android:layout_margin="20dp"
+            <me.gujun.android.taggroup.TagGroup
+                android:id="@+id/taggroup_noteinfo_item"
                 android:clickable="false"
+                app:atg_checkedBackgroundColor="@color/colorFloatingButton"
+                app:atg_pressedBackgroundColor="@color/colorFloatingButton"
+                android:layout_marginTop="20dp"
+                android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="150dp"
-                android:layout_marginTop="20dp"
-                android:elevation="2dp"
-                android:padding="10dp"
-                app:cardCornerRadius="5dp">
-                <me.gujun.android.taggroup.TagGroup
-                    android:id="@+id/taggroup_noteinfo_item"
-                    android:clickable="false"
-                    app:atg_checkedBackgroundColor="@color/colorFloatingButton"
-                    app:atg_pressedBackgroundColor="@color/colorFloatingButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    style="@style/TagGroup.Large"
-                    app:atg_backgroundColor="@color/colorFloatingButton"
-                    app:atg_borderColor="@color/colorFloatingButton"
-                    app:atg_textColor="@color/colortagtext"
-                    app:atg_textSize="15sp"
-                    app:atg_horizontalSpacing="5dp"
-                    app:atg_verticalSpacing="2dp">
-                </me.gujun.android.taggroup.TagGroup>
-            </android.support.v7.widget.CardView>
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                style="@style/TagGroup.Large"
+                app:atg_backgroundColor="@color/colorFloatingButton"
+                app:atg_borderColor="@color/colorFloatingButton"
+                app:atg_textColor="@color/colortagtext"
+                app:atg_textSize="15sp"
+                app:atg_horizontalSpacing="5dp"
+                app:atg_verticalSpacing="5dp">
+            </me.gujun.android.taggroup.TagGroup>
             <TextView
                 android:text="---我是有底线的---"
                 android:textAlignment="center"

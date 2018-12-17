@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +37,7 @@ import zql.app_jinnang.Prestener.PrestenerImp_noteinfo;
 import zql.app_jinnang.Prestener.Prestener_noteinfo;
 import zql.app_jinnang.R;
 
-public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActivityImp{
+public class NoteinfoActivity extends SwipeActivity implements NoteinfoActivityImp{
     PrestenerImp_noteinfo prestenerImpNoteinfo;
     private TagGroup tagGroup_noteinfo;
     private TextView textView_noteinfo;
@@ -80,6 +81,9 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
                 finish();
             }
         });
+        CollapsingToolbarLayout collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.cool_noteinfo);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
     }
     private void initTaggroupView(){//实例化TagGroup
         tagGroup_noteinfo=(TagGroup)this.findViewById(R.id.taggroup_noteinfo_item);
@@ -100,12 +104,6 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
             textView_noteinfo.setText(noteinfo);
             toolbar.setTitle(Means.getNoteTitleOnNoteinfoActivity(noteinfo));
         }
-        YoYo.with(Techniques.FadeIn)
-                .duration(1500)
-                .playOn(findViewById(R.id.card_text));
-        YoYo.with(Techniques.FadeIn)
-                .duration(1500)
-                .playOn(findViewById(R.id.card_taggroup));
     }
 
     @Override
@@ -118,8 +116,8 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
     }
 
     @Override
-    public void readPhotopathtoNoteImageview(String photepath,String type) {
-        if (photepath.equals("<图片>")){
+    public void readPhotopathtoNoteImageview(String photopath,String type) {
+        if (photopath.equals("<图片>")||photopath.equals("null")){
             switch (type){
                 case "旅行":
                     imageview_noteinfo.setImageResource(R.drawable.photo_travel);
@@ -141,7 +139,7 @@ public class NoteinfoActivity extends AppCompatActivity implements NoteinfoActiv
                     break;
             }
         }else {
-            Glide.with(this).load(photepath).into(imageview_noteinfo);
+            Glide.with(this).load(photopath).into(imageview_noteinfo);
         }
     }
 

@@ -50,7 +50,10 @@ public class NoteInfoModel implements NoteInfoModelImp {
         noteBeanDao_secret=daoSession_secret.getNoteBeanDao();
     }
 
-
+    /**
+     * 数据库插入操作
+     * @param noteBean
+     */
     @Override
     public void InsertNotetoData(NoteBean noteBean) {
         noteBeanDao.insert(noteBean);
@@ -60,6 +63,18 @@ public class NoteInfoModel implements NoteInfoModelImp {
     public void InsertNotetoData_secret(NoteBean noteBean) {
         noteBeanDao_secret.insert(noteBean);
     }
+
+    @Override
+    public void InsertNotetoDatabyId(NoteBean noteBean) {
+        if (noteBean.getId()!=null){
+            noteBeanDao.update(noteBean);
+        }
+    }
+
+    /**
+     * 数据库删除操作
+     * @param noteBean
+     */
 
     @Override
     public void DeleteNotefromData(NoteBean noteBean) {
@@ -73,7 +88,9 @@ public class NoteInfoModel implements NoteInfoModelImp {
 
     @Override
     public void ChangeNotetoData(NoteBean noteBean) {
-        noteBeanDao.update(noteBean);
+        if (noteBean.getId()!=null){
+            noteBeanDao.update(noteBean);
+        }
     }
 
     @Override

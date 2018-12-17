@@ -9,8 +9,6 @@ import zql.app_jinnang.Bean.NoteBean;
  */
 
 public interface PrestenerImp_main {
-    public void openAddActivity(int type);//打开添加事件的界面
-    public void openAddActivityS(String path);
     public void openCalendarActivity();//打开日历界面
     public void openSearchActivity();//打开新的搜索界面
     public void openListActivity();//打开事件列表的界面

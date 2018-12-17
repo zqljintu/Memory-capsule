@@ -14,12 +14,6 @@
         android:title="@string/menu_serect">
     </item>
     <item
-        android:id="@+id/action_camera"
-        android:orderInCategory="100"
-        android:icon="@drawable/camera_note_01"
-        android:title="拍摄创建">
-    </item>
-    <item
         android:id="@+id/action_chart"
         android:orderInCategory="100"
         android:icon="@drawable/chart_note"

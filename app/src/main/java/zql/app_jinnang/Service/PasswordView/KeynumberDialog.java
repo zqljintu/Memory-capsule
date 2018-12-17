@@ -243,8 +243,8 @@ public class KeynumberDialog extends View{
                 showNumber="<";
             }
         }
-        type=0;
-        invalidate();
+        type=0;//draw渲染的判断依据
+        invalidate();//渲染更新
     }
     private void handleup(){
         type=1;

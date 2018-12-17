@@ -22,6 +22,8 @@
         </SearchView>
     </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.RecyclerView
+        android:background="@color/cardview_light_background"
+        android:alpha="0.5"
         android:id="@+id/recycler_search"
         android:layout_marginTop="2dp"
         android:layout_below="@id/toolbar_search"

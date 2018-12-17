@@ -90,16 +90,19 @@ public class ViewPagerCardAdapter extends PagerAdapter {
         startNoteinfoActivity(imageview_item_viewpagercard,list.get(position));
         textview_item_viewpagercard.setText(Means.getNotetextOnViewPagerCard(noteinfo));
         createtime_item_viewpagercard.setText("——创建于:"+createtime);
-        if (photopath.equals("<图片>")){
+        if (photopath.equals("<图片>")||photopath.equals("null")){
             imageview_item_viewpagercard.setScaleType(ImageView.ScaleType.FIT_CENTER);
         }else {
             imageview_item_viewpagercard.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         readNoteonMainbyNotetype(lableview_item_viewpagercard);
+        /**
+         * 早期开发留下的弊端，必须满足老版本，所以添加photopath.equals("<图片>")||photopath.equals("null")两种状态判断条件
+         */
         switch (type){
             case "生活":
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_live);
-                if (photopath.equals("<图片>")){
+                if (photopath.equals("<图片>")||photopath.equals("null")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_live);
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);
@@ -107,7 +110,7 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 break;
             case "工作":
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_work);
-                if (photopath.equals("<图片>")){
+                if (photopath.equals("<图片>")||photopath.equals("null")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_work);
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);
@@ -115,7 +118,7 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 break;
             case "日记":
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_diary);
-                if (photopath.equals("<图片>")){
+                if (photopath.equals("<图片>")||photopath.equals("null")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_dilary);
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);
@@ -123,7 +126,7 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 break;
             case "学习":
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_study);
-                if (photopath.equals("<图片>")){
+                if (photopath.equals("<图片>")||photopath.equals("null")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_study);
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);
@@ -131,7 +134,7 @@ public class ViewPagerCardAdapter extends PagerAdapter {
                 break;
             case "旅行":
                 lableview_item_viewpagercard.setImageResource(R.drawable.icon_travel);
-                if (photopath.equals("<图片>")){
+                if (photopath.equals("<图片>")||photopath.equals("null")){
                     imageview_item_viewpagercard.setImageResource(R.drawable.photo_travel);
                 }else {
                     Glide.with(mainActivityImp.getActivity_this()).load(photopath).into(imageview_item_viewpagercard);

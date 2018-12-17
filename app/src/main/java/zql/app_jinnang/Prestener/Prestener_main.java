@@ -34,16 +34,6 @@ public class Prestener_main implements PrestenerImp_main {
     }
 
     @Override
-    public void openAddActivity(int type) {
-        mainActivityImp.startAddActivity(type);
-    }
-
-    @Override
-    public void openAddActivityS(String path) {
-        mainActivityImp.startAddActivityS(path);
-    }
-
-    @Override
     public void openSearchActivity() {
         mainActivityImp.startSearchActivity();
     }

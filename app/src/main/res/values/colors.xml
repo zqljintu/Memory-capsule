@@ -27,4 +27,5 @@
     <color name="colortagtext">#ffff</color>
     <color name="colortoolbartitle">#ffff</color>
     <color name="colorpopumenubackground">#453e3c</color>
+    <color name="colorDaymain">#ebebeb</color>
 </resources>

@@ -4,7 +4,6 @@ import zql.app_jinnang.Bean.NoteBean;
 import zql.app_jinnang.Model.NoteInfoModel;
 import zql.app_jinnang.Model.NoteInfoModelImp;
 import zql.app_jinnang.UserSeting;
-import zql.app_jinnang.View.AddActivityImp;
 import zql.app_jinnang.View.ListActivityImp;
 
 /**

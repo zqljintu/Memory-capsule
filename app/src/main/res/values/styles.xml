@@ -38,5 +38,8 @@
         <item name="contentInsetStart">0dp</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
-
+    <style name="Zql_theme_Transparent" parent="Theme.AppCompat.Light.NoActionBar"><!--透明主题，为了滑动返回设定-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

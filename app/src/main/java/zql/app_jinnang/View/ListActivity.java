@@ -36,7 +36,7 @@ import zql.app_jinnang.Prestener.PrestenerImp_list;
 import zql.app_jinnang.Prestener.Prestener_list;
 import zql.app_jinnang.R;
 
-public class ListActivity extends AppCompatActivity implements ListActivityImp {
+public class ListActivity extends SwipeActivity implements ListActivityImp {
     private Toolbar toolbar_list;
     private PrestenerImp_list prestenerImp_list;
     private RecyclerView recyclerView;
@@ -197,12 +197,12 @@ public class ListActivity extends AppCompatActivity implements ListActivityImp {
         list_dialog_linear_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addintent=new Intent(ListActivity.this,AddActivity.class);
+                Intent addintent=new Intent(ListActivity.this,EditActivity.class);
                 Bundle bundle=new Bundle();
-                bundle.putInt("addtype",CHANGE);
+                bundle.putInt("type",10);
                 bundle.putSerializable("noteinfo",Means.changefromNotebean(noteBean));
                 addintent.putExtra("data",bundle);
-                startActivityForResult(addintent,REQUEST_UPDATE);
+                startActivity(addintent);
                 bottomSheetDialog.dismiss();
             }
         });

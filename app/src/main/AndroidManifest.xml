@@ -8,55 +8,57 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!--连接网络权限，用于执行云端语音能力 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <!--获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <!--读取网络信息状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!--获取当前wifi状态 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <!--允许程序改变网络连接状态 -->
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <!--读取手机信息权限 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <!--读取联系人权限，上传联系人需要用到此权限 -->
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- 连接网络权限，用于执行云端语音能力 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 读取网络信息状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 获取当前wifi状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 允许程序改变网络连接状态 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- 读取手机信息权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 读取联系人权限，上传联系人需要用到此权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:name=".UserSeting"
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/icon_jiaonang_1"
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon_jiaonang_1"
         android:supportsRtl="true"
         android:theme="@style/Zql_theme_fullScreen"
-        tools:ignore="GoogleAppIndexingWarning,InnerclassSeparator">
+        tools:ignore="GoogleAppIndexingWarning,HardcodedDebugMode,InnerclassSeparator">
         <activity android:name=".View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".View.ListActivity"
-            android:theme="@style/Zql_theme_fullScreen" />
-        <activity
-            android:name=".View.AddActivity"
-            android:theme="@style/Zql_theme_fullScreen" />
+            android:theme="@style/Zql_theme_Transparent" />
         <activity
             android:name=".View.NoteinfoActivity"
-            android:theme="@style/Zql_theme_fullScreen" />
+            android:theme="@style/Zql_theme_Transparent" />
         <activity
             android:name=".View.SearchActivity"
-            android:theme="@style/Zql_theme_fullScreen" />
-        <activity android:name=".View.CalendarActivity" />
-        <activity android:name=".View.AboutActivity" />
-        <activity android:name=".View.ListSecretActivity" />
-        <activity android:name=".View.DataChartActivity" />
+            android:theme="@style/Zql_theme_Transparent" />
+        <activity android:name=".View.CalendarActivity"
+            android:theme="@style/Zql_theme_Transparent" />
+        <activity android:name=".View.AboutActivity"
+            android:theme="@style/Zql_theme_Transparent" />
+        <activity android:name=".View.ListSecretActivity"
+            android:theme="@style/Zql_theme_Transparent" />
+        <activity android:name=".View.DataChartActivity"
+            android:theme="@style/Zql_theme_Transparent" />
+        <activity android:name=".View.EditActivity" />
     </application>
 
 </manifest>

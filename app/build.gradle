@@ -47,6 +47,8 @@ dependencies {
     implementation 'cn.aigestudio.datepicker:DatePicker:2.2.0'
     implementation 'com.kyleduo.switchbutton:library:2.0.0'//switchbutton开源库
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'//chart图表开源库
+    implementation 'org.greenrobot:eventbus:3.1.1'//eventBus组件之间进行通讯
+    //implementation 'com.github.chrisbanes:PhotoView:2.1.4'//图片浏览库
     /**
      * 动画代码库
      */

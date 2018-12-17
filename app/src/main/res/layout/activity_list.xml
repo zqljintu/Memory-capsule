@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:layout_width="match_parent"
+    android:background="@color/cardview_light_background"
     android:id="@+id/relativeLayout_list"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,8 +29,7 @@
             android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorFloatingButton"
-            android:popupBackground="@color/colorFloatingButton"
+            android:backgroundTint="@android:color/transparent"
             android:textSize="16sp">
         </org.angmarch.views.NiceSpinner>
     </android.support.v7.widget.Toolbar>

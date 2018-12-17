@@ -28,7 +28,7 @@ import zql.app_jinnang.Prestener.PrestenerImp_listserect;
 import zql.app_jinnang.Prestener.Prestener_listserect;
 import zql.app_jinnang.R;
 
-public class ListSecretActivity extends AppCompatActivity implements ListSecretActivityImp{
+public class ListSecretActivity extends SwipeActivity implements ListSecretActivityImp{
     private Toolbar toolbar_listsecret;
     private PrestenerImp_listserect prestenerImp_listserect;
     private RecyclerView recyclerView;

@@ -15,6 +15,7 @@ import zql.app_jinnang.Bean.NoteBean;
 public interface NoteInfoModelImp {
     public void InsertNotetoData(NoteBean noteBean);
     public void InsertNotetoData_secret(NoteBean noteBean);
+    public void InsertNotetoDatabyId(NoteBean noteBean);
     public void DeleteNotefromData(NoteBean noteBean);
     public void DeleteNotefromData_secret(NoteBean noteBean);
     public List<NoteBean> QueryAllNotefromData();

@@ -40,7 +40,7 @@ import zql.app_jinnang.Prestener.PrestenerImp_datachart;
 import zql.app_jinnang.Prestener.Prestener_datachart;
 import zql.app_jinnang.R;
 
-public class DataChartActivity extends AppCompatActivity implements DataChartActivityImp {
+public class DataChartActivity extends SwipeActivity implements DataChartActivityImp {
     private PrestenerImp_datachart prestenerImp_datachart;
     private RelativeLayout relativeLayout;
     private PieChartView pieChartView;//饼状图

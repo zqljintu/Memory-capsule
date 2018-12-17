@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Vibrator;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.view.ViewPager;
@@ -21,31 +20,31 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.jaeger.library.StatusBarUtil;
-import com.yuyh.library.imgsel.ISNav;
-import com.yuyh.library.imgsel.common.ImageLoader;
-import com.yuyh.library.imgsel.config.ISCameraConfig;
+
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
 import zql.app_jinnang.Adapter.ViewPagerCardAdapter;
 import zql.app_jinnang.Bean.Means;
+import zql.app_jinnang.Bean.MessageEvent;
 import zql.app_jinnang.Bean.NoteBean;
 import zql.app_jinnang.Prestener.Prestener_main;
 import zql.app_jinnang.Prestener.PrestenerImp_main;
@@ -70,12 +69,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     private int count_delete;
     private AlertDialog alertDialog;
 
-    private static final int REQUEST_LIST_CODE = 0;
-    private static final int REQUEST_CAMERA_CODE = 1;
     private static final int REQUEST_UPDATE=2;
     private static final int REQUEST_COLOR=3;
-    private static final int EDIT=0;
-    private static final int CHANGE=1;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +81,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         initview();
         prestenerImpMain.readNotefromDatatoMain();
         prestenerImpMain.setBackgroundcolorfromSeting();
+        EventBus.getDefault().register(this);
     }
     private void initview(){//具体的View实现生成的函数
         initToolBarSeting();
         initFloatingActionButton();
         initViewPagercard();
-        initCameraView();
     }
     private void initToolBarSeting(){//实现ToolBar的生成
         relativeLayout=(RelativeLayout)this.findViewById(R.id.relativeLayout_main);
@@ -119,34 +114,49 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         floatingActionButton_work.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prestenerImpMain.openAddActivity(0);
+                startEditActivity(0,null);
+                floatingActionsmenu_add.collapse();
             }
         });
         floatingActionButton_study.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prestenerImpMain.openAddActivity(1);
+                startEditActivity(1,null);
+                floatingActionsmenu_add.collapse();
             }
         });
         floatingActionButton_live.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prestenerImpMain.openAddActivity(2);
+                startEditActivity(2,null);
+                floatingActionsmenu_add.collapse();
             }
         });
         floatingActionButton_diarly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prestenerImpMain.openAddActivity(3);
+                startEditActivity(3,null);
+                floatingActionsmenu_add.collapse();
             }
         });
         floatingActionButton_travel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                prestenerImpMain.openAddActivity(4);
+                startEditActivity(4,null);
+                floatingActionsmenu_add.collapse();
             }
         });
 
+    }
+    private void startEditActivity(int type,NoteBean noteBean){
+        Intent addintent=new Intent(MainActivity.this,EditActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putInt("type",type);
+        if (noteBean!=null){
+            bundle.putSerializable("noteinfo",Means.changefromNotebean(noteBean));
+        }
+        addintent.putExtra("data",bundle);
+        startActivity(addintent);
     }
     private void initEditpassworddialog(){//实例化一个重新编辑密码的dialog
         if (!password.isEmpty()){
@@ -188,21 +198,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         passwordbottomsheetdialog.setContentView(dialogview);
         passwordbottomsheetdialog.show();
 
-    }
-    private void initCameraView(){//初始化图片加载器
-        ISNav.getInstance().init(new ImageLoader() {
-            @Override
-            public void displayImage(Context context, String path, ImageView imageView) {
-                Glide.with(context).load(path).into(imageView);
-            }
-        });
-    }
-    private void initphototakActivity(){
-        ISCameraConfig config=new ISCameraConfig.Builder()
-                .needCrop(true)
-                .cropSize(0,0,500,500)
-                .build();
-        ISNav.getInstance().toCameraActivity(this,config,REQUEST_CAMERA_CODE);
     }
     private void initViewPagercard(){//实现ViewPagerCard的生成
         viewPagercard=(ViewPager)this.findViewById(R.id.viewpager_main);
@@ -253,13 +248,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         main_dialog_linear_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent addintent=new Intent(MainActivity.this,AddActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putInt("addtype",CHANGE);
-                bundle.putSerializable("noteinfo",Means.changefromNotebean(noteBean));
-                addintent.putExtra("data",bundle);
-                startActivityForResult(addintent,REQUEST_UPDATE);
-                bottomSheetDialog.dismiss();
+               startEditActivity(10,noteBean);
+               bottomSheetDialog.dismiss();
             }
         });
         main_dialog.setBackgroundColor(maincolor);
@@ -348,9 +338,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
             case R.id.action_serect:
                 initEditpassworddialog();
                 return true;
-            case R.id.action_camera:
-                initphototakActivity();
-                return true;
             case R.id.action_chart:
                 initChartActiviy();
                 return true;
@@ -375,50 +362,34 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         return this;
     }
 
-    @Override//打开新的AddActivity
-    public void startAddActivity(int type) {
-        count_delete=0;//创建新的事件只需跳转到第一位
-        floatingActionsmenu_add.collapseImmediately();
-        Intent addintent=new Intent(MainActivity.this,AddActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putInt("addtype",EDIT);
-        bundle.putInt("notetype",type);
-        bundle.putString("photouri","<图片>");
-        addintent.putExtra("data",bundle);
-        this.startActivityForResult(addintent,REQUEST_UPDATE);
-    }
 
-    @Override//通过拍照打开新的AddActivity
-    public void startAddActivityS(String path) {
-        count_delete=0;//创建新的事件只需跳转到第一位
-        Intent addintent=new Intent(MainActivity.this,AddActivity.class);
-        Bundle bundle=new Bundle();
-        bundle.putInt("addtype",EDIT);
-        bundle.putInt("notetype",1001);
-        bundle.putString("photouri",path);
-        addintent.putExtra("data",bundle);
-        startActivityForResult(addintent,REQUEST_UPDATE);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==REQUEST_CAMERA_CODE&&resultCode==RESULT_OK&&data!=null){
-            String path=data.getStringExtra("result");
-            prestenerImpMain.openAddActivityS(path);
-        }
-        if (requestCode==REQUEST_UPDATE){
-            prestenerImpMain.readNotefromDatatoMain();
-        }
-        if (requestCode==REQUEST_COLOR){
-            prestenerImpMain.setBackgroundcolorfromSeting();
+    }
+    /**
+     * EventBus接受事件
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handEvent(MessageEvent messageEvent){
+        switch (messageEvent.getMessageevent()){
+            case MessageEvent.UPDATE_DATA:
+                prestenerImpMain.readNotefromDatatoMain();
+                break;
+            case MessageEvent.UPDATA_COLOR:
+                prestenerImpMain.setBackgroundcolorfromSeting();
+                break;
+                default:
+                    break;
+
         }
     }
 
     @Override
     public void startSetingActivity() {
         Intent mintet=new Intent(MainActivity.this,AboutActivity.class);
-        this.startActivityForResult(mintet,REQUEST_COLOR);
+        this.startActivity(mintet);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -473,7 +444,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     public void openSheetDialog(NoteBean noteBean) {
         initBottomDialog(noteBean);
     }
-
 
     @Override
     public void readNotefromData(List<NoteBean> noteBeanList) {

@@ -30,7 +30,7 @@ import zql.app_jinnang.Prestener.PrestenerImp_seacher;
 import zql.app_jinnang.Prestener.Prestener_seacher;
 import zql.app_jinnang.R;
 
-public class SearchActivity extends AppCompatActivity implements SearchActivityImp {
+public class SearchActivity extends SwipeActivity implements SearchActivityImp {
     private SearchView searchView;
     private Toolbar toolbar_search;
     private RecyclerView searchrecyclerView;

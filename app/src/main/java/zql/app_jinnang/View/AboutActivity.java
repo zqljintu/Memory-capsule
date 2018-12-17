@@ -20,12 +20,14 @@ import com.jaeger.library.StatusBarUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.angmarch.views.NiceSpinner;
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import zql.app_jinnang.Bean.Means;
+import zql.app_jinnang.Bean.MessageEvent;
 import zql.app_jinnang.Prestener.PrestenerImp_about;
 import zql.app_jinnang.Prestener.Prestener_about;
 import zql.app_jinnang.R;
@@ -33,13 +35,12 @@ import zql.app_jinnang.UserSeting;
 
 import static zql.app_jinnang.R.color.colorFloatingButton;
 
-public class AboutActivity extends AppCompatActivity implements AboutActivityImp,View.OnClickListener{
+public class AboutActivity extends SwipeActivity implements AboutActivityImp,View.OnClickListener{
     private PrestenerImp_about prestenerImp_about;
     private AlertDialog alertDialog_creatpassword;
     private NiceSpinner niceSpinner;
     private Toolbar toolbar_about;
     private UserSeting userSeting;
-    private static final int REQUEST_COLOR=3;
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -267,6 +268,7 @@ public class AboutActivity extends AppCompatActivity implements AboutActivityImp
                             break;
 
                 }
+                EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATA_COLOR));
             }
         });
     }
@@ -339,7 +341,6 @@ public class AboutActivity extends AppCompatActivity implements AboutActivityImp
 
     @Override
     public void finish() {
-        setResult(REQUEST_COLOR);
         super.finish();
     }
 }
