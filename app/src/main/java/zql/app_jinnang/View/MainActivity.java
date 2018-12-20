@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.view.ViewPager;
@@ -40,6 +42,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import zql.app_jinnang.Adapter.ViewPagerCardAdapter;
@@ -60,17 +63,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     private AddFloatingActionButton addFloatingActionButton;
     private LinearLayout mainbottomlinearlayout,voicebuttonlayout;
     private ViewPager viewPagercard;
+    private ViewPagerCardAdapter adapter;
     private Toolbar toolbar_main;
-    private TextView title_toolbar_main;
+    private TextView title_toolbar_main,text_refresh;
     private RelativeLayout relativeLayout;
-    private PopupMenu popupMenu;
     private Integer maincolor;
     private String password="";
     private int count_delete;
-    private AlertDialog alertDialog;
 
     private static final int REQUEST_UPDATE=2;
-    private static final int REQUEST_COLOR=3;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         initToolBarSeting();
         initFloatingActionButton();
         initViewPagercard();
+        initrefresh();
     }
     private void initToolBarSeting(){//实现ToolBar的生成
         relativeLayout=(RelativeLayout)this.findViewById(R.id.relativeLayout_main);
@@ -96,6 +98,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
                 .duration(700)
                 .playOn(findViewById(R.id.title_toolbar_main));
         setSupportActionBar(toolbar_main);
+    }
+    private void initrefresh(){//实现刷新
+        text_refresh=(TextView)this.findViewById(R.id.main_refresh);
+        text_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prestenerImpMain.readNotefromDatatoMain();
+            }
+        });
     }
     private void initFloatingActionButton(){//实现FloatingActionButton的生成
         floatingActionButton_calendar=(FloatingActionButton)this.findViewById(R.id.floatingbutton_calendar);
@@ -201,6 +212,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     }
     private void initViewPagercard(){//实现ViewPagerCard的生成
         viewPagercard=(ViewPager)this.findViewById(R.id.viewpager_main);
+        viewPagercard.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,24,getResources().getDisplayMetrics()));
+        viewPagercard.setPageTransformer(false,new ScaleTransformer0(this));
     }
     private void initBottomDialog(final NoteBean noteBean){//创建底部弹出的窗口
         final BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(MainActivity.this);
@@ -269,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                count_delete=viewPagercard.getCurrentItem();//做一个跳转优化
                 prestenerImpMain.changeNotetoPasswordFile(noteBean);
                 prestenerImpMain.readNotefromDatatoMain();
             }
@@ -447,24 +461,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
 
     @Override
     public void readNotefromData(List<NoteBean> noteBeanList) {
-        if (noteBeanList.size()!=0){
-            prestenerImpMain.setMainBackgrountIcon();//当读取的数据为空过的时候，加载一个提示。
-        }
-        viewPagercard.removeAllViews();
-        ViewPagerCardAdapter adapter=new ViewPagerCardAdapter(this,noteBeanList,this,prestenerImpMain);
+        setMainBackgroundIcon(noteBeanList.size());
+        adapter=new ViewPagerCardAdapter(this,noteBeanList,this,prestenerImpMain);
         viewPagercard.setAdapter(adapter);
+
         /**
          * 当为删除事件时，count_delete为大于1，否则为0，在进入界面初始化的时候，我们会把count_delete设置为0
          * */
 
-        if (count_delete>=1){//优化删除（删除完成后跳转到上一个事件界面）
+       if (count_delete>=1){//优化删除（删除完成后跳转到上一个事件界面）
             viewPagercard.setCurrentItem(count_delete-1);
         }else {
             viewPagercard.setCurrentItem(0);
         }
 
-        viewPagercard.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,24,getResources().getDisplayMetrics()));
-        viewPagercard.setPageTransformer(false,new ScaleTransformer0(this));
     }
 
     @Override
@@ -487,8 +497,18 @@ public class MainActivity extends AppCompatActivity implements MainActivityImp{
     }
 
     @Override
-    public void setMainBackgroundIcon() {
+    public void setMainBackgroundIcon(int size) {
         LinearLayout linearlayout_listempty=(LinearLayout)findViewById(R.id.linearlayout_listEmpty);
-        linearlayout_listempty.setVisibility(View.GONE);
+        if (size==0){
+            linearlayout_listempty.setVisibility(View.VISIBLE);
+        }else {
+            linearlayout_listempty.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

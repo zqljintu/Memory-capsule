@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <include
+        android:id="@+id/list_empty"
+        layout="@layout/empty_view">
+    </include>
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_list"
         android:layout_width="match_parent"

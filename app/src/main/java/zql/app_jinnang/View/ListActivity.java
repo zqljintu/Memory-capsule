@@ -4,12 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +21,9 @@ import android.widget.RelativeLayout;
 import com.jaeger.library.StatusBarUtil;
 
 import org.angmarch.views.NiceSpinner;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ import java.util.List;
 
 import zql.app_jinnang.Adapter.RecyclerViewCardAdapter;
 import zql.app_jinnang.Bean.Means;
+import zql.app_jinnang.Bean.MessageEvent;
 import zql.app_jinnang.Bean.NoteBean;
 import zql.app_jinnang.Prestener.PrestenerImp_list;
 import zql.app_jinnang.Prestener.Prestener_list;
@@ -42,15 +44,13 @@ public class ListActivity extends SwipeActivity implements ListActivityImp {
     private RecyclerView recyclerView;
     private RelativeLayout relativeLayout_list;
     private NiceSpinner niceSpinner;
-    private static final int EDIT=0;
-    private static final int CHANGE=1;
-    private static final int REQUEST_UPDATE=2;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        EventBus.getDefault().register(this);
         prestenerImp_list=new Prestener_list(this);
         initView();
         prestenerImp_list.readNotefromDatatoList(0);
@@ -135,7 +135,7 @@ public class ListActivity extends SwipeActivity implements ListActivityImp {
 
     @Override
     public void readAllNotefromData(List<NoteBean> noteBeanList) {//读取数据库内的文件
-        recyclerView.removeAllViews();
+        setMainBackgroundIcon(noteBeanList.size());
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         RecyclerViewCardAdapter recyclerViewCardAdapter=new RecyclerViewCardAdapter((ArrayList<NoteBean>) noteBeanList,this,this);
         recyclerView.setLayoutManager(layoutManager);
@@ -241,22 +241,38 @@ public class ListActivity extends SwipeActivity implements ListActivityImp {
         });
         builder.create().show();
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==REQUEST_UPDATE){
-            prestenerImp_list.readNotefromDatatoList(0);
-        }
-    }
 
-    @Override
-    public void finish() {
-        setResult(REQUEST_UPDATE);
-        super.finish();
-    }
 
     @Override
     public Application getListApplication() {
         return getApplication();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handEvent(MessageEvent messageEvent){
+        switch (messageEvent.getMessageevent()){
+            case MessageEvent.UPDATE_DATA:
+                prestenerImp_list.readNotefromDatatoList(0);
+                break;
+            case MessageEvent.UPDATA_COLOR:
+                //prestenerImpMain.setBackgroundcolorfromSeting();
+                break;
+            default:
+                break;
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    public void setMainBackgroundIcon(int size) {
+        RelativeLayout relativeLayout=(RelativeLayout)findViewById(R.id.list_empty);
+        if (size==0){
+            relativeLayout.setVisibility(View.VISIBLE);
+        }else {
+            relativeLayout.setVisibility(View.GONE);
+        }
     }
 }

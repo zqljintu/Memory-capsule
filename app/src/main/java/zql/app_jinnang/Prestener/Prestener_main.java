@@ -93,8 +93,11 @@ public class Prestener_main implements PrestenerImp_main {
 
     @Override
     public void changeNotetoPasswordFile(NoteBean noteBean) {
+        if (noteBean.getId()!=null){
+            noteInfoModelImp.DeleteNotefromData(noteBean);
+            noteBean.setId(null);
+        }
         noteInfoModelImp.InsertNotetoData_secret(noteBean);
-        noteInfoModelImp.DeleteNotefromData(noteBean);
     }
 
     @Override
@@ -107,8 +110,4 @@ public class Prestener_main implements PrestenerImp_main {
         return userSeting.getcurrentColorNum();
     }
 
-    @Override
-    public void setMainBackgrountIcon() {
-        mainActivityImp.setMainBackgroundIcon();
-    }
 }

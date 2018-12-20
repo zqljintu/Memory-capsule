@@ -28,29 +28,6 @@
             android:text=""
             android:textSize="16dp"/>
     </android.support.v7.widget.Toolbar>
-    <LinearLayout
-        android:id="@+id/linearlayout_listEmpty"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
-        <ImageView
-            android:id="@+id/dataisEmptyIcon"
-            android:layout_width="wrap_content"
-            android:padding="50dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/listisempty"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_NotelistEmpty"
-            android:textStyle="bold"
-            android:textSize="17dp"
-            android:layout_gravity="center"/>
-    </LinearLayout>
-
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager_main"
         android:layout_width="match_parent"
@@ -134,6 +111,35 @@
             app:fab_size="mini"
             app:fab_title="@string/note_travel" />
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-
+    <LinearLayout
+        android:id="@+id/linearlayout_listEmpty"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:id="@+id/dataisEmptyIcon"
+            android:layout_width="wrap_content"
+            android:padding="60dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/listisempty" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_NotelistEmpty"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/main_refresh"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击刷新 ! !"
+            android:layout_gravity="center"
+            android:textSize="17sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorRed"/>
+    </LinearLayout>
 </RelativeLayout>

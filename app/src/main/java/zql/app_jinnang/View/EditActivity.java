@@ -61,18 +61,7 @@ public class EditActivity extends AppCompatActivity implements EditActivityImp,V
     private MaterialEditText materialEditText;
     private NoteBean noteBean;//最后加入数据库的数据类
     private static final int REQUEST_CAMERA_CODE = 1;
-    /**
-     * state=0，正常添加模式
-     * state=1,修改模式
-     */
-    private int state=0;
-    private void setState(int n){
-        this.state=n;
-    }
 
-    public int getState() {
-        return state;
-    }
 
     @TargetApi(Build.VERSION_CODES.M)
     @Override
@@ -80,7 +69,7 @@ public class EditActivity extends AppCompatActivity implements EditActivityImp,V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         initprestener();
-        initview();
+        initviewanddata();
         presterImp_edit.setBackgroundColorfromUserseting();
         initIntentExtra();
     }
@@ -88,7 +77,7 @@ public class EditActivity extends AppCompatActivity implements EditActivityImp,V
     /**
      * 实现界面实例化
      */
-    private void initview(){
+    private void initviewanddata(){
         this.tags=new ArrayList<>();
         this.noteBean=new NoteBean();
         tags.add("<类型>");
@@ -97,7 +86,7 @@ public class EditActivity extends AppCompatActivity implements EditActivityImp,V
         tags.add("<时间>");
         tags.add("<地点>");
         tags.add("<图片>");
-        noteBean.setNotetype("null");
+        noteBean.setNotetype("null");//默认为null
         noteBean.setPeople("null");
         noteBean.setDate("null");
         noteBean.setTime("null");
@@ -148,7 +137,6 @@ public class EditActivity extends AppCompatActivity implements EditActivityImp,V
                 updateTagsGroup(0,"旅行");
                 break;
             case 10:
-                state=1;
                 Noteinfo noteinfo=(Noteinfo) bundle.getSerializable("noteinfo");
                 loadNoteinfotoEdit(noteinfo);
                 break;
@@ -202,7 +190,7 @@ public class EditActivity extends AppCompatActivity implements EditActivityImp,V
             }else {
                 presterImp_edit.saveNoteinfotoDatabase(noteBean);
             }
-            EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATE_DATA));
+            //EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATE_DATA));
             finish();
         }
     }
@@ -597,14 +585,6 @@ public class EditActivity extends AppCompatActivity implements EditActivityImp,V
         return this.getApplication();
     }
 
-    /**
-     * 将状态暴露给外部接口
-     * @return
-     */
-    @Override
-    public int getStatement() {
-        return getState();
-    }
 
     /**
      * 返回按键事件

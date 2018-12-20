@@ -8,11 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </zql.app_jinnang.Service.DatePicker>
+    <include
+        android:id="@+id/calendar_empty"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/calendar_datapicker"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        layout="@layout/empty_view">
+    </include>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/calendar_recycler"
         android:layout_below="@id/calendar_datapicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
-
 </RelativeLayout>

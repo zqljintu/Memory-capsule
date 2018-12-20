@@ -23,7 +23,7 @@ public class Prestener_edit implements PresterImp_edit {
      */
     @Override
     public void saveNoteinfotoDatabase(NoteBean noteBean) {
-        if (editActivityImp.getStatement()==1){
+        if (noteBean.getId()!=null){
             noteInfoModelImp.ChangeNotetoData(noteBean);
         }else {
             noteInfoModelImp.InsertNotetoData(noteBean);
@@ -36,6 +36,9 @@ public class Prestener_edit implements PresterImp_edit {
      */
     @Override
     public void saveNoteinfotoSecrectDatabase(NoteBean noteBean) {
+        if (noteBean.getId()!=null){
+            noteInfoModelImp.DeleteNotefromDataByid(noteBean.getId());
+        }
         noteInfoModelImp.InsertNotetoData_secret(noteBean);
     }
 

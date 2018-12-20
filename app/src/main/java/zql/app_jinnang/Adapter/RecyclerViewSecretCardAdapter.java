@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class RecyclerViewSecretCardAdapter extends RecyclerView.Adapter<Recycler
         }
         holder.recycler_text_note.setText(Means.getNotetextOnRecyclerCard(notelist.get(position).getNoteinfo()));
         holder.recycler_text_time.setText(notelist.get(position).getCreatetime());
-        startNoteinfoActivity(holder.recycler_text_note,notelist.get(position));
+        startNoteinfoActivity(holder.linearLayout,notelist.get(position));
     }
 
     @Override
@@ -73,7 +74,8 @@ public class RecyclerViewSecretCardAdapter extends RecyclerView.Adapter<Recycler
         return notelist==null ? 0 : notelist.size();
     }
 
-    public static class Viewholder extends RecyclerView.ViewHolder{
+    public  class Viewholder extends RecyclerView.ViewHolder{
+        LinearLayout linearLayout;
         ImageView recycler_image_notetype,recycler_image_menu;
         TextView recycler_text_note,recycler_text_time;
         public Viewholder(View itemView){
@@ -82,6 +84,7 @@ public class RecyclerViewSecretCardAdapter extends RecyclerView.Adapter<Recycler
             recycler_image_menu=(ImageView)itemView.findViewById(R.id.recycler_image_menu);
             recycler_text_note=(TextView)itemView.findViewById(R.id.recycler_text_note);
             recycler_text_time=(TextView)itemView.findViewById(R.id.recycler_text_time);
+            linearLayout=(LinearLayout)itemView.findViewById(R.id.recycler_item);
         }
     }
     private void setMenuListener(View view, final NoteBean noteBean){

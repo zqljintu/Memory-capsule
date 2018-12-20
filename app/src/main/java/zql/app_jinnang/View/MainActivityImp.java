@@ -22,7 +22,7 @@ public interface MainActivityImp {
     public void startSetingActivity();
     public void startSearchActivity();
     public void setMainBackground(Integer integer);
-    public void setMainBackgroundIcon();//如果数据库为空，界面加载一个图片显示。
+    public void setMainBackgroundIcon(int size);//如果数据库为空，界面加载一个图片显示。
     public void openSheetDialog(NoteBean noteBean);
     public void readNotefromData(List<NoteBean>noteBeanList);
     public Application getMainApplication();

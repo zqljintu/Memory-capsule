@@ -28,8 +28,11 @@ public class Prestener_list implements PrestenerImp_list {
 
     @Override
     public void changeNotetoPasswordFile(NoteBean noteBean) {
+        if (noteBean.getId()!=null){
+            noteInfoModelImp.DeleteNotefromData(noteBean);
+            noteBean.setId(null);
+        }
         noteInfoModelImp.InsertNotetoData_secret(noteBean);
-        noteInfoModelImp.DeleteNotefromData(noteBean);
     }
 
     @Override

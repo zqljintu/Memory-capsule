@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.jaeger.library.StatusBarUtil;
 
@@ -63,7 +65,7 @@ public class CalendarActivity extends SwipeActivity implements CalendarActivityI
 
     @Override
     public void readNotebeansfromDatabycreatetime(List<NoteBean> noteBeanList) {
-        recyclerView.removeAllViews();
+       setMainBackgroundIcon(noteBeanList.size());
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL,false);
         RecyclerViewTimeCardAdapter recyclerViewTimeCardAdapter=new RecyclerViewTimeCardAdapter((ArrayList<NoteBean>) noteBeanList,this,this);
         recyclerView.setLayoutManager(layoutManager);
@@ -117,5 +119,14 @@ public class CalendarActivity extends SwipeActivity implements CalendarActivityI
     @Override
     public Application getCalendarApplication() {
         return getApplication();
+    }
+
+    public void setMainBackgroundIcon(int size) {
+        RelativeLayout relativeLayout=(RelativeLayout)findViewById(R.id.calendar_empty);
+        if (size==0){
+            relativeLayout.setVisibility(View.VISIBLE);
+        }else {
+            relativeLayout.setVisibility(View.GONE);
+        }
     }
 }

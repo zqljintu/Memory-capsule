@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
@@ -40,7 +41,7 @@ public class RecyclerViewSearchAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(Viewholder holder, int position) {
-        startNoteinfoActivity(holder.recycler_text_note,notelist.get(position));
+        startNoteinfoActivity(holder.relativeLayout,notelist.get(position));
         holder.recycler_text_note.setText(Means.getNotetextOnSearchCard(notelist.get(position).getNoteinfo().toString()));
     }
 
@@ -49,11 +50,13 @@ public class RecyclerViewSearchAdapter extends RecyclerView.Adapter<RecyclerView
         return notelist==null?0:notelist.size();
     }
 
-    public static class Viewholder extends RecyclerView.ViewHolder{
+    public  class Viewholder extends RecyclerView.ViewHolder{
         TextView recycler_text_note;
+        RelativeLayout relativeLayout;
         public Viewholder(View itemView){
             super(itemView);
             recycler_text_note=(TextView)itemView.findViewById(R.id.textview_item_suggestion);
+            relativeLayout=(RelativeLayout)itemView.findViewById(R.id.rela_suggestion);
         }
     }
     private void startNoteinfoActivity(View view,final NoteBean noteBean){

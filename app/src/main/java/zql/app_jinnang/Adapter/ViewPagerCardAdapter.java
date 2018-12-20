@@ -41,19 +41,14 @@ public class ViewPagerCardAdapter extends PagerAdapter {
     private List<NoteBean>list;
     private Context context;
     private LayoutInflater layoutInflater;
-    private UserSeting userSeting;
     private PrestenerImp_main prestenerImp_main;
+    private int mChildCount = 0;
 
     public ViewPagerCardAdapter(Context mcontext,List<NoteBean>mlist,MainActivityImp mmainActivityImp,PrestenerImp_main mprestenerImp_main){
         this.context=mcontext;
-        this.list=new ArrayList<NoteBean>();
-        if (!this.list.isEmpty()){
-            this.list.clear();
-        }
         this.list=mlist;
         this.mainActivityImp=mmainActivityImp;
         this.prestenerImp_main=mprestenerImp_main;
-        userSeting=(UserSeting)mainActivityImp.getMainApplication();
         layoutInflater=LayoutInflater.from(context);
     }
 
@@ -87,7 +82,7 @@ public class ViewPagerCardAdapter extends PagerAdapter {
         createtime_item_viewpagercard=(TextView)view.findViewById(R.id.createtime_item_viewpagercard);
         viewpager_card=(CardView)view.findViewById(R.id.viewPager_card);
         setMenuListener(menu_item_viewpagercard,list.get(position));
-        startNoteinfoActivity(imageview_item_viewpagercard,list.get(position));
+        startNoteinfoActivity(viewpager_card,list.get(position));
         textview_item_viewpagercard.setText(Means.getNotetextOnViewPagerCard(noteinfo));
         createtime_item_viewpagercard.setText("——创建于:"+createtime);
         if (photopath.equals("<图片>")||photopath.equals("null")){
@@ -243,4 +238,18 @@ public class ViewPagerCardAdapter extends PagerAdapter {
         return currentView;
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        mChildCount = getCount();
+        super.notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        if (mChildCount > 0) {
+            mChildCount--;
+            return POSITION_NONE;
+        }
+        return super.getItemPosition(object);
+    }
 }

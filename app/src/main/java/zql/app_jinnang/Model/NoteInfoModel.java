@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SliceValue;
 import zql.app_jinnang.Bean.Means;
+import zql.app_jinnang.Bean.MessageEvent;
 import zql.app_jinnang.Bean.NoteBean;
 import zql.app_jinnang.R;
 import zql.app_jinnang.greendao.db.DaoMaster;
@@ -57,17 +59,24 @@ public class NoteInfoModel implements NoteInfoModelImp {
     @Override
     public void InsertNotetoData(NoteBean noteBean) {
         noteBeanDao.insert(noteBean);
+        EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATE_DATA));
     }
 
     @Override
     public void InsertNotetoData_secret(NoteBean noteBean) {
+        if (noteBean.getId()!=null){
+            noteBean.setId(null);
+        }
         noteBeanDao_secret.insert(noteBean);
+        EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATE_DATA));
     }
 
     @Override
     public void InsertNotetoDatabyId(NoteBean noteBean) {
         if (noteBean.getId()!=null){
-            noteBeanDao.update(noteBean);
+           // noteBeanDao.update(noteBean);
+            noteBeanDao.refresh(noteBean);
+            EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATE_DATA));
         }
     }
 
@@ -79,6 +88,7 @@ public class NoteInfoModel implements NoteInfoModelImp {
     @Override
     public void DeleteNotefromData(NoteBean noteBean) {
         noteBeanDao.delete(noteBean);
+        EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATE_DATA));
     }
 
     @Override
@@ -89,7 +99,9 @@ public class NoteInfoModel implements NoteInfoModelImp {
     @Override
     public void ChangeNotetoData(NoteBean noteBean) {
         if (noteBean.getId()!=null){
-            noteBeanDao.update(noteBean);
+            DeleteNotefromDataByid(noteBean.getId());
+            noteBeanDao.insert(noteBean);
+            EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATE_DATA));
         }
     }
 
@@ -113,6 +125,8 @@ public class NoteInfoModel implements NoteInfoModelImp {
 
     @Override
     public List<NoteBean> QueryAllNotefromData() {
+        daoSession.clear();
+        noteBeanDao.detachAll();
         List mlist=noteBeanDao.loadAll();
         Collections.reverse(mlist);//倒序
         return mlist;

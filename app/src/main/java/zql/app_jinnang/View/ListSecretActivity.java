@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.jaeger.library.StatusBarUtil;
 
@@ -119,7 +120,7 @@ public class ListSecretActivity extends SwipeActivity implements ListSecretActiv
 
     @Override
     public void readAllNoteSerectfromData(List<NoteBean> noteBeanList) {
-        recyclerView.removeAllViews();
+        setMainBackgroundIcon(noteBeanList.size());
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         RecyclerViewSecretCardAdapter recyclerViewSecretCardAdapter=new RecyclerViewSecretCardAdapter((ArrayList<NoteBean>) noteBeanList,this,this);
         recyclerView.setLayoutManager(layoutManager);
@@ -140,5 +141,13 @@ public class ListSecretActivity extends SwipeActivity implements ListSecretActiv
     @Override
     public Context getListSerectActivityContext() {
         return this;
+    }
+    public void setMainBackgroundIcon(int size) {
+        RelativeLayout relativeLayout=(RelativeLayout)findViewById(R.id.listserect_empty);
+        if (size==0){
+            relativeLayout.setVisibility(View.VISIBLE);
+        }else {
+            relativeLayout.setVisibility(View.GONE);
+        }
     }
 }

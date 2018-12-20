@@ -28,4 +28,6 @@
     <color name="colortoolbartitle">#ffff</color>
     <color name="colorpopumenubackground">#453e3c</color>
     <color name="colorDaymain">#ebebeb</color>
+    <color name="colorRed">#ff2626</color>
+    <color name="colorPress">#999999</color>
 </resources>

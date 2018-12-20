@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView android:id="@+id/viewPager_card"
+<android.support.v7.widget.CardView
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:id="@+id/viewPager_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -8,13 +12,11 @@
     android:layout_marginBottom="70dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
             android:id="@+id/imageview_item_viewpagercard"
-            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/photo_live"
@@ -29,7 +31,6 @@
             android:scaleType="fitCenter"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"/>
-
         <TextView
             android:id="@+id/textview_item_viewpagercard"
             android:layout_width="match_parent"
@@ -55,15 +56,15 @@
             android:layout_marginBottom="10dp"/>
         <ImageView
             android:id="@+id/menu_item_viewpagercard"
+            android:src="@drawable/main_menu"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:elevation="4dp"
             android:scaleType="centerInside"
             android:clickable="true"
-            android:src="@drawable/button_set"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="35dp" />
+            android:layout_marginBottom="35dp"/>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
