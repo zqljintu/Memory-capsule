@@ -42,7 +42,7 @@
                 android:layout_centerVertical="true" />
             <TextView
                 android:id="@+id/recycler_text_note"
-                android:clickable="true"
+                android:clickable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"

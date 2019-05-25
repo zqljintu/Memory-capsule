@@ -43,6 +43,7 @@
             android:textSize="16sp"
             android:lineSpacingExtra="3dp"
             android:transitionName="@string/sharedTextView"
+            android:layout_above="@id/createtime_item_viewpagercard"
             android:text="我是一个TextView" />
         <TextView
             android:id="@+id/createtime_item_viewpagercard"

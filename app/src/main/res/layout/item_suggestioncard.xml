@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/textview_item_suggestion"
         android:paddingStart="5dp"
-        android:clickable="true"
+        android:clickable="false"
         android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

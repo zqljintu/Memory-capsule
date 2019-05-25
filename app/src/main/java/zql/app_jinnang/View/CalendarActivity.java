@@ -40,6 +40,7 @@ public class CalendarActivity extends SwipeActivity implements CalendarActivityI
     @TargetApi(Build.VERSION_CODES.M)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setSwipeAnyWhere(false);
         setContentView(R.layout.activity_calendar);
         prestenerImp_calendar=new Prestener_calendar(this);
         prestenerImp_calendar.setBackgroundcolorfromSeting();
