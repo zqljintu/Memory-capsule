@@ -9,7 +9,7 @@
         android:id="@+id/list_empty"
         layout="@layout/empty_view">
     </include>
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_list"
         android:layout_width="match_parent"
         android:layout_height="54dp"
@@ -36,11 +36,11 @@
             android:backgroundTint="@android:color/transparent"
             android:textSize="16sp">
         </org.angmarch.views.NiceSpinner>
-    </android.support.v7.widget.Toolbar>
-    <android.support.v7.widget.RecyclerView
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_list"
         android:layout_below="@id/toolbar_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

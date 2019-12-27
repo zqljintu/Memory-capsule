@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="ImageCheckBox" tools:ignore="ResourceName">
+        <attr name="onDrawable" format="reference" />
+        <attr name="offDrawable" format="reference" />
+        <attr name="waitDrawable" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="DownloadProgressButton">
+        <attr name="progress_btn_radius" format="dimension" />
+        <attr name="progress_btn_background_color" format="color" />
+        <attr name="progress_btn_background_second_color" format="color" />
+        <attr name="progress_btn_text_color" format="color" />
+        <attr name="progress_btn_text_cover_color" format="color" />
+        <attr name="progress_btn_border_width" format="dimension" />
+        <attr name="progress_btn_ball_style" format="enum">
+            <enum name="STYLE_BALL_PULSE" value="1" />
+            <enum name="STYLE_BALL_JUMP" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

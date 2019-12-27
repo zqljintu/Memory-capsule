@@ -1,0 +1,72 @@
+ext {
+    android = [
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 19,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "1.0",
+    ]
+
+    isApp = false
+
+    isLogDebug = true
+
+    base = [
+            "appcompat"            : 'androidx.appcompat:appcompat:1.1.0',
+            "constraintlayout"     : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            "multidex"             : 'androidx.multidex:multidex:2.0.1',
+            "design"               : 'com.google.android.material:material:1.0.0',
+            "mmkv"                 : 'com.tencent:mmkv:1.0.23',
+            "arouterApi"           : "com.alibaba:arouter-api:1.4.1",
+            "eventbus"             : "org.greenrobot:eventbus:3.1.1",
+            "rxandroid"            : 'io.reactivex.rxjava2:rxandroid:2.1.1',
+            "rxjava"               : 'io.reactivex.rxjava2:rxjava:2.1.1',
+            "okhttp"               : "com.squareup.okhttp3:okhttp:3.10.0",
+            "retrofit"             : "com.squareup.retrofit2:retrofit:2.4.0",
+            "converter - gson"     : "com.squareup.retrofit2:converter-gson:2.4.0",
+            "adapter - rxjava"     : "com.squareup.retrofit2:adapter-rxjava2:2.4.0",
+            "logging - interceptor": "com.squareup.okhttp3:logging-interceptor:3.9.1",
+            "gson"                 : "com.google.code.gson:gson:2.8.5",
+            "af"                   : "com.appsflyer:af-android-sdk:4+@aar",
+            "huawei"               : "com.llew.huawei:verifier:1.1.1",
+            "autosize"             : "me.jessyan:autosize:1.1.2",
+            "bugly"                : 'com.tencent.bugly:crashreport:latest.release',
+            "AdapterHelper"        : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47',
+            "recyclerview"         : 'androidx.recyclerview:recyclerview:1.0.0',
+            "bottomNavigation"     : 'com.ashokvarma.android:bottom-navigation-bar:2.1.0',
+            "rxpermission"         : 'com.github.tbruyelle:rxpermissions:0.10.2',
+            'cardView'             : 'androidx.cardview:cardview:1.0.0',
+            "lottie"               : 'com.airbnb.android:lottie:3.2.0',
+            "glide"                : 'com.github.bumptech.glide:glide:4.10.0',
+            "circleprogress"       : 'com.dinuscxj:circleprogressbar:1.3.0',
+            "processes"            : 'com.jaredrummler:android-processes:1.0.8',
+            "rvdecoration"         : 'com.yanyusong.y_divideritemdecoration:y_divideritemdecoration:2.0',
+            'progressbutton'       : 'com.xiaochendev.progressroundbtn:library:2.0.0',
+            'recyclerviewAnim'     : 'jp.wasabeef:recyclerview-animators:3.0.0',
+            'greendao'             : 'org.greenrobot:greendao:3.2.2',
+            "apachecommons"        : 'org.apache.commons:commons-lang3:3.7',
+            'liveData'             : 'android.arch.lifecycle:extensions:1.1.0',
+            'ViewModel'            : 'android.arch.lifecycle:viewmodel:1.1.0',
+            'LiveData'             : 'android.arch.lifecycle:livedata:1.1.0',
+            'bar'                  :'com.jaeger.statusbarutil:library:1.4.0',//沉浸式状态栏开源库
+            'floatingActionButton' :'com.getbase:floatingactionbutton:1.10.1',//floatingActionButton开源库
+            'nice-spinner'         :'com.github.arcadefire:nice-spinner:1.3.1',//下拉菜单开源库
+            'floatingbutton'       :'com.github.joaquimley:faboptions:1.2.0',//floatingbutton库
+            'textedit'             :'com.rengwuxian.materialedittext:library:2.1.4',//textedit开源库
+            'taggroup'             :'me.gujun.android.taggroup:library:1.4@aar',//标签库
+            'imgsel'               :'com.yuyh.imgsel:library:2.0.3',//拍照图片加载库
+            'datepicker'           :'cn.aigestudio.datepicker:DatePicker:2.2.0',
+            'switchbutton'         :'com.kyleduo.switchbutton:library:2.0.0',//switchbutton开源库
+            'hellocharts'          :'com.github.lecho:hellocharts-library:1.5.8@aar',//chart图表开源库
+            'dmjdh0'               :'com.android.support:support-compat:26.1.0',
+            'dmjdh1'               :'com.daimajia.easing:library:2.0@aar',
+            'dmjdh2'               :'com.daimajia.androidanimations:library:2.3@aar',
+    ]
+
+
+    annotationProcessors = [
+            "arouter-compiler": "com.alibaba:arouter-compiler:1.2.2",
+            "glide"           : 'com.github.bumptech.glide:compiler:4.10.0'
+    ]
+}

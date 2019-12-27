@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--通用颜色-->
+    <color name="color_ededed">#ededed</color>
+    <color name="comm_white_fff">#FFFFFF</color>
+
+    <!--主要颜色-->
+    <color name="comm_title_bar_color">#0290f8</color>
+    <color name="comm_status_bar_color">#0290f8</color>
+    <color name="comm_status_bar_color_33">#33000000</color>
+
+    <color name="comm_tool_bar_title_color_white">#fff</color>
+    <color name="comm_tool_bar_title_color_black">#262626</color>
+
+    <color name="comm_toolbar_bg_white">#fff</color>
+    <color name="comm_toolbar_bg_red">#e63c32</color>
+    <color name="comm_toolbar_bg_blue">#2c77fd</color>
+    <color name="comm_toolbar_bg_f3f2f9">#f3f2f9</color>
+
+
+    <!--主模块-->
+    <color name="main_bc">#ffffff</color>
+    <color name="main_bottom_active_color">@color/comm_title_bar_color</color>
+    <color name="main_bottom_normal_color">#868992</color>
+
+    <!--browser-->
+    <!--home-->
+    <color name="indicator_full_white">#fff</color>
+    <color name="indicator_half_white">#80FFFFFF</color>
+    <color name="color333333">#333333</color>
+    <color name="home_junk_waring_color">#fc4f25</color>
+
+    <!--end-->
+    <color name="color666666">#666666</color>
+    <!--主要背景亮色-->
+    <color name="comm_bg_light">#f3f2f9</color>
+    <color name="comm_text_66">#666666</color>
+    <color name="comm_text_33">#333333</color>
+    <color name="comm_text_7b">#E67B7B7B</color>
+
+    <color name="common_text">#fff400</color>
+
+
+</resources>

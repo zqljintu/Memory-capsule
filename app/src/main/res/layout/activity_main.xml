@@ -7,7 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/tools"
     android:background="@color/colorsecond">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
         android:layout_width="match_parent"
         android:layout_height="54dp"
@@ -27,7 +27,7 @@
             android:textColor="@android:color/white"
             android:text=""
             android:textSize="16dp"/>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:id="@+id/linearlayout_listEmpty"
         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/colorRed"/>
     </LinearLayout>
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -72,7 +72,7 @@
         android:paddingRight="40dp"
         android:paddingBottom="60dp">
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingbutton_calendar"
         android:layout_width="wrap_content"

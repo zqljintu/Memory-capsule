@@ -1,0 +1,73 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xdandroid.hellodaemon">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <application>
+
+        <receiver
+            android:name="com.xdandroid.hellodaemon.WakeUpReceiver"
+            android:process=":watch">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="com.xdandroid.hellodaemon.CANCEL_JOB_ALARM_SUB" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.xdandroid.hellodaemon.WakeUpReceiver$WakeUpAutoStartReceiver"
+            android:process=":watch">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.xdandroid.hellodaemon.AbsWorkService$WorkNotificationService" />
+
+        <service
+            android:name="com.xdandroid.hellodaemon.JobSchedulerService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":watch" />
+
+        <service
+            android:name="com.xdandroid.hellodaemon.WatchDogService"
+            android:process=":watch" />
+
+        <service
+            android:name="com.xdandroid.hellodaemon.WatchDogService$WatchDogNotificationService"
+            android:process=":watch" />
+
+
+        <service android:name="com.xdandroid.hellodaemon.KeepLiveService" />
+
+        <service android:name="com.xdandroid.hellodaemon.KeepLiveBindService" />
+
+        <activity
+            android:name="com.xdandroid.hellodaemon.KeepLiveActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:taskAffinity="com.xdandroid.hellodaemon.keep"
+            android:theme="@style/KeepLiveActivity" />
+
+        <activity
+            android:name="com.xdandroid.hellodaemon.KeepLiveBackActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/KeepLiveActivity" />
+
+    </application>
+
+</manifest>

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_search"
         android:layout_width="match_parent"
         android:elevation="4dp"
@@ -21,14 +21,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp">
         </SearchView>
-    </android.support.v7.widget.Toolbar>
-    <android.support.v7.widget.RecyclerView
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.recyclerview.widget.RecyclerView
         android:background="@color/cardview_light_background"
         android:id="@+id/recycler_search"
         android:layout_marginTop="2dp"
         android:layout_below="@id/toolbar_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

@@ -1,0 +1,24 @@
+apply from: '../module.gradle'
+def apis = rootProject.ext.base
+android {
+    defaultConfig {
+        if (rootProject.ext.isApp) {
+            applicationId "com.solo.live"
+        }
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    apis.each { key, value ->
+        if (key.endsWith("exclude")) {
+            api(value) {
+                exclude group: 'com.android.support'
+            }
+        } else {
+            api value
+        }
+    }
+}

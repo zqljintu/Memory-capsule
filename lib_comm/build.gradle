@@ -1,0 +1,30 @@
+apply from: '../module.gradle'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    defaultConfig {
+        if (rootProject.ext.isApp) {
+            applicationId "com.solo.comm"
+        }
+
+        resValue "string", "app_key", ""
+        resValue "string", "key_update", ""
+        resValue "string", "key_config", ""
+        resValue "string", "application_name", ""
+        resValue "string", "email", ""
+        resValue "string", "privacy_url", ""
+        resValue "string", "agrement_url", ""
+    }
+
+}
+
+greendao {
+    schemaVersion 1 //当前数据库版本
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api project(path: ':lib_base')
+    api project(path: ':hellodaemon')
+    api files('libs/smoothcompoundbuttonlibrary.jar')
+}

@@ -1,0 +1,71 @@
+if (rootProject.ext.isApp) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+def android_config = rootProject.ext.android
+def annotationProcessors = rootProject.ext.annotationProcessors
+
+
+
+android {
+    compileSdkVersion android_config.compileSdkVersion
+    buildToolsVersion android_config.buildToolsVersion
+    defaultConfig {
+        minSdkVersion android_config.minSdkVersion
+        targetSdkVersion android_config.targetSdkVersion
+        versionCode android_config.versionCode
+        versionName android_config.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        buildConfigField("boolean", "isLogDebug", String.valueOf(rootProject.ext.isLogDebug))
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [design_width : "360",
+                                    design_height: "640 "]
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [design_width : "360",
+                                    design_height: "640 "]
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            if (rootProject.ext.isApp) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    exclude 'debug/**'
+                }
+            }
+        }
+    }
+}
+
+
+dependencies {
+    annotationProcessors.each { key, value -> annotationProcessor value }
+}
+
+

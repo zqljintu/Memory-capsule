@@ -1,0 +1,18 @@
+<resources>
+    <string name="memory_app_name">lib_comm</string>
+    <!--其他-->
+    <string name="update">Update</string>
+    <string name="update_title">%1$s又升级了~</string>
+
+    <!--关于我们-->
+    <string name="about_title">About Us</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_rights_reserved">©2019 Soft365 Ltd. All Rights Reserved.</string>
+    <string name="about_privacy_policy">Privacy Policy</string>
+    <string name="about_user_agreement">User Agreement</string>
+    <string name="rating_protected">Protected</string>
+    <string name="rating_desc">your phone for %1$d days, cleaned \n%1$s junks. Please give us a 5-star!</string>
+    <string name="rating_ok">OK</string>
+    <string name="battery_btn_freeze">FREEZE</string>
+
+</resources>

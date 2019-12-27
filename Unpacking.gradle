@@ -1,0 +1,16 @@
+ext {
+    one = [
+            applicationId  : "com.zql.app_jinnang",
+            versionName    : "2.0",
+            versionCode    : 2,
+            key_0          : "default",//设置为包名
+            key_1          : "default",//设置为baseurl
+            key_2          : "default",
+            key_3          : "default",
+            key_4          : "default",
+            key_5          : "default",
+            key_6          : "default",
+            key_7          : "default",
+            key_8          : "default",
+    ]
+}

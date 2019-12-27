@@ -1,58 +1,102 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao' // apply plugin
+apply plugin: 'org.greenrobot.greendao'
+def android_config = rootProject.ext.android
+def app = rootProject.ext.one
+
+gradle.taskGraph.whenReady { TaskExecutionGraph taskGraph ->
+    if ("${taskGraph.allTasks}".contains("assembleRelease")) {
+        buildLog("${app.versionName}", "${app.versionCode}")
+    }
+}
 
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion android_config.compileSdkVersion
+    buildToolsVersion android_config.buildToolsVersion
     defaultConfig {
-        applicationId "zql.app_jinnang"
-        minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.03"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId app.applicationId
+        minSdkVersion android_config.minSdkVersion
+        targetSdkVersion android_config.targetSdkVersion
+        versionCode app.versionCode
+        versionName app.versionName
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("boolean", "isLogDebug", String.valueOf(rootProject.ext.isLogDebug))
+        resValue "string", "key_0", app.key_0
+        resValue "string", "key_1", app.key_1
+        resValue "string", "key_2", app.key_2
+        resValue "string", "key_3", app.key_3
+        resValue "string", "key_4", app.key_4
+        resValue "string", "key_5", app.key_5
+        resValue "string", "key_6", app.key_6
+        resValue "string", "key_7", app.key_7
+        resValue "string", "key_8", app.key_8
         multiDexEnabled true
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    signingConfigs {
+        releaseConfig {
+            storeFile file('0xGRpgTy.jks')
+            storePassword "0xGRpgTy"
+            keyAlias "0xGRpgTy"
+            keyPassword "0xGRpgTy"
         }
     }
-    greendao {
-        schemaVersion 1 //数据库版本号
-        daoPackage 'zql.app_jinnang.greendao.db'// 设置DaoMaster、DaoSession、Dao 包名
-        targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.releaseConfig
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [design_width : "360",
+                                    design_height: "640 "]
+        }
+        release {
+            signingConfig signingConfigs.releaseConfig
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [design_width : "360",
+                                    design_height: "640 "]
+
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = outputFileName
+                    if (outputFile != null
+                            && outputFileName.endsWith('.apk')
+                            && 'release'.equals(variant.buildType.name)) {
+                        outputFileName = "security_release_${app.versionCode}(${app.versionName})_${releaseTime()}.apk"
+                    }
+                }
+            }
+        }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+static def releaseTime() {
+    return new Date().format("MMdd_HHmm", TimeZone.getTimeZone("GMT+08:00"))
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation 'com.jaeger.statusbarutil:library:1.4.0'//沉浸式状态栏开源库
-    implementation 'com.getbase:floatingactionbutton:1.10.1'//floatingActionButton开源库
-    implementation 'com.android.support:cardview-v7:26.1.0'
-    implementation 'com.github.arcadefire:nice-spinner:1.3.1'//下拉菜单开源库
-    implementation 'com.github.joaquimley:faboptions:1.2.0'//floatingbutton库
-    implementation 'com.rengwuxian.materialedittext:library:2.1.4'//textedit开源库
-    implementation 'me.gujun.android.taggroup:library:1.4@aar'//标签库
-    implementation 'com.yuyh.imgsel:library:2.0.3'//拍照图片加载库
-    implementation 'com.github.bumptech.glide:glide:3.7.0'//图片加载库
-    implementation 'org.greenrobot:greendao:3.2.2' // add library数据库
-    implementation 'cn.aigestudio.datepicker:DatePicker:2.2.0'
-    implementation 'com.kyleduo.switchbutton:library:2.0.0'//switchbutton开源库
-    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'//chart图表开源库
-    implementation 'org.greenrobot:eventbus:3.1.1'//eventBus组件之间进行通讯
-    //implementation 'com.github.chrisbanes:PhotoView:2.1.4'//图片浏览库
-    /**
-     * 动画代码库
-     */
-    implementation 'com.android.support:support-compat:26.1.0'
-    implementation 'com.daimajia.easing:library:2.0@aar'
-    implementation 'com.daimajia.androidanimations:library:2.3@aar'
+    implementation project(path: ':lib_comm')
+    implementation project(path: ':lib_splash')
+    implementation project(path: ':lib_main')
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    // 引入multidex库
+    implementation 'androidx.multidex:multidex:2.0.0'
+    debugApi 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
+}
+/**
+ * 构建时间
+ * @return
+ */
+static def buildTime(String time) {
+    def date = new Date()
+    def formattedDate = date.format(time)
+    return formattedDate
 }

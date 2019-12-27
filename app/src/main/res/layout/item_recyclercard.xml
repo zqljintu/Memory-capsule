@@ -9,7 +9,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <android.support.v7.widget.CardView
+    <androidx.appcompat.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="2dp"
@@ -63,6 +63,6 @@
                 android:textAlignment="center"
                 android:text="2018.04.12"/>
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.appcompat.widget.CardView>
 
 </LinearLayout>

@@ -1,0 +1,17 @@
+apply from: '../module.gradle'
+
+android {
+    defaultConfig {
+        if (rootProject.ext.isApp) {
+            applicationId "com.zql.main"
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(path: ':lib_comm')
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+}

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_about"
         android:layout_width="match_parent"
         android:layout_height="54dp"
@@ -21,7 +21,7 @@
             android:text="用户设置"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_below="@+id/toolbar_about"
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:text="创建访问隐藏密码:"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <android.support.v7.widget.CardView
+        <androidx.appcompat.widget.CardView
             app:cardCornerRadius="5dp"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                     android:text="忘记密码"
                     android:textStyle="bold"/>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.appcompat.widget.CardView>
         <TextView
             android:textSize="15dp"
             android:text="修改主题:"
@@ -89,7 +89,7 @@
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <android.support.v7.widget.CardView
+        <androidx.appcompat.widget.CardView
             app:cardCornerRadius="5dp"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
@@ -113,7 +113,7 @@
                     android:text="模式"
                     android:textSize="15sp"/>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.appcompat.widget.CardView>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
             android:layout_marginLeft="10dp"
             android:textSize="15sp"
             android:text="关于软件:"/>
-        <android.support.v7.widget.CardView
+        <androidx.appcompat.widget.CardView
             app:cardCornerRadius="5dp"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
@@ -134,6 +134,6 @@
                 android:layout_height="50dp"
                 android:text="@string/about_application"
                 android:textStyle="italic"/>
-        </android.support.v7.widget.CardView>
+        </androidx.appcompat.widget.CardView>
     </LinearLayout>
 </RelativeLayout>

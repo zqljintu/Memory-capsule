@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+def android_config = rootProject.ext.android
+def apis = rootProject.ext.base
+
+android {
+    compileSdkVersion android_config.compileSdkVersion
+    buildToolsVersion android_config.buildToolsVersion
+    defaultConfig {
+        minSdkVersion android_config.minSdkVersion
+        targetSdkVersion android_config.targetSdkVersion
+        versionCode android_config.versionCode
+        versionName android_config.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("boolean", "isLogDebug", String.valueOf(rootProject.ext.isLogDebug))
+        resValue "string", "key_0", ""
+        resValue "string", "key_1", ""
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [design_width : "360",
+                                    design_height: "640 "]
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [design_width : "360",
+                                    design_height: "640 "]
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    apis.each { key, value ->
+        if (key.endsWith("exclude")) {
+            api(value) {
+                exclude group: 'com.android.support'
+            }
+        } else {
+            api value
+        }
+    }
+    api project(path: ':lib_util')
+    //这是一个动画库,可能就这个项目中有用到一点
+    api 'com.github.florent37:expectanim:1.0.7'
+
+}
+
+
+
+

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--comm-->
+    <dimen name="comm_title_bar_text_size">20sp</dimen>
+    <!--home-->
+    <dimen name="home_card_radius">2dp</dimen>
+</resources>
