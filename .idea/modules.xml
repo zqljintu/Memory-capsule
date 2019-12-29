@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Memory-capsule.iml" filepath="$PROJECT_DIR$/Memory-capsule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MemoryCapsule.iml" filepath="$PROJECT_DIR$/MemoryCapsule.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
