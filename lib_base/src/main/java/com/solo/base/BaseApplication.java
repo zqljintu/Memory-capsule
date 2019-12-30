@@ -38,7 +38,7 @@ public abstract class BaseApplication extends MultiDexApplication implements App
     public void onCreate() {
         super.onCreate();
         CrashReport.initCrashReport(getApplicationContext(),
-                "b68477cb03",
+                "cca6ad46fc",
                 true);
         mApplication = this;
         GlobalUtils.init(this);
