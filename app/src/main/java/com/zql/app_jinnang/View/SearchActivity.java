@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 
 import com.jaeger.library.StatusBarUtil;
-import com.solo.comm.widget.SwipeActivity;
+import com.zql.comm.widget.SwipeActivity;
 
 import java.util.List;
 

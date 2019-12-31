@@ -11,8 +11,14 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/hellodaemon" />
             <option value="$PROJECT_DIR$/lib_base" />
+            <option value="$PROJECT_DIR$/lib_calendar" />
+            <option value="$PROJECT_DIR$/lib_chart" />
             <option value="$PROJECT_DIR$/lib_comm" />
+            <option value="$PROJECT_DIR$/lib_edit" />
+            <option value="$PROJECT_DIR$/lib_info" />
             <option value="$PROJECT_DIR$/lib_main" />
+            <option value="$PROJECT_DIR$/lib_other" />
+            <option value="$PROJECT_DIR$/lib_setting" />
             <option value="$PROJECT_DIR$/lib_splash" />
             <option value="$PROJECT_DIR$/lib_util" />
           </set>

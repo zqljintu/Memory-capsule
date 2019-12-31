@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jaeger.library.StatusBarUtil;
-import com.solo.comm.widget.SwipeActivity;
+import com.zql.comm.widget.SwipeActivity;
 
 import java.util.List;
 

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">lib_edit</string>
+    <string name="add_textview_savefile">保存</string>
+    <string name="add_dialog_ok">确定</string>
+    <string name="add_dialog_cancle">取消</string>
+    <string name="add_dialog_toolbar_title">编辑</string>
+    <string name="add_dialog_people_title">人物</string>
+    <string name="add_edittext_location">输入地址信息</string>
+    <string name="add_dialog_notetype_title">选择标签</string>
+    <string name="add_dialog_time_title">选择时间</string>
+    <string name="add_dialog_date_title">选择日期</string>
+    <string name="add_dialog_location_title">地址</string>
+    <string name="add_dialog_savenote_message">是否保存修改</string>
+    <string name="add_dialog_savenote_save">保存</string>
+    <string name="add_dialog_savenote_cancel">取消</string>
+    <string name="add_edittext_people">输入相关人物</string>
+    <string name="menu_addfloatingbutton_people">人物</string>
+    <string name="menu_addfloatingbutton_type">类型</string>
+    <string name="menu_addfloatingbutton_time">日期</string>
+    <string name="menu_addfloatingbutton_clock">闹钟</string>
+    <string name="menu_addfloatingbutton_location">地点</string>
+    <string name="menu_addfloatingbutton_photo">图片</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_list"
+        android:orderInCategory="100"
+        android:icon="@drawable/list_note_01"
+
+        android:title="@string/menu_listabout"></item>
+    <item
+        android:id="@+id/action_serect"
+        android:orderInCategory="100"
+        android:icon="@drawable/secret_not_01"
+        android:title="@string/menu_serect">
+    </item>
+    <item
+        android:id="@+id/action_chart"
+        android:orderInCategory="100"
+        android:icon="@drawable/chart_note"
+        android:title="@string/menu_datachart">
+    </item>
+    <item
+        android:id="@+id/action_seting"
+        android:orderInCategory="100"
+        android:title="@string/menu_userseting"
+        android:icon="@drawable/seting_note01"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/search_001"
+        android:orderInCategory="100"
+        android:title="搜索"
+        app:showAsAction="always">
+    </item>
+</menu>

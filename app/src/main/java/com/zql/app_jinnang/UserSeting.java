@@ -2,7 +2,7 @@ package com.zql.app_jinnang;
 
 import android.content.SharedPreferences;
 
-import com.solo.comm.CommApplication;
+import com.zql.comm.CommApplication;
 
 import java.util.ArrayList;
 import java.util.List;

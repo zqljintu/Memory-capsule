@@ -86,6 +86,11 @@ dependencies {
     implementation project(path: ':lib_comm')
     implementation project(path: ':lib_splash')
     implementation project(path: ':lib_main')
+    implementation project(path: ':lib_calendar')
+    implementation project(path: ':lib_other')
+    implementation project(path: ':lib_chart')
+    implementation project(path: ':lib_setting')
+    implementation project(path: ':lib_edit')
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     // 引入multidex库
     implementation 'androidx.multidex:multidex:2.0.0'

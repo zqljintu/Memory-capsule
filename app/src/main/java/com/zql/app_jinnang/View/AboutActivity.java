@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.solo.comm.widget.SwipeActivity;
+import com.zql.comm.widget.SwipeActivity;
 
 import org.angmarch.views.NiceSpinner;
 import org.greenrobot.eventbus.EventBus;

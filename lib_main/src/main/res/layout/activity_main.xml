@@ -1,9 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    android:id="@+id/relativeLayout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
+    android:background="@color/colorsecond">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white"
+        android:elevation="4dp"
+        android:background="@color/colorFloatingButton"
+        app:popupTheme="@style/Zql_theme_OverflowMenuStyle"
+        android:theme="@style/Zql_theme_toolbar"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:title="记忆胶囊">
+        <TextView
+            android:id="@+id/title_toolbar_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:text=""
+            android:textSize="16dp"/>
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/linearlayout_listEmpty"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:id="@+id/dataisEmptyIcon"
+            android:layout_width="wrap_content"
+            android:padding="60dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/listisempty" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_NotelistEmpty"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/main_refresh"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击刷新 ! !"
+            android:layout_gravity="center"
+            android:textSize="17sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorRed"/>
+    </LinearLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="70dp"
+        android:clipToPadding="false"
+        android:paddingLeft="40dp"
+        android:paddingTop="60dp"
+        android:paddingRight="40dp"
+        android:paddingBottom="60dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.viewpager.widget.ViewPager>
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingbutton_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        app:fab_colorNormal="@android:color/white"
+        app:fab_icon="@drawable/floating_button_calendar"/>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/floatinbuttonmenu_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        app:fab_addButtonPlusIconColor="@color/colorfourth"
+        app:fab_addButtonColorNormal="@android:color/white"
+        app:fab_labelStyle="@style/Zql_theme_background_floatinbuttonlable"
+        app:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_work"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorFloatingButton"
+            app:fab_icon="@drawable/icon_work"
+            app:fab_size="mini"
+            app:fab_title="@string/note_work" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorFloatingButton"
+            app:fab_icon="@drawable/icon_study"
+            app:fab_size="mini"
+            app:fab_title="@string/note_study" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorFloatingButton"
+            app:fab_icon="@drawable/icon_live"
+            app:fab_size="mini"
+            app:fab_title="@string/note_live" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_diary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorFloatingButton"
+            app:fab_icon="@drawable/icon_diary"
+            app:fab_size="mini"
+            app:fab_title="@string/note_diary" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_travel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorFloatingButton"
+            app:fab_icon="@drawable/icon_travel"
+            app:fab_size="mini"
+            app:fab_title="@string/note_travel" />
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+</RelativeLayout>

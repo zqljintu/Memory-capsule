@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">lib_main</string>
+    <string name="text_save">保存</string>
+    <string name="note_work">工作</string>
+    <string name="note_study">学习</string>
+    <string name="note_live">生活</string>
+    <string name="note_travel">旅行</string>
+    <string name="note_diary">日记</string>
+    <string name="menu_listabout">列表清单</string>
+    <string name="menu_userseting">用户设置</string>
+    <string name="menu_datachart">数据分析</string>
+    <string name="menu_serect">我的秘密</string>
+    <string name="menu_noteabout">详情</string>
+    <string name="menu_notehide">隐藏</string>
+    <string name="menu_notedelete">删除</string>
+    <string name="menu_notechange">修改</string>
+    <string name="menu_friendspace">分享</string>
+    <string name="sharedTextView">sharedtextview</string>
+    <string name="add_dialog_notetype_title">选择标签</string>
+    <string name="menu_addfloatingbutton_people">人物</string>
+    <string name="menu_addfloatingbutton_type">类型</string>
+    <string name="menu_addfloatingbutton_time">日期</string>
+    <string name="menu_addfloatingbutton_clock">闹钟</string>
+    <string name="menu_addfloatingbutton_location">地点</string>
+    <string name="menu_addfloatingbutton_photo">图片</string>
 </resources>

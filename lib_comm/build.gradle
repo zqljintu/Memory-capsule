@@ -4,7 +4,7 @@ apply plugin: 'org.greenrobot.greendao'
 android {
     defaultConfig {
         if (rootProject.ext.isApp) {
-            applicationId "com.solo.comm"
+            applicationId "com.zql.comm"
         }
 
         resValue "string", "app_key", ""

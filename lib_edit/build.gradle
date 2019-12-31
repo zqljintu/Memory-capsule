@@ -1,0 +1,15 @@
+apply from: '../module.gradle'
+
+android {
+    defaultConfig {
+        if (rootProject.ext.isApp) {
+            applicationId "com.zql.edit"
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(path: ':lib_comm')
+}

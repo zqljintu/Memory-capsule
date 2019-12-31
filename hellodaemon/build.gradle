@@ -3,7 +3,7 @@ def apis = rootProject.ext.base
 android {
     defaultConfig {
         if (rootProject.ext.isApp) {
-            applicationId "com.solo.live"
+            applicationId "com.zql.live"
         }
     }
 

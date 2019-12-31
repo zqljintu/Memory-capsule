@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/add_floatingbutton_type"
+        android:icon="@drawable/add_floatingbutton_type"
+        android:title="@string/menu_addfloatingbutton_type">
+    </item>
+    <item
+        android:id="@+id/add_floatingbutton_people"
+        android:icon="@drawable/add_floatingbutton_people"
+        android:title="@string/menu_addfloatingbutton_people">
+    </item>
+    <item
+        android:id="@+id/add_floatingbutton_time"
+        android:icon="@drawable/floatingbutton_time"
+        android:title="@string/menu_addfloatingbutton_time">
+    </item>
+    <item
+        android:id="@+id/add_floatingbutton_clock"
+        android:icon="@drawable/add_floatingbutton_clock"
+        android:title="@string/menu_addfloatingbutton_clock">
+    </item>
+    <item
+        android:id="@+id/add_floatingbutton_location"
+        android:icon="@drawable/add_floatingbutton_location"
+        android:title="@string/menu_addfloatingbutton_location">
+    </item>
+    <item
+        android:id="@+id/add_floatingbutton_photo"
+        android:icon="@drawable/add_floatingbutton_photo"
+        android:title="@string/menu_addfloatingbutton_photo">
+    </item>
+</menu>

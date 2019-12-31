@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.solo.comm">
+    package="com.zql.comm">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application>
-        <service android:name=".service.MainService" />
+        <service android:name="com.zql.comm.service.MainService" />
     </application>
 </manifest>

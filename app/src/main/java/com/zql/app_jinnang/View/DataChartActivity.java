@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 
 import com.jaeger.library.StatusBarUtil;
-import com.solo.comm.widget.SwipeActivity;
+import com.zql.comm.widget.SwipeActivity;
 
 import org.angmarch.views.NiceSpinner;
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/add_dialog_people_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorFloatingButton"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/add_dialog_edit_people"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            app:met_iconLeft="@drawable/add_floatingbutton_people"
+            android:hint="@string/add_edittext_people"
+            android:padding="5dp"
+            app:met_iconPadding="10dp"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/add_dialog_people_ok"
+            android:clickable="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="@string/add_dialog_ok"
+            android:gravity="center"
+            android:layout_below="@id/add_dialog_edit_people"/>
+        <TextView
+            android:id="@+id/add_dialog_people_cancel"
+            android:clickable="true"
+            android:gravity="center"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@id/add_dialog_people_ok"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/add_dialog_edit_people"
+            android:text="@string/add_dialog_cancle"
+            android:layout_marginRight="10dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

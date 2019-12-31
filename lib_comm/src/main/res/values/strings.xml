@@ -15,4 +15,13 @@
     <string name="rating_ok">OK</string>
     <string name="battery_btn_freeze">FREEZE</string>
 
+    <string name="app_ID">300011869943</string>
+    <string name="app_name">记忆胶囊</string>
+    <string name="text_save">保存</string>
+    <string name="note_work">工作</string>
+    <string name="note_study">学习</string>
+    <string name="note_live">生活</string>
+    <string name="note_travel">旅行</string>
+    <string name="note_diary">日记</string>
+
 </resources>

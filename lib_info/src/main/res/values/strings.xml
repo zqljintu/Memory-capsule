@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">lib_info</string>
+    <string name="sharedTextView">sharedtextview</string>
+    <string name="menu_noteabout">详情</string>
+</resources>
