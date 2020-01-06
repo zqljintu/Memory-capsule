@@ -70,18 +70,6 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
     private int count_delete;
 
     private static final int REQUEST_UPDATE=2;
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        StatusBarUtil.setColor(this, getColor(R.color.colorFloatingButton));
-        initview();
-        mPresenter.readNotefromDatatoMain();
-        mPresenter.setBackgroundcolorfromSeting();
-        EventBus.getDefault().register(this);
-    }
-
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_main;
@@ -89,7 +77,11 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     @Override
     protected void initView() {
-
+      //  EventBus.getDefault().register(this);
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorFloatingButton));
+        initview();
+        mPresenter.readNotefromDatatoMain();
+        mPresenter.setBackgroundcolorfromSeting();
     }
 
     @Override
@@ -510,7 +502,7 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     @Override
     protected void onDestroy() {
-        EventBus.getDefault().unregister(this);
+       // EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }

@@ -80,7 +80,7 @@
             android:layout_marginTop="23dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/shape_update_btn"
+            android:background="#1255df"
             android:text="@string/update"
             android:textAllCaps="false"
             android:textColor="#ffffff"

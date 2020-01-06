@@ -1,16 +1,34 @@
 package com.zql.comm;
 
+import android.app.Application;
 import android.content.SharedPreferences;
+
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.zql.base.BaseApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserSeting extends CommApplication implements UserSetingImp {
+public class UserSeting extends BaseApplication implements UserSetingImp {
+
     public SharedPreferences sharedPreferences;
+
+    private static BaseApplication mApplication;
+
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mApplication = this;
+        ARouter.openLog();     // 打印日志
+        ARouter.openDebug();
+        ARouter.init(this);
         initSharedPreference();
+    }
+
+    @Override
+    protected void init() {
+
     }
 
     @Override
@@ -119,6 +137,10 @@ public class UserSeting extends CommApplication implements UserSetingImp {
                     break;
         }
         return mlist;
+    }
+
+    public static BaseApplication getApplication() {
+        return mApplication;
     }
 
     @Override

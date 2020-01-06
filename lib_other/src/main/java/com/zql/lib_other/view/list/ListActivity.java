@@ -49,7 +49,6 @@ public class ListActivity extends BaseLifecycleActivity<ListPresenter> implement
     @Override
     protected void initView() {
         setContentView(R.layout.activity_list);
-        EventBus.getDefault().register(this);
         initview();
         mPresenter.readNotefromDatatoList(0);
         mPresenter.setBackgroundcolorfromSeting();
@@ -271,8 +270,8 @@ public class ListActivity extends BaseLifecycleActivity<ListPresenter> implement
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
+
     public void setMainBackgroundIcon(int size) {
         RelativeLayout relativeLayout=(RelativeLayout)findViewById(R.id.list_empty);
         if (size==0){

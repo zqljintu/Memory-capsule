@@ -3,15 +3,17 @@ package com.zql.comm;
 import java.util.List;
 
 public interface UserSetingImp {
-    public void putpasswordonSeting(String password);
-    public String getpassswordfromSeting();
-    public void putquestiononSeting(String question);
-    public String getquestionfromSeting();
-    public boolean iscurrentthePassword(String password);
-    public boolean iscurrentthQuestion(String qusetion);
-    public boolean isnullthepassword();
-    public boolean isnullthequestion();
-    public void putcurrentColor(int color);
-    public List<Integer> getcurrentColor();
-    public int getcurrentColorNum();
+
+    void putpasswordonSeting(String password);
+    String getpassswordfromSeting();
+    void putquestiononSeting(String question);
+    String getquestionfromSeting();
+    boolean iscurrentthePassword(String password);
+    boolean iscurrentthQuestion(String qusetion);
+    boolean isnullthepassword();
+    boolean isnullthequestion();
+    void putcurrentColor(int color);
+    List<Integer> getcurrentColor();
+    int getcurrentColorNum();
+
 }

@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 
-import com.zql.comm.dao.GameBeanDao;
 import com.zql.comm.greendao.db.DaoMaster;
+import com.zql.comm.greendao.db.NoteBeanDao;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -26,6 +26,6 @@ public class UpDataDaoHelper extends DaoMaster.OpenHelper {
             public void onDropAllTables(Database db, boolean ifExists) {
                 DaoMaster.dropAllTables(db, ifExists);
             }
-        }, GameBeanDao.class);
+        }, NoteBeanDao.class);
     }
 }

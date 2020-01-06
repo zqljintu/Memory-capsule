@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.is.lib_util.GlobalUtils;
 import com.zql.base.utils.AppUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
@@ -37,13 +36,10 @@ public abstract class BaseApplication extends MultiDexApplication implements App
     public void onCreate() {
         super.onCreate();
         CrashReport.initCrashReport(getApplicationContext(),
-                "cca6ad46fc",
+                "",
                 true);
         mApplication = this;
-        GlobalUtils.init(this);
         initLog();
-        //DoraemonKit.install(this);
-        //进程判断
         if (AppUtil.getProcessName().equals(getString(R.string.key_0))) {
             registerActivityLifecycleCallbacks(this);
             String rootDir = MMKV.initialize(this);

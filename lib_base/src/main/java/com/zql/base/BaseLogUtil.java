@@ -3,13 +3,10 @@ package com.zql.base;
 import android.content.ClipData;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 
 import androidx.annotation.IntDef;
@@ -19,9 +16,6 @@ import androidx.collection.SimpleArrayMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.is.lib_util.ThrowableUtils;
-import com.is.lib_util.GlobalUtils;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -477,21 +471,7 @@ public class BaseLogUtil {
         String format = getSdf().format(new Date());
         String date = format.substring(0, 10);
         String time = format.substring(11);
-        final String fullPath =
-                CONFIG.getDir() + CONFIG.getFilePrefix() + "_"
-                        + date + "_" +
-                        CONFIG.getProcessName() + CONFIG.getFileExtension();
-        if (!createOrExistsFile(fullPath, date)) {
-            Log.e("LogUtils", "create " + fullPath + " failed!");
-            return;
-        }
-        final String content = time +
-                T[type - V] +
-                "/" +
-                tag +
-                msg +
-                LINE_SEP;
-        input2File(content, fullPath);
+
     }
 
     private static SimpleDateFormat getSdf() {
@@ -565,17 +545,6 @@ public class BaseLogUtil {
     private static void printDeviceInfo(final String filePath, final String date) {
         String versionName = "";
         int versionCode = 0;
-        try {
-            PackageInfo pi = GlobalUtils.getApp()
-                    .getPackageManager()
-                    .getPackageInfo(GlobalUtils.getApp().getPackageName(), 0);
-            if (pi != null) {
-                versionName = pi.versionName;
-                versionCode = pi.versionCode;
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
         final String head = "************* Log Head ****************" +
                 "\nDate of Log        : " + date +
                 "\nDevice Manufacturer: " + Build.MANUFACTURER +
@@ -711,17 +680,10 @@ public class BaseLogUtil {
         private int mStackDeep = 1;     // The stack's deep of log.
         private int mStackOffset = 0;     // The stack's offset of log.
         private int mSaveDays = -1;    // The save days of log.
-        private String mProcessName = GlobalUtils.getCurrentProcessName();
         private IFileWriter mFileWriter;
 
         private Config() {
             if (mDefaultDir != null) return;
-            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                    && GlobalUtils.getApp().getExternalCacheDir() != null)
-                mDefaultDir = GlobalUtils.getApp().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
-            else {
-                mDefaultDir = GlobalUtils.getApp().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
-            }
         }
 
         public final Config setConsoleSwitch(final boolean consoleSwitch) {
@@ -744,11 +706,6 @@ public class BaseLogUtil {
         public final Config setFileWriter(final IFileWriter fileWriter) {
             mFileWriter = fileWriter;
             return this;
-        }
-
-        public final String getProcessName() {
-            if (mProcessName == null) return "";
-            return mProcessName.replace(":", "_");
         }
 
         public final String getDefaultDir() {
@@ -910,7 +867,7 @@ public class BaseLogUtil {
 
         @Override
         public String toString() {
-            return "process: " + getProcessName()
+            return "process: "
                     + LINE_SEP + "switch: " + isLogSwitch()
                     + LINE_SEP + "console: " + isLog2ConsoleSwitch()
                     + LINE_SEP + "tag: " + getGlobalTag()
@@ -955,7 +912,6 @@ public class BaseLogUtil {
 
         static String object2String(Object object, int type) {
             if (object.getClass().isArray()) return array2String(object);
-            if (object instanceof Throwable) return throwable2String((Throwable) object);
             if (object instanceof Bundle) return bundle2String((Bundle) object);
             if (object instanceof Intent) return intent2String((Intent) object);
             if (type == JSON) {
@@ -966,8 +922,7 @@ public class BaseLogUtil {
             return object.toString();
         }
 
-        private static String throwable2String(final Throwable e) {
-            return ThrowableUtils.getFullStackTrace(e);
+        private static void throwable2String(final Throwable e) {
         }
 
         private static String bundle2String(Bundle bundle) {

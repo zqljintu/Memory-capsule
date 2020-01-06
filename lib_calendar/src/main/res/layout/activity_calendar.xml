@@ -3,11 +3,11 @@
     android:background="@color/cardview_light_background"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.zql.app_jinnang.Service.DatePicker
+    <com.zql.comm.widget.DatePicke.DatePicker
         android:id="@+id/calendar_datapicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </com.zql.app_jinnang.Service.DatePicker>
+    </com.zql.comm.widget.DatePicke.DatePicker>
     <include
         android:id="@+id/calendar_empty"
         android:layout_marginTop="20dp"

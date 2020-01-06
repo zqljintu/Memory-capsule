@@ -33,8 +33,11 @@ import cn.aigestudio.datepicker.cons.DPMode;
 
 @Route(path = RouteUrl.Url_CalendarActivity)
 public class CalendarActivity extends BaseLifecycleActivity<CalendarPresenter> implements CalendarContract.view{
+
     private Integer integer0,integer1;
+
     private DatePicker datePicker;
+
     private RecyclerView recyclerView;
 
     @Override

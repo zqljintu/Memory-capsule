@@ -5,7 +5,7 @@
     android:id="@+id/tool_bar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/comm_title_bar_color"
+    android:background="#ffffff"
     tools:layout_height="35dp">
 
 

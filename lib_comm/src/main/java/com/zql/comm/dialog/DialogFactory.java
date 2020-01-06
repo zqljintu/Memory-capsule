@@ -66,20 +66,4 @@ public class DialogFactory {
         mDialog.show();
     }
 
-
-    public static void createRateDialog(Context context) {
-        Dialog mDialog = new Dialog(context, R.style.common_custom_dialog);
-        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View root = LayoutInflater.from(context).inflate(R.layout.dialog_rate, null);
-        mDialog.setContentView(root);
-        Window dialogWindow = mDialog.getWindow();
-        WindowManager m = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高用
-        WindowManager.LayoutParams p = dialogWindow.getAttributes(); // 获取对话框当前的参数值
-        // 设置高度和宽度
-        p.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        p.width = (int) (d.getWidth() * 0.8);
-        dialogWindow.setAttributes(p);
-        mDialog.show();
-    }
 }
