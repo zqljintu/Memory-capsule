@@ -44,5 +44,4 @@
     <string name="sharedImageView">sharedimageview</string>
     <string name="sharedTextView">sharedtextview</string>
     <string name="about_application">code by 尽途\ndesign by 尽途\n如有问题请联系 zqlsw@qq.com</string>
-    <string name="text_NotelistEmpty">还没有记录，点击加号开始创建吧！</string>
 </resources>

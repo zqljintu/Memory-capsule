@@ -1,10 +1,14 @@
 package com.zql.comm;
 
-import android.app.Application;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.tencent.mmkv.MMKV;
 import com.zql.base.BaseApplication;
+import com.zql.comm.bean.DaoMaster;
+import com.zql.comm.bean.DaoSession;
+import com.zql.comm.data.CommData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +19,10 @@ public class UserSeting extends BaseApplication implements UserSetingImp {
 
     private static BaseApplication mApplication;
 
+    private SQLiteDatabase db,db_secret;
+
+    private static DaoSession daoSession,daoSession_secret;
+
 
     @Override
     public void onCreate() {
@@ -22,8 +30,32 @@ public class UserSeting extends BaseApplication implements UserSetingImp {
         mApplication = this;
         ARouter.openLog();     // 打印日志
         ARouter.openDebug();
-        ARouter.init(this);
-        initSharedPreference();
+        ARouter.init(this);//初始化阿里路由
+        MMKV.initialize(this);//初始化MMKV写入工具
+        initSharedPreference();//初始化写入xml
+        initGreendao();//初始化数据库
+        initGreendao_serect();//初始化隐私数据库
+    }
+
+    void initGreendao(){//创建公开数据库
+        DaoMaster.DevOpenHelper helper=new DaoMaster.DevOpenHelper(this,"recluse-db",null);
+        db=helper.getWritableDatabase();
+        DaoMaster daoMaster=new DaoMaster(db);
+        daoSession=daoMaster.newSession();
+    }
+    void initGreendao_serect(){//创建私密数据库
+        DaoMaster.DevOpenHelper helper=new DaoMaster.DevOpenHelper(this,"serect-db",null);
+        db_secret=helper.getWritableDatabase();
+        DaoMaster daoMaster=new DaoMaster(db_secret);
+        daoSession_secret=daoMaster.newSession();
+    }
+
+    public static DaoSession getNoteDaoSession(){
+        return daoSession;
+    }
+
+    public static DaoSession getNoteSeDaoSession(){
+        return daoSession_secret;
     }
 
     @Override
@@ -43,27 +75,22 @@ public class UserSeting extends BaseApplication implements UserSetingImp {
 
     @Override
     public String getpassswordfromSeting() {
-        return sharedPreferences.getString("password","null").toString();
+        return CommData.getUserPassword();
     }
 
     @Override
     public String getquestionfromSeting() {
-        return sharedPreferences.getString("question","null").toString();
+        return CommData.getUserQuestion();
     }
 
     @Override
     public void putpasswordonSeting(String password) {
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("password",password);
-        editor.commit();
-        editor.apply();
+        CommData.setUserPassword(password);
     }
 
     @Override
     public void putquestiononSeting(String question) {
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putString("question",question);
-        editor.commit();
+        CommData.setUserQuestion(question);
     }
 
     @Override
@@ -104,15 +131,13 @@ public class UserSeting extends BaseApplication implements UserSetingImp {
 
     @Override
     public void putcurrentColor(int color) {
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-        editor.putInt("color",color);
-        editor.commit();
+        CommData.setUserColor(color);
     }
 
     @Override
     public List<Integer> getcurrentColor() {
         List<Integer> mlist=new ArrayList<>();
-        switch (sharedPreferences.getInt("color",0)){
+        switch (getcurrentColorNum()){
             case 0:
                 mlist.add(0,getResources().getColor(R.color.colorFloatingButton));
                 mlist.add(1,getResources().getColor(R.color.colorfirst));
@@ -145,6 +170,6 @@ public class UserSeting extends BaseApplication implements UserSetingImp {
 
     @Override
     public int getcurrentColorNum() {
-        return sharedPreferences.getInt("color",0);
+        return CommData.getUserColor();
     }
 }

@@ -10,17 +10,17 @@ import java.util.List;
 
 public interface ListSecretContract {
     interface view extends IView {
-        public void opensheetdialog(NoteBean noteBean);
-        public Context getListSerectActivityContext();
-        public Application getListSerectApplication();
-        public void readAllNoteSerectfromData(List<NoteBean> noteBeanList);
-        public void setBackgroundcolorfromSeting(List<Integer> colorlist);
+        void opensheetdialog(NoteBean noteBean);
+        Context getListSerectActivityContext();
+        Application getListSerectApplication();
+        void readAllNoteSerectfromData(List<NoteBean> noteBeanList);
+        void setBackgroundcolorfromSeting(List<Integer> colorlist);
     }
     interface presenter {
-        public void readNoteserectfromDatatoList();
-        public void deleteNotebeanserect(NoteBean noteBean);
-        public void setBackgroundcolorfromSeting();//设置主题色
-        public void opensheetdialog(NoteBean noteBean);
-        public Context getListSerectActivityContext();
+        void readNoteserectfromDatatoList();
+        void deleteNotebeanserect(NoteBean noteBean);
+        void setBackgroundcolorfromSeting();//设置主题色
+        void opensheetdialog(NoteBean noteBean);
+        Context getListSerectActivityContext();
     }
 }

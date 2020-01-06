@@ -3,7 +3,6 @@ package com.zql.comm.data;
 import com.zql.base.sp.SpUtil;
 
 /**
- * Create by Totoro
  * 2019-11-11 11:01
  **/
 public class SplashData {

@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 
-import com.zql.comm.greendao.db.DaoMaster;
-import com.zql.comm.greendao.db.NoteBeanDao;
+import com.zql.comm.bean.DaoMaster;
+import com.zql.comm.bean.NoteBeanDao;
 
 import org.greenrobot.greendao.database.Database;
 

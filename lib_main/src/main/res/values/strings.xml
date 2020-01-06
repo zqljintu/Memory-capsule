@@ -23,4 +23,5 @@
     <string name="menu_addfloatingbutton_clock">闹钟</string>
     <string name="menu_addfloatingbutton_location">地点</string>
     <string name="menu_addfloatingbutton_photo">图片</string>
+    <string name="text_NotelistEmpty">还没有记录，点击加号开始创建吧！</string>
 </resources>

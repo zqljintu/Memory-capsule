@@ -11,16 +11,16 @@ public final class SpUtil {
         MMKV.defaultMMKV().encode(key, value);
     }
 
-    public static String getString(String key) {
-        return MMKV.defaultMMKV().decodeString(key, "");
+    public static String getString(String key ,String def) {
+        return MMKV.defaultMMKV().decodeString(key, def);
     }
 
     public static void putInt(String key, int value) {
         MMKV.defaultMMKV().encode(key, value);
     }
 
-    public static int getInt(String key) {
-        return MMKV.defaultMMKV().decodeInt(key, -1);
+    public static int getInt(String key, int def) {
+        return MMKV.defaultMMKV().decodeInt(key, def);
     }
 
     public static void putLong(String key, long value) {

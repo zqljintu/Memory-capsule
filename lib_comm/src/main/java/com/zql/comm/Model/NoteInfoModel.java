@@ -2,16 +2,15 @@ package com.zql.comm.Model;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 
 import com.zql.comm.R;
+import com.zql.comm.UserSeting;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.bean.NoteBean;
-import com.zql.comm.greendao.db.DaoMaster;
-import com.zql.comm.greendao.db.DaoSession;
-import com.zql.comm.greendao.db.NoteBeanDao;
+import com.zql.comm.bean.NoteBeanDao;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -27,29 +26,17 @@ import lecho.lib.hellocharts.model.SliceValue;
  */
 
 public class NoteInfoModel implements NoteInfoModelImp {
-    private NoteBeanDao noteBeanDao,noteBeanDao_secret;
-    private SQLiteDatabase db,db_secret;
-    private DaoSession daoSession,daoSession_secret;
+
     private Context mcontext;
+
+
+    private NoteBeanDao noteBeanDao,noteBeanDao_secret;
+
 
     public NoteInfoModel(Context context){
         this.mcontext=context;
-        initGreendao();
-        initGreendao_serect();
-    }
-    void initGreendao(){//创建公开数据库
-        DaoMaster.DevOpenHelper helper=new DaoMaster.DevOpenHelper(mcontext,"recluse-db",null);
-        db=helper.getWritableDatabase();
-        DaoMaster daoMaster=new DaoMaster(db);
-        daoSession=daoMaster.newSession();
-        noteBeanDao=daoSession.getNoteBeanDao();
-    }
-    void initGreendao_serect(){//创建私密数据库
-        DaoMaster.DevOpenHelper helper=new DaoMaster.DevOpenHelper(mcontext,"serect-db",null);
-        db_secret=helper.getWritableDatabase();
-        DaoMaster daoMaster=new DaoMaster(db_secret);
-        daoSession_secret=daoMaster.newSession();
-        noteBeanDao_secret=daoSession_secret.getNoteBeanDao();
+        noteBeanDao = UserSeting.getNoteDaoSession().getNoteBeanDao();
+        noteBeanDao_secret = UserSeting.getNoteSeDaoSession().getNoteBeanDao();
     }
 
     /**
@@ -74,7 +61,6 @@ public class NoteInfoModel implements NoteInfoModelImp {
     @Override
     public void InsertNotetoDatabyId(NoteBean noteBean) {
         if (noteBean.getId()!=null){
-           // noteBeanDao.update(noteBean);
             noteBeanDao.refresh(noteBean);
             EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATE_DATA));
         }
@@ -125,7 +111,7 @@ public class NoteInfoModel implements NoteInfoModelImp {
 
     @Override
     public List<NoteBean> QueryAllNotefromData() {
-        daoSession.clear();
+        UserSeting.getNoteDaoSession().clear();
         noteBeanDao.detachAll();
         List mlist=noteBeanDao.loadAll();
         Collections.reverse(mlist);//倒序

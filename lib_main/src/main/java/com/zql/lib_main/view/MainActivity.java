@@ -3,7 +3,6 @@ package com.zql.lib_main.view;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Application;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -46,7 +46,6 @@ import com.zql.lib_main.R;
 import com.zql.lib_main.adapter.ViewPagerCardAdapter;
 
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -64,7 +63,7 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
     private ViewPagerCardAdapter adapter;
     private Toolbar toolbar_main;
     private TextView title_toolbar_main,text_refresh;
-    private RelativeLayout relativeLayout;
+    private ConstraintLayout conLayout;
     private Integer maincolor;
     private String password="";
     private int count_delete;
@@ -96,9 +95,9 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         initrefresh();
     }
     private void initToolBarSeting(){//实现ToolBar的生成
-        relativeLayout=(RelativeLayout)this.findViewById(R.id.relativeLayout_main);
-        toolbar_main=(Toolbar)this.findViewById(R.id.toolbar_main);
-        title_toolbar_main=(TextView)findViewById(R.id.title_toolbar_main);
+        conLayout = findViewById(R.id.relativeLayout_main);
+        toolbar_main =  findViewById(R.id.toolbar_main);
+        title_toolbar_main = findViewById(R.id.title_toolbar_main);
         YoYo.with(Techniques.DropOut)
                 .duration(700)
                 .playOn(findViewById(R.id.title_toolbar_main));
@@ -407,7 +406,7 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override//设置背景的颜色
     public void setMainBackground(Integer integer) {
-        relativeLayout.setBackground(getDrawable(integer));
+        conLayout.setBackground(getDrawable(integer));
     }
 
     @Override//打开新的ListActivity
@@ -482,7 +481,7 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         maincolor=mlist.get(0);//设置主体颜色
         StatusBarUtil.setColor(this, mlist.get(0));
         toolbar_main.setBackgroundColor(mlist.get(0));
-        relativeLayout.setBackgroundColor(mlist.get(1));
+        conLayout.setBackgroundColor(mlist.get(1));
         floatingActionButton_diarly.setColorNormal(mlist.get(0));
         floatingActionButton_live.setColorNormal(mlist.get(0));
         floatingActionButton_study.setColorNormal(mlist.get(0));
@@ -492,11 +491,11 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     @Override
     public void setMainBackgroundIcon(int size) {
-        LinearLayout linearlayout_listempty=(LinearLayout)findViewById(R.id.linearlayout_listEmpty);
+        ConstraintLayout con_listempty = findViewById(R.id.con_listEmpty);
         if (size==0){
-            linearlayout_listempty.setVisibility(View.VISIBLE);
+            con_listempty.setVisibility(View.VISIBLE);
         }else {
-            linearlayout_listempty.setVisibility(View.GONE);
+            con_listempty.setVisibility(View.GONE);
         }
     }
 

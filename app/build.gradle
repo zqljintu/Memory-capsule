@@ -91,6 +91,7 @@ dependencies {
     implementation project(path: ':lib_chart')
     implementation project(path: ':lib_setting')
     implementation project(path: ':lib_edit')
+    implementation project(path: ':lib_info')
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     // 引入multidex库
     implementation 'androidx.multidex:multidex:2.0.0'
