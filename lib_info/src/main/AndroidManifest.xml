@@ -1,2 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zql.lib_info" />
+    package="com.zql.lib_info" >
+    <application>
+        <activity
+            android:name=".view.NoteinfoActivity"
+            android:theme="@style/Zql_theme_Transparent" />
+    </application>
+</manifest>

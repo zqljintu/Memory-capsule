@@ -13,18 +13,21 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.jaeger.library.StatusBarUtil;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.Noteinfo;
+import com.zql.comm.route.RouteUrl;
 import com.zql.lib_info.R;
 
 import java.util.List;
 
 import me.gujun.android.taggroup.TagGroup;
 
+@Route(path = RouteUrl.Url_NoteinfoActivity)
 public class NoteinfoActivity extends BaseLifecycleActivity<NoteInfoPresenter> implements NoteInfoContract.view{
     private TagGroup tagGroup_noteinfo;
     private TextView textView_noteinfo;
@@ -33,14 +36,6 @@ public class NoteinfoActivity extends BaseLifecycleActivity<NoteInfoPresenter> i
     private Integer maincolor;
     private Toolbar toolbar;
 
-
-    @TargetApi(Build.VERSION_CODES.M)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_noteinfo);
-       
-    }
 
     @Override
     protected void initView() {
@@ -54,17 +49,17 @@ public class NoteinfoActivity extends BaseLifecycleActivity<NoteInfoPresenter> i
 
     @Override
     protected int getContentLayoutId() {
-        return 0;
+        return R.layout.activity_noteinfo;
     }
 
     @Override
     protected NoteInfoPresenter getPresenter() {
-        return null;
+        return new NoteInfoPresenter(this);
     }
 
     private void getintentExtra(){//获取传递过来的信息，并通过PrestenerImpNoteInfo读取显示在NoteinfoActivity上
         Intent mintent=getIntent();
-        Bundle bundle=mintent.getExtras();
+        Bundle bundle=mintent.getBundleExtra("info");
         Noteinfo noteinfo= (Noteinfo) bundle.getSerializable("noteinfo");
         mPresenter.readDatatoNoteinfo(noteinfo);
     }

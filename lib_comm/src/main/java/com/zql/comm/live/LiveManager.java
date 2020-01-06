@@ -4,10 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-/**
- * Create by Totoro
- * 2019-11-11 13:51
- **/
+
 public class LiveManager {
 
     private ArrayList<LiveIm> mLiveIms;

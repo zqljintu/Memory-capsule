@@ -1,2 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zql.lib_other" />
+    package="com.zql.lib_other" >
+    <application>
+        <activity
+            android:name=".view.list.ListActivity"
+            android:theme="@style/Zql_theme_Transparent" />
+        <activity
+            android:name=".view.search.SearchActivity"
+            android:theme="@style/Zql_theme_Transparent" />
+        <activity
+            android:name=".view.serect.ListSecretActivity"
+            android:theme="@style/Zql_theme_Transparent" />
+    </application>
+</manifest>

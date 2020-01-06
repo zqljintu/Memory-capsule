@@ -6,7 +6,6 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatImageView;
 
 /**
- * @author 夜斗
  * @date 2019/10/22
  */
  public class FlightItemView extends AppCompatImageView {

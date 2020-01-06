@@ -22,10 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
-/**
- * Create by Totoro
- * 2019-11-07 16:56
- **/
+
 public abstract class BaseFragment extends Fragment implements HandlerUtils.OnReceiveMessageListener {
 
 

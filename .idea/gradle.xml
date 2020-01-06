@@ -20,7 +20,6 @@
             <option value="$PROJECT_DIR$/lib_other" />
             <option value="$PROJECT_DIR$/lib_setting" />
             <option value="$PROJECT_DIR$/lib_splash" />
-            <option value="$PROJECT_DIR$/lib_util" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

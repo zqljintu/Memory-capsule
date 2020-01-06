@@ -3,7 +3,6 @@ package com.zql.base.sp;
 import com.tencent.mmkv.MMKV;
 
 /**
- * Create by Totoro
  * 2019-11-07 15:02
  **/
 public final class SpUtil {

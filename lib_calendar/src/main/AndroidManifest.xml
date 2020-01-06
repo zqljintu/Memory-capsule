@@ -1,2 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zql.lib_calendar" />
+    package="com.zql.lib_calendar" >
+    <application>
+        <activity android:name=".view.CalendarActivity"
+            android:theme="@style/Zql_theme_Transparent" />
+
+    </application>
+</manifest>

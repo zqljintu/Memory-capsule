@@ -9,10 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-/**
- * Create by Totoro
- * 2019-11-07 14:54
- **/
+
 public class AppUtil {
 
 

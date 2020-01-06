@@ -26,7 +26,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name=".UserSeting"
+        android:name="com.zql.comm.UserSeting"
         android:allowBackup="true"
         android:icon="@drawable/icon_jiaonang_1"
         android:label="@string/app_name"
@@ -35,30 +35,12 @@
         android:theme="@style/Zql_theme_fullScreen"
         tools:replace="android:label"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".View.MainActivity">
+        <activity android:name="com.zql.lib_main.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".View.ListActivity"
-            android:theme="@style/Zql_theme_Transparent" />
-        <activity
-            android:name=".View.NoteinfoActivity"
-            android:theme="@style/Zql_theme_Transparent" />
-        <activity
-            android:name=".View.SearchActivity"
-            android:theme="@style/Zql_theme_Transparent" />
-        <activity android:name=".View.CalendarActivity"
-            android:theme="@style/Zql_theme_Transparent" />
-        <activity android:name=".View.AboutActivity"
-            android:theme="@style/Zql_theme_Transparent" />
-        <activity android:name=".View.ListSecretActivity"
-            android:theme="@style/Zql_theme_Transparent" />
-        <activity android:name=".View.DataChartActivity"
-            android:theme="@style/Zql_theme_Transparent" />
-        <activity android:name=".View.EditActivity" />
 
         <!--屏幕适配参数-->
         <meta-data

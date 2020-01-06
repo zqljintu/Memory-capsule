@@ -22,16 +22,15 @@ import java.util.Map;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
- * Create by Totoro
  * 2019-11-07 15:21
  **/
 public abstract class CommApplication extends BaseApplication implements AppsFlyerConversionListener {
 
-    private final String DB_NAME = "SecurityNew";
+    private final String DB_NAME = "MemoryCapsule";
 
     private final String TAG = CommApplication.class.getSimpleName();
 
-    private final String af_id = "qbKVyawAiwNX3b4D3Frijm";
+    private final String af_id = "";
 
     private NetRepository mNetRepository;
 
@@ -59,7 +58,7 @@ public abstract class CommApplication extends BaseApplication implements AppsFly
         RxHelper.runOnPool(new Runnable() {
             @Override
             public void run() {
-                InstallDBUtils.insertAll();
+
             }
         }, mCompositeDisposable);
     }

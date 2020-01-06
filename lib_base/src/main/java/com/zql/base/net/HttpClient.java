@@ -12,7 +12,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
- * Create by Totoro
  * 2019-11-11 09:24
  **/
 public class HttpClient {

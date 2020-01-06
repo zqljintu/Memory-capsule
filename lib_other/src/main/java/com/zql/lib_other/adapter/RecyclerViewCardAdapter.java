@@ -13,8 +13,10 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.route.RouteUrl;
 import com.zql.lib_other.R;
 import com.zql.lib_other.view.list.ListPresenter;
 
@@ -123,11 +125,9 @@ public class RecyclerViewCardAdapter extends RecyclerView.Adapter<RecyclerViewCa
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mintent=new Intent(listActivityImp.getListActivityConent(),NoteinfoActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-                mintent.putExtras(bundle);
-                context.startActivity(mintent);
+                ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
             }
         });
     }

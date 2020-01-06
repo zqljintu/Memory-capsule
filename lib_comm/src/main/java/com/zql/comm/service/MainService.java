@@ -15,7 +15,6 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Create by Totoro
  * 2019-11-11 13:40
  **/
 public class MainService extends AbsWorkService {

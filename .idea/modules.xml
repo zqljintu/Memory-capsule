@@ -16,7 +16,6 @@
       <module fileurl="file://$PROJECT_DIR$/lib_other/lib_other.iml" filepath="$PROJECT_DIR$/lib_other/lib_other.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_setting/lib_setting.iml" filepath="$PROJECT_DIR$/lib_setting/lib_setting.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_splash/lib_splash.iml" filepath="$PROJECT_DIR$/lib_splash/lib_splash.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_util/lib_util.iml" filepath="$PROJECT_DIR$/lib_util/lib_util.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-Memory-capsule.iml" filepath="$PROJECT_DIR$/test-Memory-capsule.iml" />
     </modules>
   </component>

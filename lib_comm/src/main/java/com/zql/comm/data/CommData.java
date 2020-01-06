@@ -6,10 +6,6 @@ import com.google.gson.Gson;
 import com.zql.base.event.EventBusUtil;
 import com.zql.base.sp.SpUtil;
 import com.zql.comm.event.OrgChangeEvent;
-import com.zql.comm.net.model.ConfigBean;
-import com.zql.comm.net.model.ConfigModel;
-import com.zql.comm.net.model.SdkModel;
-import com.zql.comm.net.model.UpdateModel;
 
 /**
  * Create by Totoro

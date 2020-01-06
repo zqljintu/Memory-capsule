@@ -1,7 +1,6 @@
 package com.zql.comm.constant;
 
 /**
- * Create by Totoro
  * 2019-11-12 09:25
  * 埋点数据
  **/

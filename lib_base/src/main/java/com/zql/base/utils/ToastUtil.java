@@ -11,11 +11,7 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
-/**
- * Create by Totoro
- * 2019-11-08 17:48
- * 吐司
- **/
+
 public class ToastUtil {
 
     private static Toast mToast;

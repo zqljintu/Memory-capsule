@@ -1,1 +1,12 @@
-include ':app', ':hellodaemon', ':lib_util', ':lib_base', ':lib_comm', ':lib_main', ':lib_splash', ':lib_edit', ':lib_calendar', ':lib_chart', ':lib_other', ':lib_setting', ':lib_info'
+include ':app',
+        ':hellodaemon',
+        ':lib_base',
+        ':lib_comm',
+        ':lib_main',
+        ':lib_splash',
+        ':lib_edit',
+        ':lib_calendar',
+        ':lib_chart',
+        ':lib_other',
+        ':lib_setting',
+        ':lib_info'

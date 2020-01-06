@@ -14,7 +14,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * Create by Totoro
  * 2019-11-11 09:30
  **/
 public class HeadInterceptor implements Interceptor {

@@ -58,7 +58,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 /**
- * Create by Totoro
  * 2019-11-07 14:45
  **/
 public class BaseLogUtil {

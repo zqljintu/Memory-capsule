@@ -47,7 +47,6 @@ dependencies {
             api value
         }
     }
-    api project(path: ':lib_util')
     //这是一个动画库,可能就这个项目中有用到一点
     api 'com.github.florent37:expectanim:1.0.7'
 

@@ -13,10 +13,12 @@ import android.widget.RelativeLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jaeger.library.StatusBarUtil;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.route.RouteUrl;
 import com.zql.comm.widget.DatePicke.DatePicker;
 import com.zql.lib_calendar.R;
 import com.zql.lib_calendar.adapter.RecyclerViewTimeCardAdapter;
@@ -29,7 +31,7 @@ import cn.aigestudio.datepicker.bizs.calendars.DPCManager;
 import cn.aigestudio.datepicker.bizs.decors.DPDecor;
 import cn.aigestudio.datepicker.cons.DPMode;
 
-
+@Route(path = RouteUrl.Url_CalendarActivity)
 public class CalendarActivity extends BaseLifecycleActivity<CalendarPresenter> implements CalendarContract.view{
     private Integer integer0,integer1;
     private DatePicker datePicker;

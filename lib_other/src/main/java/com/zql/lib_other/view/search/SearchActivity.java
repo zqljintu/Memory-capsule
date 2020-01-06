@@ -10,15 +10,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jaeger.library.StatusBarUtil;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.route.RouteUrl;
 import com.zql.lib_other.R;
 import com.zql.lib_other.adapter.RecyclerViewSearchAdapter;
 
 
 import java.util.List;
 
+@Route(path = RouteUrl.Url_SearchActivity)
 public class SearchActivity extends BaseLifecycleActivity<SearchPresenter> implements SearchContract.view {
     private SearchView searchView;
     private Toolbar toolbar_search;

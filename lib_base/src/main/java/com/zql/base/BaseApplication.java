@@ -14,7 +14,6 @@ import com.tencent.mmkv.MMKV;
 import java.util.ArrayList;
 
 /**
- * Create by Totoro
  * 2019-11-07 14:42
  **/
 public abstract class BaseApplication extends MultiDexApplication implements Application.ActivityLifecycleCallbacks {

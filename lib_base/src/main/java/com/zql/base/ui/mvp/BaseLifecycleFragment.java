@@ -8,10 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.zql.base.ui.BaseFragment;
 
-/**
- * @author 夜斗
- * @date 2019/11/6
- */
+
 public abstract class BaseLifecycleFragment<T extends BasePresenter> extends BaseFragment {
 
     protected T mPresenter;

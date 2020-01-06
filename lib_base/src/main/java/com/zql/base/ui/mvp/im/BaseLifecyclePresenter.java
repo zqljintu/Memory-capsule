@@ -5,10 +5,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 
-/**
- * @author 夜斗
- * @date 2019/11/11
- */
+
 public interface BaseLifecyclePresenter extends LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)

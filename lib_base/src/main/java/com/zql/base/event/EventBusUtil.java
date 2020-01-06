@@ -3,7 +3,6 @@ package com.zql.base.event;
 import org.greenrobot.eventbus.EventBus;
 
 /**
- * Create by Totoro
  * 2019-11-07 16:47
  **/
 public class EventBusUtil {

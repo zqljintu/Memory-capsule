@@ -10,8 +10,10 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jaeger.library.StatusBarUtil;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
+import com.zql.comm.route.RouteUrl;
 import com.zql.lib_chart.R;
 
 import org.angmarch.views.NiceSpinner;
@@ -32,6 +34,7 @@ import lecho.lib.hellocharts.model.SubcolumnValue;
 import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.PieChartView;
 
+@Route(path = RouteUrl.Url_DateChartActivity)
 public class DataChartActivity extends BaseLifecycleActivity<DataChartPresenter> implements DataChartContract.view {
     private RelativeLayout relativeLayout;
     private PieChartView pieChartView;//饼状图

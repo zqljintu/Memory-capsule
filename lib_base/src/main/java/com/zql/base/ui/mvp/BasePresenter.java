@@ -8,10 +8,7 @@ import com.zql.base.ui.mvp.im.IView;
 
 import java.lang.ref.WeakReference;
 
-/**
- * Create by Totoro
- * 2019-11-07 16:27
- **/
+
 public abstract class BasePresenter<V extends IView> implements BaseLifecyclePresenter {
 
 

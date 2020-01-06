@@ -14,10 +14,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.zql.comm.UserSeting;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.route.RouteUrl;
 import com.zql.lib_main.R;
 import com.zql.lib_main.view.MainPresenter;
 
@@ -221,11 +223,9 @@ public class ViewPagerCardAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mintent=new Intent(mainActivityImp.getActivity_this(),NoteinfoActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-                mintent.putExtras(bundle);
-                context.startActivity(mintent);
+                ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
             }
         });
     }

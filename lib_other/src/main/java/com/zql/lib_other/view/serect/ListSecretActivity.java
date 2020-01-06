@@ -15,17 +15,21 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.jaeger.library.StatusBarUtil;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.route.RouteUrl;
 import com.zql.lib_other.R;
 import com.zql.lib_other.adapter.RecyclerViewSecretCardAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Route(path = RouteUrl.Url_ListSeActivity)
 public class ListSecretActivity extends BaseLifecycleActivity<ListSecretPresenter> implements ListSecretContract.view{
     private Toolbar toolbar_listsecret;
     private RecyclerView recyclerView;
@@ -76,11 +80,9 @@ public class ListSecretActivity extends BaseLifecycleActivity<ListSecretPresente
         list_dialog_linear_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mintent=new Intent(ListSecretActivity.this,NoteinfoActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-                mintent.putExtras(bundle);
-                startActivity(mintent);
+                ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
                 bottomSheetDialog.dismiss();
             }
         });

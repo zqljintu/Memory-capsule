@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.jaeger.library.StatusBarUtil;
 import com.joaquimley.faboptions.FabOptions;
@@ -35,6 +36,7 @@ import com.zql.comm.bean.Noteinfo;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
 import com.yuyh.library.imgsel.config.ISListConfig;
+import com.zql.comm.route.RouteUrl;
 
 
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ import me.gujun.android.taggroup.TagGroup;
 
 import static com.zql.comm.bean.Means.isphotouri;
 
-
+@Route(path = RouteUrl.Url_EditActivity)
 public class EditActivity extends BaseLifecycleActivity<EditPresenter> implements EditContract.view, View.OnClickListener {
     private FabOptions fabOptions;
     private SwitchButton switchButton_secret;

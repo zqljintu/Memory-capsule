@@ -10,9 +10,6 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.NotificationCompat;
 
-/**
- * Created by pandajoy on 17-1-2.
- */
 
 public class WakeBarOneManager extends BaseNotification {
 

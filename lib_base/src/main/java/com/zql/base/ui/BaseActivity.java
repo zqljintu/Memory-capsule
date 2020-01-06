@@ -25,10 +25,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
-/**
- * Create by Totoro
- * 2019-11-07 16:19
- **/
+
 public abstract class BaseActivity extends AppCompatActivity implements HandlerUtils.OnReceiveMessageListener {
 
     protected ArrayList<Animator> mAnimators = new ArrayList<>();

@@ -26,6 +26,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
@@ -37,6 +39,7 @@ import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.route.RouteUrl;
 import com.zql.comm.widget.PasswordView.KeyPasswordView;
 import com.zql.comm.widget.PasswordView.KeynumberDialog;
 import com.zql.lib_main.R;
@@ -50,7 +53,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.lang.reflect.Method;
 import java.util.List;
 
-
+@Route(path = RouteUrl.Url_MainActivity)
 public class MainActivity extends BaseLifecycleActivity<MainPresenter> implements MainContract.view {
 
     private FloatingActionsMenu floatingActionsmenu_add;
@@ -170,14 +173,12 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     }
     private void startEditActivity(int type, NoteBean noteBean){
-        Intent addintent=new Intent(MainActivity.this,EditActivity.class);
         Bundle bundle=new Bundle();
         bundle.putInt("type",type);
         if (noteBean!=null){
             bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
         }
-        addintent.putExtra("data",bundle);
-        startActivity(addintent);
+        ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle("data",bundle).navigation();
     }
     private void initEditpassworddialog(){//实例化一个重新编辑密码的dialog
         if (!password.isEmpty()){
@@ -239,11 +240,9 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         main_dialog_linear_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mintent=new Intent(MainActivity.this,NoteinfoActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-                mintent.putExtras(bundle);
-                startActivity(mintent);
+                ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info", bundle).navigation();
                 bottomSheetDialog.dismiss();
             }
         });
@@ -371,13 +370,11 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     @Override//打开新的搜索界面
     public void startSearchActivity() {
-        Intent mintent=new Intent(this,SearchActivity.class);
-        startActivity(mintent);
+        ARouter.getInstance().build(RouteUrl.Url_SearchActivity).navigation();
     }
     //打开数据图表分析界面
     private void initChartActiviy(){
-        Intent mintent=new Intent(MainActivity.this,DataChartActivity.class);
-        this.startActivity(mintent);
+        ARouter.getInstance().build(RouteUrl.Url_DateChartActivity).navigation();
     }
 
 
@@ -412,8 +409,7 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     @Override
     public void startSetingActivity() {
-        Intent mintet=new Intent(MainActivity.this,AboutActivity.class);
-        this.startActivity(mintet);
+        ARouter.getInstance().build(RouteUrl.Url_AboutActivity).navigation();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -424,21 +420,17 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     @Override//打开新的ListActivity
     public void startListActivity() {
-        Intent mintent=new Intent(MainActivity.this, ListActivity.class);
-        this.startActivityForResult(mintent,REQUEST_UPDATE);
+        ARouter.getInstance().build(RouteUrl.Url_ListActivity).navigation();
     }
 
     @Override//打开秘密ListActivity
     public void startListSecretActivity() {
-        Intent mintent=new Intent(MainActivity.this,ListSecretActivity.class);
-        this.startActivity(mintent);
+        ARouter.getInstance().build(RouteUrl.Url_ListSeActivity).navigation();
     }
 
     @Override//打开日历CalendarActivity
     public void startCalendarActivity() {
-        Intent mintent=new Intent(MainActivity.this,CalendarActivity.class);
-        mintent.putExtra("UPDATE",0);
-        this.startActivity(mintent);
+        ARouter.getInstance().build(RouteUrl.Url_CalendarActivity).withInt("UPDATE",0).navigation();
     }
 
     public class ScaleTransformer0 implements ViewPager.PageTransformer {//改变形状的透明度

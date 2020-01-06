@@ -2,11 +2,6 @@ package com.zql.base.utils;
 
 import android.util.Log;
 
-/**
- * author : dayu
- * date : 2019-11-18 11:15
- * description :
- */
 public class BaseLog {
 
     private static boolean isDebug = true;

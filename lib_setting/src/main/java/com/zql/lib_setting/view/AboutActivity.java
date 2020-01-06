@@ -13,12 +13,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jaeger.library.StatusBarUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.UserSeting;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.MessageEvent;
+import com.zql.comm.route.RouteUrl;
 import com.zql.lib_setting.R;
 
 import org.angmarch.views.NiceSpinner;
@@ -29,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+@Route(path = RouteUrl.Url_AboutActivity)
 public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> implements AboutContract.view, View.OnClickListener{
     private AlertDialog alertDialog_creatpassword;
     private NiceSpinner niceSpinner;
