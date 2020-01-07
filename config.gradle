@@ -62,6 +62,8 @@ ext {
             'dmjdh0'               :'com.android.support:support-compat:26.1.0',
             'dmjdh1'               :'com.daimajia.easing:library:2.0@aar',
             'dmjdh2'               :'com.daimajia.androidanimations:library:2.3@aar',
+            'popumenu'             :'com.lxj:xpopup:1.8.10-x',
+            'toptightmenu'         :'com.zaaach:toprightmenu:1.1.2',
     ]
 
 

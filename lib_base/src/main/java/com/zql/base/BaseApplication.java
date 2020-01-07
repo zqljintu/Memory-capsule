@@ -36,17 +36,12 @@ public abstract class BaseApplication extends MultiDexApplication implements App
     public void onCreate() {
         super.onCreate();
         CrashReport.initCrashReport(getApplicationContext(),
-                "",
+                "cca6ad46fc",
                 true);
         mApplication = this;
         initLog();
-        if (AppUtil.getProcessName().equals(getString(R.string.key_0))) {
-            registerActivityLifecycleCallbacks(this);
-            String rootDir = MMKV.initialize(this);
-            BaseLogUtil.D(TAG, "MMKV>>rootDir" + rootDir);
-            init();
-        }
-
+        registerActivityLifecycleCallbacks(this);
+        init();
     }
 
     protected abstract void init();

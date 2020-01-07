@@ -11,39 +11,37 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
-import com.getbase.floatingactionbutton.AddFloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.jaeger.library.StatusBarUtil;
+import com.lxj.xpopup.XPopup;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.bean.NoteBean;
 import com.zql.comm.route.RouteUrl;
+import com.zql.comm.widget.ChangeTextViewSpace;
 import com.zql.comm.widget.PasswordView.KeyPasswordView;
 import com.zql.comm.widget.PasswordView.KeynumberDialog;
 import com.zql.lib_main.R;
 import com.zql.lib_main.adapter.ViewPagerCardAdapter;
+import com.zql.lib_main.menu.MenuView;
 
 
 import org.greenrobot.eventbus.Subscribe;
@@ -53,22 +51,36 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 @Route(path = RouteUrl.Url_MainActivity)
-public class MainActivity extends BaseLifecycleActivity<MainPresenter> implements MainContract.view {
+public class MainActivity extends BaseLifecycleActivity<MainPresenter> implements
+        MainContract.view ,
+        View.OnClickListener{
 
     private FloatingActionsMenu floatingActionsmenu_add;
+
     private FloatingActionButton floatingActionButton_work,floatingActionButton_study,floatingActionButton_live,floatingActionButton_diarly,floatingActionButton_travel,floatingActionButton_calendar;
-    private AddFloatingActionButton addFloatingActionButton;
-    private LinearLayout mainbottomlinearlayout,voicebuttonlayout;
+
     private ViewPager viewPagercard;
+
     private ViewPagerCardAdapter adapter;
-    private Toolbar toolbar_main;
-    private TextView title_toolbar_main,text_refresh;
+
+    private ChangeTextViewSpace mTextTitle;
+
+    private ConstraintLayout mConToolbar;
+
+    private TextView text_refresh;
+
     private ConstraintLayout conLayout;
+
     private Integer maincolor;
+
     private String password="";
+
     private int count_delete;
 
-    private static final int REQUEST_UPDATE=2;
+    private ImageView mImageMore;
+
+    private ImageView mImageSearch;
+
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_main;
@@ -76,9 +88,8 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     @Override
     protected void initView() {
-      //  EventBus.getDefault().register(this);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorFloatingButton));
-        initview();
+        init();
         mPresenter.readNotefromDatatoMain();
         mPresenter.setBackgroundcolorfromSeting();
     }
@@ -88,7 +99,7 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         return new MainPresenter(this);
     }
 
-    private void initview(){//具体的View实现生成的函数
+    private void init(){//具体的View实现生成的函数
         initToolBarSeting();
         initFloatingActionButton();
         initViewPagercard();
@@ -96,12 +107,14 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
     }
     private void initToolBarSeting(){//实现ToolBar的生成
         conLayout = findViewById(R.id.relativeLayout_main);
-        toolbar_main =  findViewById(R.id.toolbar_main);
-        title_toolbar_main = findViewById(R.id.title_toolbar_main);
-        YoYo.with(Techniques.DropOut)
-                .duration(700)
-                .playOn(findViewById(R.id.title_toolbar_main));
-        setSupportActionBar(toolbar_main);
+        mTextTitle = findViewById(R.id.text_title);
+        mTextTitle.setSpacing(1);
+        mTextTitle.setText(getString(R.string.application_name));
+        mConToolbar = findViewById(R.id.con_toolbar);
+        mImageMore =  findViewById(R.id.image_more);
+        mImageSearch =  findViewById(R.id.image_search);
+        mImageMore.setOnClickListener(this);
+        mImageSearch.setOnClickListener(this);
     }
     private void initrefresh(){//实现刷新
         text_refresh=(TextView)this.findViewById(R.id.main_refresh);
@@ -113,56 +126,38 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         });
     }
     private void initFloatingActionButton(){//实现FloatingActionButton的生成
-        floatingActionButton_calendar=(FloatingActionButton)this.findViewById(R.id.floatingbutton_calendar);
-        floatingActionsmenu_add=(FloatingActionsMenu)this.findViewById(R.id.floatinbuttonmenu_add);
-        floatingActionButton_work=(FloatingActionButton)this.findViewById(R.id.floatingbutton_work);
-        floatingActionButton_study=(FloatingActionButton)this.findViewById(R.id.floatingbutton_study);
-        floatingActionButton_live=(FloatingActionButton)this.findViewById(R.id.floatingbutton_live);
-        floatingActionButton_diarly=(FloatingActionButton)this.findViewById(R.id.floatingbutton_diary);
-        floatingActionButton_travel=(FloatingActionButton)this.findViewById(R.id.floatingbutton_travel);
-        floatingActionButton_calendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mPresenter.openCalendarActivity();
-            }
+        floatingActionButton_calendar = findViewById(R.id.floatingbutton_calendar);
+        floatingActionsmenu_add = findViewById(R.id.floatinbuttonmenu_add);
+        floatingActionButton_work = findViewById(R.id.floatingbutton_work);
+        floatingActionButton_study = findViewById(R.id.floatingbutton_study);
+        floatingActionButton_live = findViewById(R.id.floatingbutton_live);
+        floatingActionButton_diarly = findViewById(R.id.floatingbutton_diary);
+        floatingActionButton_travel = findViewById(R.id.floatingbutton_travel);
+        floatingActionButton_calendar.setOnClickListener(view -> mPresenter.openCalendarActivity());
+        floatingActionButton_work.setOnClickListener(view -> {
+            startEditActivity(0,null);
+            floatingActionsmenu_add.collapse();
         });
-        floatingActionButton_work.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startEditActivity(0,null);
-                floatingActionsmenu_add.collapse();
-            }
+        floatingActionButton_study.setOnClickListener(view -> {
+            startEditActivity(1,null);
+            floatingActionsmenu_add.collapse();
         });
-        floatingActionButton_study.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startEditActivity(1,null);
-                floatingActionsmenu_add.collapse();
-            }
+        floatingActionButton_live.setOnClickListener(view -> {
+            startEditActivity(2,null);
+            floatingActionsmenu_add.collapse();
         });
-        floatingActionButton_live.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startEditActivity(2,null);
-                floatingActionsmenu_add.collapse();
-            }
+        floatingActionButton_diarly.setOnClickListener(view -> {
+            startEditActivity(3,null);
+            floatingActionsmenu_add.collapse();
         });
-        floatingActionButton_diarly.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startEditActivity(3,null);
-                floatingActionsmenu_add.collapse();
-            }
-        });
-        floatingActionButton_travel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startEditActivity(4,null);
-                floatingActionsmenu_add.collapse();
-            }
+        floatingActionButton_travel.setOnClickListener(view -> {
+            startEditActivity(4,null);
+            floatingActionsmenu_add.collapse();
         });
 
     }
+
+
     private void startEditActivity(int type, NoteBean noteBean){
         Bundle bundle=new Bundle();
         bundle.putInt("type",type);
@@ -171,6 +166,8 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         }
         ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle("data",bundle).navigation();
     }
+
+
     private void initEditpassworddialog(){//实例化一个重新编辑密码的dialog
         if (!password.isEmpty()){
             password="";
@@ -212,69 +209,62 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         passwordbottomsheetdialog.show();
 
     }
+
+
     private void initViewPagercard(){//实现ViewPagerCard的生成
         viewPagercard=(ViewPager)this.findViewById(R.id.viewpager_main);
         viewPagercard.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,24,getResources().getDisplayMetrics()));
         viewPagercard.setPageTransformer(false,new ScaleTransformer0(this));
     }
+
+
     private void initBottomDialog(final NoteBean noteBean){//创建底部弹出的窗口
         final BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(MainActivity.this);
         View dialogview= LayoutInflater.from(MainActivity.this)
                 .inflate(R.layout.activity_main_dialog,null);
         LinearLayout main_dialog_linear_about,main_dialog_linear_hide,main_dialog_linear_delete,main_dialog_linear_change,main_dialog_friendspace,main_dialog;
-        main_dialog=(LinearLayout)dialogview.findViewById(R.id.main_dialog);
-        main_dialog_linear_about=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_about);
-        main_dialog_friendspace=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_friendspace);
-        main_dialog_linear_hide=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_hide);
-        main_dialog_linear_delete=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_delete);
-        main_dialog_linear_change=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_change);
-        main_dialog_linear_about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-                ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info", bundle).navigation();
-                bottomSheetDialog.dismiss();
-            }
+        main_dialog = dialogview.findViewById(R.id.main_dialog);
+        main_dialog_linear_about = dialogview.findViewById(R.id.main_dialog_linear_about);
+        main_dialog_friendspace = dialogview.findViewById(R.id.main_dialog_linear_friendspace);
+        main_dialog_linear_hide = dialogview.findViewById(R.id.main_dialog_linear_hide);
+        main_dialog_linear_delete = dialogview.findViewById(R.id.main_dialog_linear_delete);
+        main_dialog_linear_change = dialogview.findViewById(R.id.main_dialog_linear_change);
+        main_dialog_linear_about.setOnClickListener(view -> {
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
+            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info", bundle).navigation();
+            bottomSheetDialog.dismiss();
         });
-        main_dialog_friendspace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sharedNotetexttoWeChart(noteBean.getNoteinfo());
-                bottomSheetDialog.dismiss();
-            }
+        main_dialog_friendspace.setOnClickListener(view -> {
+            sharedNotetexttoWeChart(noteBean.getNoteinfo());
+            bottomSheetDialog.dismiss();
         });
-        main_dialog_linear_hide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initPasswordFileDialog(noteBean);
-                bottomSheetDialog.dismiss();
-            }
+        main_dialog_linear_hide.setOnClickListener(view -> {
+            initPasswordFileDialog(noteBean);
+            bottomSheetDialog.dismiss();
         });
-        main_dialog_linear_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initDeleteDialog(noteBean);
-                bottomSheetDialog.dismiss();
-            }
+        main_dialog_linear_delete.setOnClickListener(view -> {
+            initDeleteDialog(noteBean);
+            bottomSheetDialog.dismiss();
         });
-        main_dialog_linear_change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               startEditActivity(10,noteBean);
-               bottomSheetDialog.dismiss();
-            }
+        main_dialog_linear_change.setOnClickListener(view -> {
+           startEditActivity(10,noteBean);
+           bottomSheetDialog.dismiss();
         });
         main_dialog.setBackgroundColor(maincolor);
         bottomSheetDialog.setContentView(dialogview);
         bottomSheetDialog.show();
     }
+
+
     private void sharedNotetexttoWeChart(String text){//将便签文字分享到微信朋友圈
         Intent intent=new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT,text);
         startActivity(Intent.createChooser(intent,"share"));
     }
+
+
     private void initPasswordFileDialog(final NoteBean noteBean){//将便签加入到私密文件夹中
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("隐藏");
@@ -295,6 +285,8 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         });
         builder.create().show();
     }
+
+
     private void initDeleteDialog(final NoteBean noteBean){//删除选定的便签
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("删除");
@@ -316,11 +308,6 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         builder.create().show();
     }
 
-    @Override//创建菜单目录
-    public boolean onCreatePanelMenu(int featureId, Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main,menu);
-        return super.onCreatePanelMenu(featureId, menu);
-    }
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -337,27 +324,36 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         return super.onPrepareOptionsPanel(view, menu);
     }
 
-    @Override//设置监听菜单
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.action_list) {
-            mPresenter.openListActivity();
-            return true;
-        } else if (itemId == R.id.action_seting) {
-            mPresenter.openSetiongActivity();
-            return true;
-        } else if (itemId == R.id.action_search) {
-            mPresenter.openSearchActivity();
-            return true;
-        } else if (itemId == R.id.action_serect) {
-            initEditpassworddialog();
-            return true;
-        } else if (itemId == R.id.action_chart) {
-            initChartActiviy();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    private void initRightMenu(){
+        new XPopup.Builder(getContext())
+                .atView(find(R.id.view_menu))
+                .asCustom(new MenuView(this, new MenuView.OnMenuListClickListener() {
+                    @Override
+                    public void OnItemClick(int pos) {
+                        initMenuItem(pos);
+                    }
+                }))
+                .show();
     }
+
+
+    private void initMenuItem(int pos){
+        switch (pos){
+            case 0:
+                mPresenter.openListActivity();
+                break;
+            case 1:
+                initEditpassworddialog();
+                break;
+            case 2:
+                initChartActiviy();
+                break;
+            case 3:
+                mPresenter.openSetiongActivity();
+                break;
+        }
+    }
+
 
     @Override//打开新的搜索界面
     public void startSearchActivity() {
@@ -424,6 +420,15 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         ARouter.getInstance().build(RouteUrl.Url_CalendarActivity).withInt("UPDATE",0).navigation();
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.image_more){
+            initRightMenu();
+        }else if (v.getId() == R.id.image_search){
+            mPresenter.openSearchActivity();
+        }
+    }
+
     public class ScaleTransformer0 implements ViewPager.PageTransformer {//改变形状的透明度
         private Context context;
         private float elevation;
@@ -480,7 +485,7 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
     public void setBackgroundcolorfromSeting(List<Integer>mlist) {
         maincolor=mlist.get(0);//设置主体颜色
         StatusBarUtil.setColor(this, mlist.get(0));
-        toolbar_main.setBackgroundColor(mlist.get(0));
+        mConToolbar.setBackgroundColor(mlist.get(0));
         conLayout.setBackgroundColor(mlist.get(1));
         floatingActionButton_diarly.setColorNormal(mlist.get(0));
         floatingActionButton_live.setColorNormal(mlist.get(0));
@@ -501,7 +506,6 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     @Override
     protected void onDestroy() {
-       // EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }

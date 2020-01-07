@@ -20,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/photo_live"
-            android:layout_margin="20dp"
-            android:transitionName="@string/sharedImageView"/>
+            android:layout_margin="20dp" />
         <ImageView
             android:id="@+id/lableview_item_viewpagercard"
             android:layout_width="50dp"

@@ -22,7 +22,7 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("boolean", "isLogDebug", String.valueOf(rootProject.ext.isLogDebug))
-        resValue "string", "key_0", app.key_0
+        resValue "string", "application_name", app.applicatuonName
         resValue "string", "key_1", app.key_1
         resValue "string", "key_2", app.key_2
         resValue "string", "key_3", app.key_3

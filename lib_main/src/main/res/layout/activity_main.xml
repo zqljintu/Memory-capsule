@@ -7,30 +7,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorsecond">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_main"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/con_toolbar"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:minHeight="?attr/actionBarSize"
-        app:titleTextColor="@android:color/white"
-        android:elevation="4dp"
         android:background="@color/colorFloatingButton"
-        app:popupTheme="@style/Zql_theme_OverflowMenuStyle"
-        android:theme="@style/Zql_theme_toolbar"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:title="记忆胶囊"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-        <TextView
-            android:id="@+id/title_toolbar_main"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.zql.comm.widget.ChangeTextViewSpace
+            android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@android:color/white"
-            android:text=""
-            android:textSize="16dp"/>
-    </androidx.appcompat.widget.Toolbar>
+            android:layout_marginStart="17dp"
+            android:text="@string/application_name"
+            android:textSize="20.5sp"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif-condensed-medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/image_more"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_more_black"
+            android:layout_marginEnd="15dp"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:foreground="?android:attr/selectableItemBackground"/>
+
+        <View
+            android:id="@+id/view_menu"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            app:layout_constraintTop_toBottomOf="@id/image_more"
+            app:layout_constraintStart_toStartOf="@id/image_more"
+            app:layout_constraintEnd_toEndOf="@id/image_more"/>
+
+        <ImageView
+            android:id="@+id/image_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search_black"
+            android:layout_marginEnd="30dp"
+            android:padding="5dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_more"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/con_listEmpty"
@@ -75,6 +106,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_main"
         android:layout_width="match_parent"
@@ -87,8 +119,8 @@
         android:paddingTop="30dp"
         android:paddingRight="40dp"
         android:paddingBottom="90dp">
-
     </androidx.viewpager.widget.ViewPager>
+
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingbutton_calendar"
         android:layout_width="wrap_content"
