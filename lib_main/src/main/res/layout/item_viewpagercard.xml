@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -56,15 +56,19 @@
             android:layout_marginBottom="10dp"/>
         <ImageView
             android:id="@+id/menu_item_viewpagercard"
-            android:src="@drawable/main_menu"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:src="@drawable/button_set"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:padding="4dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:elevation="4dp"
             android:scaleType="centerInside"
-            android:clickable="true"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="35dp"/>
+            android:layout_marginBottom="35dp"
+            android:focusable="true"
+            tools:ignore="UnusedAttribute" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
