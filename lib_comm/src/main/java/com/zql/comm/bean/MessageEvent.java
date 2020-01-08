@@ -1,6 +1,8 @@
 package com.zql.comm.bean;
 
-public class MessageEvent {
+import com.zql.base.event.BaseEvent;
+
+public class MessageEvent extends BaseEvent {
     public final static int UPDATE_DATA=0;
     public final static int UPDATA_COLOR=1;
 

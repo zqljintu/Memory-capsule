@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zql.lib_splash">
 
-    <application>
+ <!--   <application>
         <activity android:name=".SplashActivity"></activity>
-    </application>
+    </application>-->
 
 </manifest>

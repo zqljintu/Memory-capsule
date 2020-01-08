@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jaeger.library.StatusBarUtil;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.zql.base.event.EventBusUtil;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.UserSeting;
 import com.zql.comm.bean.Means;
@@ -24,7 +25,6 @@ import com.zql.comm.route.RouteUrl;
 import com.zql.lib_setting.R;
 
 import org.angmarch.views.NiceSpinner;
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -272,7 +272,7 @@ public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> impleme
                             break;
 
                 }
-                EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATA_COLOR));
+                EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATA_COLOR));
             }
         });
     }

@@ -3,6 +3,7 @@
 
     <style name="AppTheme.Splash" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
     </style>
 </resources>

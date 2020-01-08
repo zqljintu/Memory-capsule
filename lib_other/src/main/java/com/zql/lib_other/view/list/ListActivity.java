@@ -41,9 +41,14 @@ import java.util.List;
 @Route(path = RouteUrl.Url_ListActivity)
 public class ListActivity extends BaseLifecycleActivity<ListPresenter> implements ListContract.view {
     private Toolbar toolbar_list;
+
     private RecyclerView recyclerView;
+
     private RelativeLayout relativeLayout_list;
+
     private NiceSpinner niceSpinner;
+
+    private int maincolor;
 
 
     @Override
@@ -153,6 +158,7 @@ public class ListActivity extends BaseLifecycleActivity<ListPresenter> implement
 
     @Override
     public void setBackgroundcolorfromSeting(List<Integer> colorlist) {
+        maincolor = colorlist.get(0);
         StatusBarUtil.setColor(this, colorlist.get(0));
         toolbar_list.setBackgroundColor(colorlist.get(0));
         niceSpinner.setBackgroundColor(colorlist.get(0));
@@ -172,51 +178,42 @@ public class ListActivity extends BaseLifecycleActivity<ListPresenter> implement
         final BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(ListActivity.this);
         final View dialogview= LayoutInflater.from(ListActivity.this)
                 .inflate(R.layout.activity_main_dialog,null);
-        LinearLayout list_dialog_linear_about,list_dialog_linear_hide,list_dialog_linear_delete,list_dialog_linear_change,list_dialog_linear_share;
-        list_dialog_linear_about=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_about);
-        list_dialog_linear_hide=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_hide);
-        list_dialog_linear_delete=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_delete);
-        list_dialog_linear_change=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_change);
-        list_dialog_linear_share=(LinearLayout)dialogview.findViewById(R.id.main_dialog_linear_friendspace);
-        list_dialog_linear_about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-                ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info", bundle).navigation();
-                bottomSheetDialog.dismiss();
-            }
+        LinearLayout list_dialog_linear_about,
+                list_dialog_linear_hide,
+                list_dialog_linear_delete,
+                list_dialog_linear_change,
+                list_dialog_linear_share;
+        LinearLayout main_dialog = dialogview.findViewById(R.id.main_dialog);
+        list_dialog_linear_about = dialogview.findViewById(R.id.main_dialog_linear_about);
+        list_dialog_linear_hide = dialogview.findViewById(R.id.main_dialog_linear_hide);
+        list_dialog_linear_delete = dialogview.findViewById(R.id.main_dialog_linear_delete);
+        list_dialog_linear_change = dialogview.findViewById(R.id.main_dialog_linear_change);
+        list_dialog_linear_share = dialogview.findViewById(R.id.main_dialog_linear_friendspace);
+        main_dialog.setBackgroundColor(maincolor);
+        list_dialog_linear_about.setOnClickListener(view -> {
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
+            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info", bundle).navigation();
+            bottomSheetDialog.dismiss();
         });
-        list_dialog_linear_hide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initPasswordFileDialog(noteBean);
-                bottomSheetDialog.dismiss();
-            }
+        list_dialog_linear_hide.setOnClickListener(view -> {
+            initPasswordFileDialog(noteBean);
+            bottomSheetDialog.dismiss();
         });
-        list_dialog_linear_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initDeleteDilog(noteBean);
-                bottomSheetDialog.dismiss();
-            }
+        list_dialog_linear_delete.setOnClickListener(view -> {
+            initDeleteDilog(noteBean);
+            bottomSheetDialog.dismiss();
         });
-        list_dialog_linear_change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putInt("type",10);
-                bundle.putSerializable("noteinfo",Means.changefromNotebean(noteBean));
-                ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle("data",bundle);
-                bottomSheetDialog.dismiss();
-            }
+        list_dialog_linear_change.setOnClickListener(view -> {
+            Bundle bundle=new Bundle();
+            bundle.putInt("type",10);
+            bundle.putSerializable("noteinfo",Means.changefromNotebean(noteBean));
+            ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle("data",bundle);
+            bottomSheetDialog.dismiss();
         });
-        list_dialog_linear_share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sharedNotetexttoWeChart(noteBean.getNoteinfo());
-                bottomSheetDialog.dismiss();
-            }
+        list_dialog_linear_share.setOnClickListener(view -> {
+            sharedNotetexttoWeChart(noteBean.getNoteinfo());
+            bottomSheetDialog.dismiss();
         });
         bottomSheetDialog.setContentView(dialogview);
         bottomSheetDialog.show();

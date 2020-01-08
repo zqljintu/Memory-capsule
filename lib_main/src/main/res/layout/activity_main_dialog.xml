@@ -20,9 +20,8 @@
         android:layout_height="40dp"
         android:elevation="10dp"
         android:orientation="horizontal"
-        android:clickable="true"
-        android:background="@drawable/background_dialog_item"
->
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true">
         <ImageView
             android:padding="10dp"
             android:layout_weight="4"
@@ -35,18 +34,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/menu_noteabout"
+            android:textColor="#ffffff"
             android:textSize="15dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="20dp"
             android:gravity="center_vertical"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#636262"/>
     <LinearLayout
         android:id="@+id/main_dialog_linear_friendspace"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:elevation="10dp"
         android:orientation="horizontal"
-        android:clickable="true"
-        android:background="@drawable/background_dialog_item">
+        android:clickable="true">
         <ImageView
             android:padding="7dp"
             android:layout_weight="4"
@@ -59,19 +65,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/menu_friendspace"
+            android:textColor="#ffffff"
             android:textSize="15dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="20dp"
             android:gravity="center_vertical"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#636262"/>
     <LinearLayout
         android:id="@+id/main_dialog_linear_hide"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:elevation="10dp"
         android:orientation="horizontal"
-        android:clickable="true"
-        android:background="@drawable/background_dialog_item"
-     >
+        android:clickable="true">
         <ImageView
             android:padding="10dp"
             android:layout_weight="4"
@@ -84,18 +96,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/menu_notehide"
+            android:textColor="#ffffff"
             android:textSize="15dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="20dp"
             android:gravity="center_vertical"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#636262"/>
     <LinearLayout
         android:id="@+id/main_dialog_linear_delete"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:elevation="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:clickable="true"
-        android:background="@drawable/background_dialog_item">
+        android:clickable="true">
         <ImageView
             android:padding="10dp"
             android:layout_weight="4"
@@ -109,17 +128,24 @@
             android:layout_height="match_parent"
             android:text="@string/menu_notedelete"
             android:textSize="15dp"
-            android:paddingLeft="10dp"
+            android:textColor="#ffffff"
+            android:paddingLeft="20dp"
             android:gravity="center_vertical"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#636262"/>
     <LinearLayout
         android:id="@+id/main_dialog_linear_change"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:foreground="?android:attr/selectableItemBackground"
         android:elevation="10dp"
         android:orientation="horizontal"
-        android:clickable="true"
-        android:background="@drawable/background_dialog_item">
+        android:clickable="true">
         <ImageView
             android:padding="10dp"
             android:layout_weight="4"
@@ -132,9 +158,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/menu_notechange"
+            android:textColor="#ffffff"
             android:textSize="15dp"
-            android:paddingLeft="10dp"
+            android:paddingLeft="20dp"
             android:gravity="center_vertical"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#636262"/>
 
 </LinearLayout>

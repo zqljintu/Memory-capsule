@@ -4,7 +4,6 @@ package com.zql.comm.data;
 import com.zql.base.sp.SpUtil;
 
 /**
- * Create by Totoro
  * 2019-11-11 10:00
  **/
 public class CommData {

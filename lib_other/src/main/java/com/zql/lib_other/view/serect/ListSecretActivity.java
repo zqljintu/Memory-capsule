@@ -32,9 +32,10 @@ import java.util.List;
 @Route(path = RouteUrl.Url_ListSeActivity)
 public class ListSecretActivity extends BaseLifecycleActivity<ListSecretPresenter> implements ListSecretContract.view{
     private Toolbar toolbar_listsecret;
+
     private RecyclerView recyclerView;
 
-
+    private int color;
 
     @Override
     protected int getContentLayoutId() {
@@ -43,7 +44,7 @@ public class ListSecretActivity extends BaseLifecycleActivity<ListSecretPresente
 
     @Override
     protected void initView() {
-        initview();
+        init();
         mPresenter.readNoteserectfromDatatoList();
         mPresenter.setBackgroundcolorfromSeting();
     }
@@ -53,45 +54,36 @@ public class ListSecretActivity extends BaseLifecycleActivity<ListSecretPresente
         return new ListSecretPresenter(this);
     }
 
-    private void initview(){//具体view的实现
+    private void init(){//具体view的实现
         inittoolbarSeting();
         initRecyclerView();
     }
     private void inittoolbarSeting(){//对toolbar的实例化
-        toolbar_listsecret=(Toolbar) this.findViewById(R.id.toolbar_list_secret);
+        toolbar_listsecret = findViewById(R.id.toolbar_list_secret);
         setSupportActionBar(toolbar_listsecret);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-        toolbar_listsecret.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        toolbar_listsecret.setNavigationOnClickListener(view -> finish());
     }
     private void initBottomMenu(final NoteBean noteBean){//Bottomsheetdialog进行实例化
-        final BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(this);
-        final View dialogview= LayoutInflater.from(this)
+        final BottomSheetDialog bottomSheetDialog  =new BottomSheetDialog(this);
+        final View dialogview = LayoutInflater.from(this)
                 .inflate(R.layout.activity_secret_dialog,null);
-        LinearLayout list_dialog_linear_about,list_dialog_linear_hide,list_dialog_linear_delete,list_dialog_linear_change;
-        list_dialog_linear_about=(LinearLayout)dialogview.findViewById(R.id.secret_dialog_linear_about);
-        list_dialog_linear_delete=(LinearLayout)dialogview.findViewById(R.id.secret_dialog_linear_delete);
-        list_dialog_linear_about.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-                ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
-                bottomSheetDialog.dismiss();
-            }
+        LinearLayout list_dialog_linear_about,list_dialog_linear_delete;
+        LinearLayout main_dialog = dialogview.findViewById(R.id.secret_dialog);
+        list_dialog_linear_about = dialogview.findViewById(R.id.secret_dialog_linear_about);
+        list_dialog_linear_delete = dialogview.findViewById(R.id.secret_dialog_linear_delete);
+        main_dialog.setBackgroundColor(color);
+        list_dialog_linear_about.setOnClickListener(view -> {
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
+            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
+            bottomSheetDialog.dismiss();
         });
-        list_dialog_linear_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initDeleteDialog(noteBean);
-                bottomSheetDialog.dismiss();
-            }
+        list_dialog_linear_delete.setOnClickListener(view -> {
+            initDeleteDialog(noteBean);
+            bottomSheetDialog.dismiss();
         });
         bottomSheetDialog.setContentView(dialogview);
         bottomSheetDialog.show();
@@ -100,19 +92,11 @@ public class ListSecretActivity extends BaseLifecycleActivity<ListSecretPresente
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("删除");
         builder.setMessage("确定删除");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mPresenter.deleteNotebeanserect(noteBean);
-                mPresenter.readNoteserectfromDatatoList();
-            }
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            mPresenter.deleteNotebeanserect(noteBean);
+            mPresenter.readNoteserectfromDatatoList();
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setNegativeButton("取消", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.create().show();
     }
 
@@ -122,20 +106,26 @@ public class ListSecretActivity extends BaseLifecycleActivity<ListSecretPresente
     }
 
     private void initRecyclerView(){//对recycerView实例化
-        recyclerView=(RecyclerView)this.findViewById(R.id.recycler_list_secret);
+        recyclerView = findViewById(R.id.recycler_list_secret);
     }
 
     @Override
     public void readAllNoteSerectfromData(List<NoteBean> noteBeanList) {
         setMainBackgroundIcon(noteBeanList.size());
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
-        RecyclerViewSecretCardAdapter recyclerViewSecretCardAdapter=new RecyclerViewSecretCardAdapter((ArrayList<NoteBean>) noteBeanList,this,mPresenter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL,
+                false);
+        RecyclerViewSecretCardAdapter recyclerViewSecretCardAdapter=new RecyclerViewSecretCardAdapter(
+                (ArrayList<NoteBean>) noteBeanList,
+                this,
+                mPresenter);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recyclerViewSecretCardAdapter);
     }
 
     @Override
     public void setBackgroundcolorfromSeting(List<Integer> colorlist) {
+        color = colorlist.get(0);
         StatusBarUtil.setColor(this, colorlist.get(0));
         toolbar_listsecret.setBackgroundColor(colorlist.get(0));
     }
@@ -150,7 +140,7 @@ public class ListSecretActivity extends BaseLifecycleActivity<ListSecretPresente
         return this;
     }
     public void setMainBackgroundIcon(int size) {
-        RelativeLayout relativeLayout=(RelativeLayout)findViewById(R.id.listserect_empty);
+        RelativeLayout relativeLayout = findViewById(R.id.listserect_empty);
         if (size==0){
             relativeLayout.setVisibility(View.VISIBLE);
         }else {

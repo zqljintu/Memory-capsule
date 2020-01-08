@@ -31,6 +31,7 @@ import com.kyleduo.switchbutton.SwitchButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.Means;
+import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.bean.NoteBean;
 import com.zql.comm.bean.Noteinfo;
 import com.yuyh.library.imgsel.ISNav;
@@ -38,6 +39,9 @@ import com.yuyh.library.imgsel.common.ImageLoader;
 import com.yuyh.library.imgsel.config.ISListConfig;
 import com.zql.comm.route.RouteUrl;
 
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,12 +54,19 @@ import static com.zql.comm.bean.Means.isphotouri;
 @Route(path = RouteUrl.Url_EditActivity)
 public class EditActivity extends BaseLifecycleActivity<EditPresenter> implements EditContract.view, View.OnClickListener {
     private FabOptions fabOptions;
+
     private SwitchButton switchButton_secret;
+
     private Toolbar toolbar_add;
+
     private TagGroup tagGroup;
+
     private List<String> tags;
+
     private MaterialEditText materialEditText;
+
     private NoteBean noteBean;//最后加入数据库的数据类
+
     private static final int REQUEST_CAMERA_CODE = 1;
 
 
@@ -147,7 +158,7 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
     @Override
     public void setbackgroundcolor(List<Integer>list) {
         StatusBarUtil.setColor(this,list.get(0));
-        toolbar_add.setBackgroundColor(list.get(1));
+        toolbar_add.setBackgroundColor(list.get(0));
     }
 
     /**
@@ -186,7 +197,6 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
             }else {
                 mPresenter.saveNoteinfotoDatabase(noteBean);
             }
-            //EventBus.getDefault().post(new MessageEvent(MessageEvent.UPDATE_DATA));
             finish();
         }
     }
@@ -195,7 +205,7 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
      * //实例化标签框
      */
     private void inittagegroup(){
-        tagGroup=(TagGroup)this.findViewById(R.id.add_tag_group);
+        tagGroup= findViewById(R.id.add_tag_group);
         tagGroup.setTags(tags);
         tagGroup.setOnTagClickListener(new TagGroup.OnTagClickListener() {
             @Override
@@ -222,7 +232,7 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
      * //实例化toolbar对象，设置返回按钮，监听返回按钮状态
      */
     private void inittoolbarseting(){
-        toolbar_add=(Toolbar)this.findViewById(R.id.toolbar_add);
+        toolbar_add = findViewById(R.id.toolbar_add);
         setSupportActionBar(toolbar_add);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -305,46 +315,31 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
         LayoutInflater layoutInflater=LayoutInflater.from(this);
         View centerview=layoutInflater.inflate(R.layout.activity_add_notetypedialog,null);
         LinearLayout add_dialog_type_work,add_dialog_type_study,add_dialog_type_live,add_dialog_type_diary,add_dialog_type_travel;
-        add_dialog_type_work=(LinearLayout)centerview.findViewById(R.id.add_dialog_typenote_work);
-        add_dialog_type_diary=(LinearLayout)centerview.findViewById(R.id.add_dialog_typenote_diary);
-        add_dialog_type_live=(LinearLayout)centerview.findViewById(R.id.add_dialog_typenote_live);
-        add_dialog_type_study=(LinearLayout)centerview.findViewById(R.id.add_dialog_typenote_study);
-        add_dialog_type_travel=(LinearLayout)centerview.findViewById(R.id.add_dialog_typenote_travel);
+        add_dialog_type_work = centerview.findViewById(R.id.add_dialog_typenote_work);
+        add_dialog_type_diary = centerview.findViewById(R.id.add_dialog_typenote_diary);
+        add_dialog_type_live = centerview.findViewById(R.id.add_dialog_typenote_live);
+        add_dialog_type_study = centerview.findViewById(R.id.add_dialog_typenote_study);
+        add_dialog_type_travel = centerview.findViewById(R.id.add_dialog_typenote_travel);
         final AlertDialog alertDialog=builder.setView(centerview).create();
-        add_dialog_type_work.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateTagsGroup(0,getString(R.string.note_work));
-                alertDialog.dismiss();
-            }
+        add_dialog_type_work.setOnClickListener(view -> {
+            updateTagsGroup(0,getString(R.string.note_work));
+            alertDialog.dismiss();
         });
-        add_dialog_type_diary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateTagsGroup(0,getString(R.string.note_diary));
-                alertDialog.dismiss();
-            }
+        add_dialog_type_diary.setOnClickListener(view -> {
+            updateTagsGroup(0,getString(R.string.note_diary));
+            alertDialog.dismiss();
         });
-        add_dialog_type_live.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateTagsGroup(0,getString(R.string.note_live));
-                alertDialog.dismiss();
-            }
+        add_dialog_type_live.setOnClickListener(view -> {
+            updateTagsGroup(0,getString(R.string.note_live));
+            alertDialog.dismiss();
         });
-        add_dialog_type_study.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateTagsGroup(0,getString(R.string.note_study));
-                alertDialog.dismiss();
-            }
+        add_dialog_type_study.setOnClickListener(view -> {
+            updateTagsGroup(0,getString(R.string.note_study));
+            alertDialog.dismiss();
         });
-        add_dialog_type_travel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateTagsGroup(0,getString(R.string.note_travel));
-                alertDialog.dismiss();
-            }
+        add_dialog_type_travel.setOnClickListener(view -> {
+            updateTagsGroup(0,getString(R.string.note_travel));
+            alertDialog.dismiss();
         });
         alertDialog.show();
     }
@@ -377,12 +372,9 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
      */
     private void initdatecenterdialog(){
         final Calendar calendar=Calendar.getInstance();
-        new DatePickerDialog(this,0, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                int year=i1+1;
-                updateTagsGroup(2,i+"年"+year+"月"+i2+"日");
-            }
+        new DatePickerDialog(this,0, (datePicker, i, i1, i2) -> {
+            int year=i1+1;
+            updateTagsGroup(2,i+"年"+year+"月"+i2+"日");
         },calendar.get(Calendar.YEAR)
                 ,calendar.get(Calendar.MONTH)
                 ,calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -392,12 +384,7 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
      */
     private void inittimecenterdialog(){
         Calendar calendar=Calendar.getInstance();
-        new TimePickerDialog(this,3, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                updateTagsGroup(3,i+"时"+i1+"分");
-            }
-        }
+        new TimePickerDialog(this,3, (timePicker, i, i1) -> updateTagsGroup(3,i+"时"+i1+"分")
                 ,calendar.get(Calendar.HOUR_OF_DAY)
                 ,calendar.get(Calendar.MINUTE)
                 ,true).show();
@@ -428,20 +415,14 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setMessage(R.string.add_dialog_savenote_message);
         builder.setCancelable(true);
-        builder.setPositiveButton(R.string.add_dialog_savenote_save, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                savedNoteinfotoDatabase();
-                dialogInterface.dismiss();
-                finish();
-            }
+        builder.setPositiveButton(R.string.add_dialog_savenote_save, (dialogInterface, i) -> {
+            savedNoteinfotoDatabase();
+            dialogInterface.dismiss();
+            finish();
         });
-        builder.setNegativeButton(R.string.add_dialog_savenote_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-                finish();
-            }
+        builder.setNegativeButton(R.string.add_dialog_savenote_cancel, (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            finish();
         });
         AlertDialog dialog=builder.create();
         dialog.show();
@@ -588,6 +569,23 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
         }
         return false;
     }
+
+    /**
+     * Event事件监听函数
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handEvent(MessageEvent messageEvent){
+        switch (messageEvent.getMessageevent()){
+            case MessageEvent.UPDATA_COLOR:
+                mPresenter.setBackgroundColorfromUserseting();
+                break;
+            default:
+                break;
+
+        }
+    }
+
+
 
     @Override
     public void finish() {

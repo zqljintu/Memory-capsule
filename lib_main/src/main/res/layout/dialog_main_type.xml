@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content" />
     <LinearLayout
         android:id="@+id/main_dialog_typenote_all"
-        android:background="@drawable/background_dialog_item"
+        android:foreground="?android:attr/selectableItemBackground"
         android:orientation="horizontal"
         android:clickable="true"
         android:layout_width="match_parent"
@@ -33,7 +34,7 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/main_dialog_typenote_work"
-        android:background="@drawable/background_dialog_item"
+        android:foreground="?android:attr/selectableItemBackground"
         android:orientation="horizontal"
         android:clickable="true"
         android:layout_width="match_parent"
@@ -54,7 +55,7 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/main_dialog_typenote_study"
-        android:background="@drawable/background_dialog_item"
+        android:foreground="?android:attr/selectableItemBackground"
         android:orientation="horizontal"
         android:clickable="true"
         android:layout_width="match_parent"
@@ -75,7 +76,7 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/main_dialog_typenote_live"
-        android:background="@drawable/background_dialog_item"
+        android:foreground="?android:attr/selectableItemBackground"
         android:orientation="horizontal"
         android:clickable="true"
         android:layout_width="match_parent"
@@ -96,7 +97,7 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/main_dialog_typenote_diary"
-        android:background="@drawable/background_dialog_item"
+        android:foreground="?android:attr/selectableItemBackground"
         android:orientation="horizontal"
         android:clickable="true"
         android:layout_width="match_parent"
@@ -117,7 +118,7 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/main_dialog_typenote_travel"
-        android:background="@drawable/background_dialog_item"
+        android:foreground="?android:attr/selectableItemBackground"
         android:orientation="horizontal"
         android:clickable="true"
         android:layout_width="match_parent"

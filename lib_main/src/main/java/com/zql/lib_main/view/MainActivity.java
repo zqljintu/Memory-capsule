@@ -57,7 +57,12 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     private FloatingActionsMenu floatingActionsmenu_add;
 
-    private FloatingActionButton floatingActionButton_work,floatingActionButton_study,floatingActionButton_live,floatingActionButton_diarly,floatingActionButton_travel,floatingActionButton_calendar;
+    private FloatingActionButton floatingActionButton_work,
+            floatingActionButton_study,
+            floatingActionButton_live,
+            floatingActionButton_diarly,
+            floatingActionButton_travel,
+            floatingActionButton_calendar;
 
     private ViewPager viewPagercard;
 
@@ -117,13 +122,8 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         mImageSearch.setOnClickListener(this);
     }
     private void initrefresh(){//实现刷新
-        text_refresh=(TextView)this.findViewById(R.id.main_refresh);
-        text_refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPresenter.readNotefromDatatoMain();
-            }
-        });
+        text_refresh= findViewById(R.id.main_refresh);
+        text_refresh.setOnClickListener(v -> mPresenter.readNotefromDatatoMain());
     }
     private void initFloatingActionButton(){//实现FloatingActionButton的生成
         floatingActionButton_calendar = findViewById(R.id.floatingbutton_calendar);
@@ -212,7 +212,7 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
 
     private void initViewPagercard(){//实现ViewPagerCard的生成
-        viewPagercard=(ViewPager)this.findViewById(R.id.viewpager_main);
+        viewPagercard = findViewById(R.id.viewpager_main);
         viewPagercard.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,24,getResources().getDisplayMetrics()));
         viewPagercard.setPageTransformer(false,new ScaleTransformer0(this));
     }
@@ -269,13 +269,10 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("隐藏");
         builder.setMessage("确认隐藏？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                count_delete=viewPagercard.getCurrentItem();//做一个跳转优化
-                mPresenter.changeNotetoPasswordFile(noteBean);
-                mPresenter.readNotefromDatatoMain();
-            }
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            count_delete=viewPagercard.getCurrentItem();//做一个跳转优化
+            mPresenter.changeNotetoPasswordFile(noteBean);
+            mPresenter.readNotefromDatatoMain();
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
@@ -291,48 +288,22 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("删除");
         builder.setMessage("确定删除？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                count_delete=viewPagercard.getCurrentItem();//做一个跳转优化
-                mPresenter.deleteNoteBean(noteBean);
-                mPresenter.readNotefromDatatoMain();
-            }
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            count_delete=viewPagercard.getCurrentItem();//做一个跳转优化
+            mPresenter.deleteNoteBean(noteBean);
+            mPresenter.readNotefromDatatoMain();
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setNegativeButton("取消", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.create().show();
     }
 
-
-    @SuppressLint("RestrictedApi")
-    @Override
-    protected boolean onPrepareOptionsPanel(View view, Menu menu) {
-        if (menu.getClass() == MenuBuilder.class) {
-            try {
-                Method method = menu.getClass().getDeclaredMethod("setOptionalIconsVisible", Boolean.TYPE);
-                method.setAccessible(true);
-                method.invoke(menu, true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return super.onPrepareOptionsPanel(view, menu);
-    }
-
+    /**
+     * 右上角的菜单
+     */
     private void initRightMenu(){
         new XPopup.Builder(getContext())
                 .atView(find(R.id.view_menu))
-                .asCustom(new MenuView(this, new MenuView.OnMenuListClickListener() {
-                    @Override
-                    public void OnItemClick(int pos) {
-                        initMenuItem(pos);
-                    }
-                }))
+                .asCustom(new MenuView(this, pos -> initMenuItem(pos)))
                 .show();
     }
 
@@ -399,10 +370,9 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         ARouter.getInstance().build(RouteUrl.Url_AboutActivity).navigation();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override//设置背景的颜色
     public void setMainBackground(Integer integer) {
-        conLayout.setBackground(getDrawable(integer));
+        conLayout.setBackground(getResources().getDrawable(integer));
     }
 
     @Override//打开新的ListActivity

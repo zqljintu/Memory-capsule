@@ -11,14 +11,14 @@ import java.util.List;
 
 public interface EditContract {
     interface view extends IView{
-        public Context getbasecontext();//获取
-        public Application getapplication();
-        public void setbackgroundcolor(List<Integer> list);//修改背景色
+        Context getbasecontext();//获取
+        Application getapplication();
+        void setbackgroundcolor(List<Integer> list);//修改背景色
     }
 
     interface presenter{
-        public void saveNoteinfotoDatabase(NoteBean noteBean);
-        public void saveNoteinfotoSecrectDatabase(NoteBean noteBean);
-        public void setBackgroundColorfromUserseting();
+        void saveNoteinfotoDatabase(NoteBean noteBean);
+        void saveNoteinfotoSecrectDatabase(NoteBean noteBean);
+        void setBackgroundColorfromUserseting();
     }
 }
