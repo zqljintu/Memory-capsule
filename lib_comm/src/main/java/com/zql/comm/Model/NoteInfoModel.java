@@ -96,7 +96,7 @@ public class NoteInfoModel implements NoteInfoModelImp {
         List<NoteBean> mlist=noteBeanDao.loadAll();
         List<String> slist=new ArrayList<>();
         for (int i=0;i<mlist.size();i++){
-            slist.add(mlist.get(i).getCreatetime().toString());
+            slist.add(mlist.get(i).getCreatetime());
         }
         return Means.removeDuplicate(slist);//去除重复的元素
     }

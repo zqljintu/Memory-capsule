@@ -2,4 +2,5 @@
     <string name="app_name">lib_info</string>
     <string name="sharedTextView">sharedtextview</string>
     <string name="menu_noteabout">详情</string>
+    <string name="about_application">code by 尽途\ndesign by 尽途\n如有问题请联系 zqlsw@qq.com</string>
 </resources>

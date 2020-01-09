@@ -131,7 +131,7 @@
                 android:gravity="center|left"
                 android:id="@+id/text_aboutcoder"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:text="@string/about_application"
                 android:textStyle="italic"/>
         </androidx.cardview.widget.CardView>

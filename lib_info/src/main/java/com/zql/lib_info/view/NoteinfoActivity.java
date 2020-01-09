@@ -31,7 +31,7 @@ public class NoteinfoActivity extends BaseLifecycleActivity<NoteInfoPresenter> i
     private TextView textView_noteinfo;
     private ImageView imageview_noteinfo;
     private CoordinatorLayout coordinatorLayout_noteinfo;
-    private Integer maincolor;
+    private int maincolor;
     private Toolbar toolbar;
 
 
@@ -55,36 +55,34 @@ public class NoteinfoActivity extends BaseLifecycleActivity<NoteInfoPresenter> i
         return new NoteInfoPresenter(this);
     }
 
-    private void getintentExtra(){//获取传递过来的信息，并通过PrestenerImpNoteInfo读取显示在NoteinfoActivity上
+    /**
+     * 获取传递过来的信息，并通过PrestenerImpNoteInfo读取显示在NoteinfoActivity上
+     */
+    private void getintentExtra(){
         Intent mintent=getIntent();
         Bundle bundle=mintent.getBundleExtra("info");
         Noteinfo noteinfo= (Noteinfo) bundle.getSerializable("noteinfo");
         mPresenter.readDatatoNoteinfo(noteinfo);
     }
     private void initToolbarSeting(){//toolbard的设置
-        toolbar=(Toolbar)this.findViewById(R.id.toolbar_noteinfo);
-        coordinatorLayout_noteinfo=(CoordinatorLayout)this.findViewById(R.id.coordinator_noteinfo);
+        toolbar = findViewById(R.id.toolbar_noteinfo);
+        coordinatorLayout_noteinfo = findViewById(R.id.coordinator_noteinfo);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-        CollapsingToolbarLayout collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.cool_noteinfo);
+        toolbar.setNavigationOnClickListener(view -> finish());
+        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.cool_noteinfo);
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
     }
     private void initTaggroupView(){//实例化TagGroup
-        tagGroup_noteinfo=(TagGroup)this.findViewById(R.id.taggroup_noteinfo_item);
+        tagGroup_noteinfo = findViewById(R.id.taggroup_noteinfo_item);
     }
     private void initTextview(){//实例化TextView
-        textView_noteinfo=(TextView)this.findViewById(R.id.text_noteinfo_item);
+        textView_noteinfo = findViewById(R.id.text_noteinfo_item);
     }
     private void initImageview(){//实例化ImagView
-        imageview_noteinfo=(ImageView)this.findViewById(R.id.noteinfo_imageview);
+        imageview_noteinfo = findViewById(R.id.noteinfo_imageview);
     }
 
 

@@ -64,7 +64,7 @@ public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> impleme
         initSerectandQuestionview();
     }
     private void inittoolbarseting(){
-        toolbar_about=(Toolbar)this.findViewById(R.id.toolbar_about);
+        toolbar_about = findViewById(R.id.toolbar_about);
         setSupportActionBar(toolbar_about);
         getSupportActionBar().setHomeButtonEnabled(true);//设置返回键可用
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,48 +77,36 @@ public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> impleme
         });
     }
     private void initSerectandQuestionview(){
-        TextView text_password=(TextView)this.findViewById(R.id.text_creatpasswordandquestion);
-        TextView text_password_edit=(TextView)this.findViewById(R.id.text_editpassword);
-        TextView text_question_edit=(TextView)this.findViewById(R.id.text_editquestion);
-        TextView text_forgetpaswword=(TextView)this.findViewById(R.id.text_forgetpassword);
-        text_password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mPresenter.isnullthepasswordfromSeting()){
-                    initpassworddialog();
-                }else {
-                    Toast.makeText(AboutActivity.this, "密码已经存在，如修改请点击修改密码", Toast.LENGTH_SHORT).show();
-                }
+        TextView text_password = findViewById(R.id.text_creatpasswordandquestion);
+        TextView text_password_edit = findViewById(R.id.text_editpassword);
+        TextView text_question_edit = findViewById(R.id.text_editquestion);
+        TextView text_forgetpaswword = findViewById(R.id.text_forgetpassword);
+        text_password.setOnClickListener(view -> {
+            if (mPresenter.isnullthepasswordfromSeting()){
+                initpassworddialog();
+            }else {
+                Toast.makeText(AboutActivity.this, "密码已经存在，如修改请点击修改密码", Toast.LENGTH_SHORT).show();
             }
         });
-        text_password_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mPresenter.isnullthepasswordfromSeting()){
-                    Toast.makeText(AboutActivity.this, "密码尚未创建，请先创建密码", Toast.LENGTH_SHORT).show();
-                }else {
-                    initEditpassworddialog();
-                }
+        text_password_edit.setOnClickListener(view -> {
+            if (mPresenter.isnullthepasswordfromSeting()){
+                Toast.makeText(AboutActivity.this, "密码尚未创建，请先创建密码", Toast.LENGTH_SHORT).show();
+            }else {
+                initEditpassworddialog();
             }
         });
-        text_question_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mPresenter.isnullthequestionfromSeting()){
-                    Toast.makeText(AboutActivity.this, "密保尚未创建，请先创建密保", Toast.LENGTH_SHORT).show();
-                }else {
-                    initQuestionddialog();
-                }
+        text_question_edit.setOnClickListener(view -> {
+            if (mPresenter.isnullthequestionfromSeting()){
+                Toast.makeText(AboutActivity.this, "密保尚未创建，请先创建密保", Toast.LENGTH_SHORT).show();
+            }else {
+                initQuestionddialog();
             }
         });
-        text_forgetpaswword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mPresenter.isnullthequestionfromSeting()){
-                    Toast.makeText(AboutActivity.this, "密保尚未创建，请先创建密保", Toast.LENGTH_SHORT).show();
-                }else {
-                    initiscurrentQuestiondialog();
-                }
+        text_forgetpaswword.setOnClickListener(view -> {
+            if (mPresenter.isnullthequestionfromSeting()){
+                Toast.makeText(AboutActivity.this, "密保尚未创建，请先创建密保", Toast.LENGTH_SHORT).show();
+            }else {
+                initiscurrentQuestiondialog();
             }
         });
     }
@@ -126,9 +114,9 @@ public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> impleme
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         LayoutInflater layoutInflater=LayoutInflater.from(this);
         View centerview=layoutInflater.inflate(R.layout.activity_set_editpassworddialog,null);
-        final MaterialEditText materialEditText_password=(MaterialEditText)centerview.findViewById(R.id.set_dialog_password_edit_password);
-        final TextView texttitle=(TextView)centerview.findViewById(R.id.title_text_password);
-        Button button_ok=(Button)centerview.findViewById(R.id.set_dialog_password_ok_password);
+        final MaterialEditText materialEditText_password = centerview.findViewById(R.id.set_dialog_password_edit_password);
+        final TextView texttitle = centerview.findViewById(R.id.title_text_password);
+        Button button_ok = centerview.findViewById(R.id.set_dialog_password_ok_password);
         final AlertDialog alertDialog_editpassword=builder.setView(centerview).create();
         texttitle.setText("创建新的密码");
         button_ok.setOnClickListener(new View.OnClickListener() {
@@ -152,9 +140,9 @@ public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> impleme
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         LayoutInflater layoutInflater=LayoutInflater.from(this);
         View centerview=layoutInflater.inflate(R.layout.activity_set_editpassworddialog,null);
-        final MaterialEditText materialEditText_password=(MaterialEditText)centerview.findViewById(R.id.set_dialog_password_edit_password);
-        final TextView texttitle=(TextView)centerview.findViewById(R.id.title_text_password);
-        Button button_ok=(Button)centerview.findViewById(R.id.set_dialog_password_ok_password);
+        final MaterialEditText materialEditText_password = centerview.findViewById(R.id.set_dialog_password_edit_password);
+        final TextView texttitle = centerview.findViewById(R.id.title_text_password);
+        Button button_ok = centerview.findViewById(R.id.set_dialog_password_ok_password);
         final AlertDialog alertDialog_editpassword=builder.setView(centerview).create();
         texttitle.setText("请输入旧密码");
         button_ok.setOnClickListener(new View.OnClickListener() {
@@ -173,21 +161,18 @@ public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> impleme
     private void initQuestionddialog(){//实例化一个重新编辑密保的dialog
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         LayoutInflater layoutInflater=LayoutInflater.from(this);
-        View centerview=layoutInflater.inflate(R.layout.activity_set_editquestiondialog,null);
+        View centerview = layoutInflater.inflate(R.layout.activity_set_editquestiondialog,null);
         final MaterialEditText materialEditText_password=(MaterialEditText)centerview.findViewById(R.id.set_dialog_question_edit_question);
-        final TextView texttitle=(TextView)centerview.findViewById(R.id.title_text_question);
-        Button button_ok=(Button)centerview.findViewById(R.id.set_dialog_password_ok_question);
+        final TextView texttitle = centerview.findViewById(R.id.title_text_question);
+        Button button_ok = centerview.findViewById(R.id.set_dialog_password_ok_question);
         final AlertDialog alertDialog_editpassword=builder.setView(centerview).create();
         texttitle.setText("请输入旧密保");
-        button_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mPresenter.iscurrentthequestionfromSeting(materialEditText_password.getText().toString())){
-                    alertDialog_editpassword.dismiss();
-                    initeditnewQuestiondialog();
-                }else {
-                    Toast.makeText(AboutActivity.this, "输入旧的密保有误", Toast.LENGTH_SHORT).show();
-                }
+        button_ok.setOnClickListener(view -> {
+            if (mPresenter.iscurrentthequestionfromSeting(materialEditText_password.getText().toString())){
+                alertDialog_editpassword.dismiss();
+                initeditnewQuestiondialog();
+            }else {
+                Toast.makeText(AboutActivity.this, "输入旧的密保有误", Toast.LENGTH_SHORT).show();
             }
         });
         alertDialog_editpassword.show();
@@ -196,20 +181,17 @@ public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> impleme
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         LayoutInflater layoutInflater=LayoutInflater.from(this);
         View centerview=layoutInflater.inflate(R.layout.activity_set_editquestiondialog,null);
-        final MaterialEditText materialEditText_password=(MaterialEditText)centerview.findViewById(R.id.set_dialog_question_edit_question);
-        final TextView texttitle=(TextView)centerview.findViewById(R.id.title_text_question);
-        Button button_ok=(Button)centerview.findViewById(R.id.set_dialog_password_ok_question);
+        final MaterialEditText materialEditText_password = centerview.findViewById(R.id.set_dialog_question_edit_question);
+        final TextView texttitle = centerview.findViewById(R.id.title_text_question);
+        Button button_ok = centerview.findViewById(R.id.set_dialog_password_ok_question);
         final AlertDialog alertDialog_editpassword=builder.setView(centerview).create();
         texttitle.setText("请输入新密保");
-        button_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Means.isedittext_empty(materialEditText_password)){
-                    Toast.makeText(AboutActivity.this, "请输入密保", Toast.LENGTH_SHORT).show();
-                }else {
-                    mPresenter.putquestionOnSeting(materialEditText_password.getText().toString());
-                    alertDialog_editpassword.dismiss();
-                }
+        button_ok.setOnClickListener(view -> {
+            if (Means.isedittext_empty(materialEditText_password)){
+                Toast.makeText(AboutActivity.this, "请输入密保", Toast.LENGTH_SHORT).show();
+            }else {
+                mPresenter.putquestionOnSeting(materialEditText_password.getText().toString());
+                alertDialog_editpassword.dismiss();
             }
         });
         alertDialog_editpassword.show();
@@ -217,63 +199,57 @@ public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> impleme
     private void initiscurrentQuestiondialog(){
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         LayoutInflater layoutInflater=LayoutInflater.from(this);
-        View centerview=layoutInflater.inflate(R.layout.activity_set_editquestiondialog,null);
-        final MaterialEditText materialEditText_password=(MaterialEditText)centerview.findViewById(R.id.set_dialog_question_edit_question);
-        final TextView texttitle=(TextView)centerview.findViewById(R.id.title_text_question);
-        Button button_ok=(Button)centerview.findViewById(R.id.set_dialog_password_ok_question);
+        View centerview = layoutInflater.inflate(R.layout.activity_set_editquestiondialog,null);
+        final MaterialEditText materialEditText_password = centerview.findViewById(R.id.set_dialog_question_edit_question);
+        final TextView texttitle = centerview.findViewById(R.id.title_text_question);
+        Button button_ok = centerview.findViewById(R.id.set_dialog_password_ok_question);
         final AlertDialog alertDialog_editpassword=builder.setView(centerview).create();
         texttitle.setText("请输入密保");
-        button_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Means.isedittext_empty(materialEditText_password)){
-                    Toast.makeText(AboutActivity.this, "请输入密保", Toast.LENGTH_SHORT).show();
+        button_ok.setOnClickListener(view -> {
+            if (Means.isedittext_empty(materialEditText_password)){
+                Toast.makeText(AboutActivity.this, "请输入密保", Toast.LENGTH_SHORT).show();
+            }else {
+                if (mPresenter.iscurrentthequestionfromSeting(materialEditText_password.getText().toString())){
+                    alertDialog_editpassword.dismiss();
+                    mPresenter.showthecurrentpasswordOnAboutactivity();
                 }else {
-                    if (mPresenter.iscurrentthequestionfromSeting(materialEditText_password.getText().toString())){
-                        alertDialog_editpassword.dismiss();
-                        mPresenter.showthecurrentpasswordOnAboutactivity();
-                    }else {
-                        Toast.makeText(AboutActivity.this, "密保错误请重新输入", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(AboutActivity.this, "密保错误请重新输入", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         alertDialog_editpassword.show();
     }
     private void initBackgroundcolorview(){//颜色选择
-        niceSpinner=(NiceSpinner)this.findViewById(R.id.spiner_color_set);
+        niceSpinner = findViewById(R.id.spiner_color_set);
         List<String>data=new LinkedList<>(Arrays.asList("默认","珊瑚朱","樱草紫","霓虹绿","绅士黑"));
         niceSpinner.attachDataSource(data);
-        niceSpinner.addOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i){
-                    case 0:
-                        mPresenter.putcurrentcolorOnSeting(0);
-                        mPresenter.setBackgroundcolorfromSeting();
+        niceSpinner.addOnItemClickListener((adapterView, view, i, l) -> {
+            switch (i){
+                case 0:
+                    mPresenter.putcurrentcolorOnSeting(0);
+                    mPresenter.setBackgroundcolorfromSeting();
+                    break;
+                case 1:
+                    mPresenter.putcurrentcolorOnSeting(1);
+                    mPresenter.setBackgroundcolorfromSeting();
+                    break;
+                case 2:
+                    mPresenter.putcurrentcolorOnSeting(2);
+                    mPresenter.setBackgroundcolorfromSeting();
+                    break;
+                case 3:
+                    mPresenter.putcurrentcolorOnSeting(3);
+                    mPresenter.setBackgroundcolorfromSeting();
+                    break;
+                case 4:
+                    mPresenter.putcurrentcolorOnSeting(4);
+                    mPresenter.setBackgroundcolorfromSeting();
+                    break;
+                default:
                         break;
-                    case 1:
-                        mPresenter.putcurrentcolorOnSeting(1);
-                        mPresenter.setBackgroundcolorfromSeting();
-                        break;
-                    case 2:
-                        mPresenter.putcurrentcolorOnSeting(2);
-                        mPresenter.setBackgroundcolorfromSeting();
-                        break;
-                    case 3:
-                        mPresenter.putcurrentcolorOnSeting(3);
-                        mPresenter.setBackgroundcolorfromSeting();
-                        break;
-                    case 4:
-                        mPresenter.putcurrentcolorOnSeting(4);
-                        mPresenter.setBackgroundcolorfromSeting();
-                        break;
-                    default:
-                            break;
 
-                }
-                EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATA_COLOR));
             }
+            EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATA_COLOR));
         });
     }
     private void initAboutcode(){
@@ -281,27 +257,24 @@ public class AboutActivity extends BaseLifecycleActivity<AboutPresenter> impleme
     }
     private void initpassworddialog(){//实例化一个创建密码和密保问题的Dialog
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        LayoutInflater layoutInflater=LayoutInflater.from(this);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
         View centerview=layoutInflater.inflate(R.layout.activity_set_passworddialog,null);
-        final MaterialEditText materialEditText_password=(MaterialEditText)centerview.findViewById(R.id.set_dialog_password_edit);
-        final MaterialEditText materialEditText_question=(MaterialEditText)centerview.findViewById(R.id.set_dialog_question_edit);
-        Button button_ok=(Button)centerview.findViewById(R.id.set_dialog_password_ok);
+        final MaterialEditText materialEditText_password = centerview.findViewById(R.id.set_dialog_password_edit);
+        final MaterialEditText materialEditText_question = centerview.findViewById(R.id.set_dialog_question_edit);
+        Button button_ok = centerview.findViewById(R.id.set_dialog_password_ok);
         alertDialog_creatpassword=builder.setView(centerview).create();
-        button_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Means.isedittext_empty(materialEditText_password)&Means.isedittext_empty(materialEditText_question)){
-                    Toast.makeText(AboutActivity.this, "请输入密码和密保", Toast.LENGTH_SHORT).show();
-                }else if (Means.isedittext_empty(materialEditText_password)|Means.isedittext_empty(materialEditText_question)){
-                    Toast.makeText(AboutActivity.this, "请输入密码或密保", Toast.LENGTH_SHORT).show();
+        button_ok.setOnClickListener(view -> {
+            if (Means.isedittext_empty(materialEditText_password)&Means.isedittext_empty(materialEditText_question)){
+                Toast.makeText(AboutActivity.this, "请输入密码和密保", Toast.LENGTH_SHORT).show();
+            }else if (Means.isedittext_empty(materialEditText_password)|Means.isedittext_empty(materialEditText_question)){
+                Toast.makeText(AboutActivity.this, "请输入密码或密保", Toast.LENGTH_SHORT).show();
+            }else {
+                if (materialEditText_password.getText().toString().length()!=6){
+                    Toast.makeText(AboutActivity.this, "密码为6位数字", Toast.LENGTH_SHORT).show();
                 }else {
-                    if (materialEditText_password.getText().toString().length()!=6){
-                        Toast.makeText(AboutActivity.this, "密码为6位数字", Toast.LENGTH_SHORT).show();
-                    }else {
-                        mPresenter.putpasswordandquestionOnSeting(materialEditText_password.getText().toString(),
-                                materialEditText_question.getText().toString());
-                        alertDialog_creatpassword.dismiss();
-                    }
+                    mPresenter.putpasswordandquestionOnSeting(materialEditText_password.getText().toString(),
+                            materialEditText_question.getText().toString());
+                    alertDialog_creatpassword.dismiss();
                 }
             }
         });
