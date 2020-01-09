@@ -18,13 +18,13 @@
         <ImageView
             android:id="@+id/imageview_item_viewpagercard"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             android:src="@drawable/photo_live"
             android:layout_margin="20dp" />
         <ImageView
             android:id="@+id/lableview_item_viewpagercard"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:clickable="true"
             android:src="@drawable/icon_live"
             android:scaleType="fitCenter"
@@ -39,7 +39,7 @@
             android:textColor="@color/colorItemViewPageCardText"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:lineSpacingExtra="3dp"
             android:transitionName="@string/sharedTextView"
             android:layout_above="@id/createtime_item_viewpagercard"

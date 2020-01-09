@@ -35,9 +35,6 @@ public abstract class BaseApplication extends MultiDexApplication implements App
     @Override
     public void onCreate() {
         super.onCreate();
-        CrashReport.initCrashReport(getApplicationContext(),
-                "cca6ad46fc",
-                true);
         mApplication = this;
         initLog();
         registerActivityLifecycleCallbacks(this);

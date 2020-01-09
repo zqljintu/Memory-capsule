@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
 import com.zql.base.BaseApplication;
 import com.zql.comm.bean.DaoMaster;
@@ -35,6 +36,9 @@ public class UserSeting extends BaseApplication implements UserSetingImp {
         initSharedPreference();//初始化写入xml
         initGreendao();//初始化数据库
         initGreendao_serect();//初始化隐私数据库
+        CrashReport.initCrashReport(getApplicationContext(),
+                "cca6ad46fc",
+                true);
     }
 
     void initGreendao(){//创建公开数据库

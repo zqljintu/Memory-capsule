@@ -15,9 +15,6 @@ import android.text.style.ReplacementSpan;
 import android.text.style.StyleSpan;
 import android.widget.TextView;
 
-/**
- * Created by pandajoy on 17-4-25.
- */
 
 public class StringStyleUtils {
 

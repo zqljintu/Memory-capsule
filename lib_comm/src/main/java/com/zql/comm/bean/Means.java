@@ -17,13 +17,13 @@ import java.util.TimeZone;
 
 public abstract class Means {
     public static String NOSTRING="null";
-    public static int EDIT=0;
-    public static int CHANGE=1;
-    public static int WORK=0;
-    public static int STUDY=1;
-    public static int LIVE=2;
-    public static int DIARY=3;
-    public static int TRAYEL=4;
+    public static int EDIT = 0;
+    public static int CHANGE = 1;
+    public static int WORK = 0;
+    public static int STUDY = 1;
+    public static int LIVE = 2;
+    public static int DIARY = 3;
+    public static int TRAYEL = 4;
     public static String getNoteStringfromNoteInt(int type){//获取note类型
         switch (type){
             case 0:
@@ -117,14 +117,16 @@ public abstract class Means {
         }
     }
     public static String getCreatetime(){//获取创建时间
+        String[] weeks = {"星期六","星期天","星期一","星期二","星期三","星期四","星期五"};
         Calendar calendar=Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
-        String year=String.valueOf(calendar.get(Calendar.YEAR));
-        String mounth=String.valueOf(calendar.get(Calendar.MONTH)+1);
-        String day=String.valueOf(calendar.get(Calendar.DATE));
+        String year = String.valueOf(calendar.get(Calendar.YEAR));
+        String mounth = String.valueOf(calendar.get(Calendar.MONTH)+1);
+        String day = String.valueOf(calendar.get(Calendar.DATE));
+        int weekday = calendar.get(Calendar.DAY_OF_WEEK);
         String hour=String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
         String minute=String.valueOf(calendar.get(Calendar.MINUTE));
-        return year+"-"+mounth+"-"+day;
+        return year+"-"+mounth+"-"+day + "/" +weeks[weekday];
     }
     public static int getTheYearoncalendar(){
         Calendar calendar=Calendar.getInstance();

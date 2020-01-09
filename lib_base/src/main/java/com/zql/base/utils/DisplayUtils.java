@@ -6,7 +6,6 @@ import android.util.TypedValue;
 import com.zql.base.BaseApplication;
 
 /**
- * Create by Totoro
  * 2019-11-08 17:57
  **/
 public class DisplayUtils {
