@@ -40,6 +40,12 @@ public class MenuView extends AttachPopupView {
                 dismiss();
             }
         });
+        findViewById(R.id.con_net).setOnClickListener(v -> {
+            if (null != mListener){
+                mListener.OnItemClick(4);
+                dismiss();
+            }
+        });
     }
 
     @Override

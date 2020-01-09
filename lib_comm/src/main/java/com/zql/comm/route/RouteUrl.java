@@ -4,6 +4,9 @@ package com.zql.comm.route;
  * 2019-11-11 11:04
  **/
 public interface RouteUrl {
+    /**
+     * 本地模式
+     */
 
     String Url_MainActivity = "/lib_main/main_activity";
 
@@ -24,5 +27,11 @@ public interface RouteUrl {
     String Url_AboutActivity = "/lib_setting/about_activity";
 
     String Url_SplashActivity = "/lib_splash/splash_activity";
+
+    /**
+     * 联网模式
+     */
+
+    String Url_NetMainActivity = "/lib_net/netmain_activity";
 
 }

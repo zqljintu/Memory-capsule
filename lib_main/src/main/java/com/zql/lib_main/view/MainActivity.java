@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -35,6 +36,7 @@ import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.data.CommData;
 import com.zql.comm.route.RouteUrl;
 import com.zql.comm.widget.ChangeTextViewSpace;
 import com.zql.comm.widget.PasswordView.KeyPasswordView;
@@ -322,7 +324,16 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
             case 3:
                 mPresenter.openSetiongActivity();
                 break;
+            case 4:
+                initNetVersion();
+                break;
         }
+    }
+
+    private void initNetVersion() {
+        CommData.setNetVersion();
+        ARouter.getInstance().build(RouteUrl.Url_NetMainActivity).navigation();
+        finish();
     }
 
 

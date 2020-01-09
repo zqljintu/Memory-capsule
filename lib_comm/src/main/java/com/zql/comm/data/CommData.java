@@ -15,6 +15,8 @@ public class CommData {
 
     private static final String USER_COLOR = "comm_user_color";
 
+    private static final String VERSON_LOCAL = "comm_verson_local";
+
     public static String getUserPassword() {
         return SpUtil.getString(USER_PASSWORD,USER_DEFAULT);
     }
@@ -37,6 +39,18 @@ public class CommData {
 
     public static void setUserColor(int color){
         SpUtil.putInt(USER_COLOR, color);
+    }
+
+    public static boolean getIsLocalVersion(){
+        return SpUtil.getBoolean(VERSON_LOCAL, true);
+    }
+
+    public static void  setLocalVerson(){
+        SpUtil.putBoolean(VERSON_LOCAL, true);
+    }
+
+    public static void  setNetVersion(){
+        SpUtil.putBoolean(VERSON_LOCAL, false);
     }
 
 }
