@@ -28,6 +28,7 @@
     <application
         android:name="com.zql.comm.UserSeting"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/application_name"
         android:roundIcon="@mipmap/ic_launcher_round"

@@ -3,8 +3,8 @@ ext {
             applicationId  : "com.zql.app_jinnang",
             versionName    : "2.0",
             versionCode    : 2,
-            applicatuonName: "记忆胶囊",
-            key_1          : "default",//设置为baseurl
+            applicationName: "记忆胶囊",
+            baseUrl        : "http://106.12.163.108",//设置为baseurl,连接网络服务器
             key_2          : "default",
             key_3          : "default",
             key_4          : "default",

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 def android_config = rootProject.ext.android
+def app = rootProject.ext.one
 def apis = rootProject.ext.base
 
 android {
@@ -12,7 +13,7 @@ android {
         versionName android_config.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("boolean", "isLogDebug", String.valueOf(rootProject.ext.isLogDebug))
-        resValue "string", "key_0", ""
+        resValue "string", "baseUrl", app.baseUrl
         resValue "string", "key_1", ""
     }
 

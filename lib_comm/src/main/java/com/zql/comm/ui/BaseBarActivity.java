@@ -13,7 +13,6 @@ import com.zql.base.ui.mvp.BasePresenter;
 import com.zql.comm.R;
 
 /**
- * @author 夜斗
  * @date 2019/11/14
  */
 public abstract class BaseBarActivity<T extends BasePresenter> extends BaseLifecycleActivity<T> {
