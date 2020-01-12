@@ -33,8 +33,8 @@ import java.util.List;
 public class ViewPagerCardAdapter extends PagerAdapter {
     private View currentView;
     public static ImageView menu_item_viewpagercard;
-    private ImageView imageview_item_viewpagercard,lableview_item_viewpagercard;
-    private TextView textview_item_viewpagercard,createtime_item_viewpagercard;
+    private ImageView imageview_item_viewpagercard, lableview_item_viewpagercard;
+    private TextView textview_item_viewpagercard, createtime_item_viewpagercard;
     private CardView viewpager_card;
     private List<NoteBean>list;
     private Context context;

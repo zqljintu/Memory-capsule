@@ -1,6 +1,7 @@
 package com.zql.comm.bean;
 
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -117,16 +118,16 @@ public abstract class Means {
         }
     }
     public static String getCreatetime(){//获取创建时间
-        String[] weeks = {"星期六","星期天","星期一","星期二","星期三","星期四","星期五"};
+        String[] weeks = {"星期天","星期一","星期二","星期三","星期四","星期五","星期六"};
         Calendar calendar=Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         String year = String.valueOf(calendar.get(Calendar.YEAR));
         String mounth = String.valueOf(calendar.get(Calendar.MONTH)+1);
         String day = String.valueOf(calendar.get(Calendar.DATE));
-        int weekday = calendar.get(Calendar.DAY_OF_WEEK);
+        int weekday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         String hour=String.valueOf(calendar.get(Calendar.HOUR_OF_DAY));
         String minute=String.valueOf(calendar.get(Calendar.MINUTE));
-        return year+"-"+mounth+"-"+day + "/" +weeks[weekday];
+        return year+"-"+mounth+"-"+day + "/" + weeks[weekday];
     }
     public static int getTheYearoncalendar(){
         Calendar calendar=Calendar.getInstance();
