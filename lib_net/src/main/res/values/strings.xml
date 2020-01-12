@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">lib_net</string>
+    <string name="net_capsule">胶囊</string>
+    <string name="net_user">我的</string>
 </resources>

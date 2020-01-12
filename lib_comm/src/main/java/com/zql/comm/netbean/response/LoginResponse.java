@@ -1,5 +1,7 @@
 package com.zql.comm.netbean.response;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class LoginResponse implements Serializable {
@@ -36,5 +38,14 @@ public class LoginResponse implements Serializable {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginResponse{" +
+                "error_name=" + error_name +
+                ", sex='" + sex + '\'' +
+                ", msg='" + msg + '\'' +
+                '}';
     }
 }

@@ -30,4 +30,5 @@
     <color name="colorDaymain">#ebebeb</color>
     <color name="colorRed">#EE6464</color>
     <color name="colorPress">#999999</color>
+    <color name="colorNormal">#868992</color>
 </resources>

@@ -40,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
         super.onCreate(savedInstanceState);
         setContentView(getContentLayoutId());
         EventBusUtil.register(this);
+        ARouter.getInstance().inject(this);
     }
 
     protected abstract int getContentLayoutId();

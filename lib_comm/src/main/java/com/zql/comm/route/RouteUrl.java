@@ -34,4 +34,8 @@ public interface RouteUrl {
 
     String Url_NetMainActivity = "/lib_net/netmain_activity";
 
+    String Url_UserFragment = "/lib_user/user_fragment";
+
+    String Url_CapsuleFragment = "/lib_capsule/capsule_fragment";
+
 }
