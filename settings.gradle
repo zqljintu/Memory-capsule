@@ -1,4 +1,4 @@
-include ':app', ':lib_net',
+include ':app', ':lib_net', ':lib_user', ':lib_capsule',
         ':hellodaemon',
         ':lib_base',
         ':lib_comm',

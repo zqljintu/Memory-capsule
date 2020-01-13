@@ -1,14 +1,16 @@
 package com.zql.lib_net.view;
 
 
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.ashokvarma.bottomnavigation.BottomNavigationBar;
-import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.data.CommData;
 import com.zql.comm.net.HttpData;
@@ -27,7 +29,12 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
 
     private ViewPager mViewPager;
 
-    private BottomNavigationBar mBottomBar;
+    private ConstraintLayout mConCapsule, mConMore;
+
+    private ImageView mImgCapsule, mImgMore;
+
+    private TextView mTextCapsule, mTextMore;
+
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();;
 
@@ -49,7 +56,6 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
     @Override
     protected void initView() {
         mViewPager = find(R.id.net_viewpager);
-        mBottomBar = find(R.id.net_bottombar);
         initNav();
         initVp();
         mHttpData = new HttpData();
@@ -71,6 +77,7 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
         }
 
         mVpAdapter = new VpAdapter(getSupportFragmentManager(), mFragments);
+        initBottomMenu(mViewPager.getCurrentItem());
         mViewPager.setAdapter(mVpAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -80,7 +87,7 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
 
             @Override
             public void onPageSelected(int position) {
-                mBottomBar.selectTab(position);
+                initBottomMenu(position);
             }
 
             @Override
@@ -92,31 +99,37 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
 
     }
 
+
     private void initNav() {
-        mBottomBar.setMode(BottomNavigationBar.MODE_FIXED);
-        mBottomBar.addItem(new BottomNavigationItem(R.drawable.ic_capsule,getString(R.string.net_capsule)));
-        mBottomBar.addItem(new BottomNavigationItem(R.drawable.ic_user,getString(R.string.net_user)));
-        mBottomBar.setActiveColor(R.color.colorFloatingButton);
-        mBottomBar.setInActiveColor(R.color.colorNormal);
-        mBottomBar.initialise();
-        mBottomBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(int position) {
-                mViewPager.setCurrentItem(position);
-            }
-
-            @Override
-            public void onTabUnselected(int position) {
-
-            }
-
-            @Override
-            public void onTabReselected(int position) {
-
-            }
+        mConCapsule = find(R.id.con_capsule);
+        mConMore = find(R.id.con_more);
+        mImgCapsule = find(R.id.img_capsule);
+        mImgMore = find(R.id.img_more);
+        mTextCapsule = find(R.id.text_capsule);
+        mTextMore = find(R.id.text_more);
+        mConCapsule.setOnClickListener(v -> {
+            mViewPager.setCurrentItem(0);
+            initBottomMenu(0);
         });
-        mBottomBar.setPadding(0,0,0,0);
+        mConMore.setOnClickListener(v -> {
+            mViewPager.setCurrentItem(1);
+            initBottomMenu(1);
+        });
+    }
 
+    private void initBottomMenu(int pos){
+        if (pos > 1) return;
+        if (pos == 0){
+            mImgCapsule.setColorFilter(getResources().getColor(R.color.colorFloatingButton));
+            mTextCapsule.setTextColor(getResources().getColor(R.color.colorFloatingButton));
+            mImgMore.setColorFilter(getResources().getColor(R.color.colorMenuBg));
+            mTextMore.setTextColor(getResources().getColor(R.color.colorMenuBg));
+        }else {
+            mImgCapsule.setColorFilter(getResources().getColor(R.color.colorMenuBg));
+            mTextCapsule.setTextColor(getResources().getColor(R.color.colorMenuBg));
+            mImgMore.setColorFilter(getResources().getColor(R.color.colorFloatingButton));
+            mTextMore.setTextColor(getResources().getColor(R.color.colorFloatingButton));
+        }
     }
 
     @Override

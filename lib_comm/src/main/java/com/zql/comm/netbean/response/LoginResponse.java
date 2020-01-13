@@ -1,7 +1,5 @@
 package com.zql.comm.netbean.response;
 
-import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 
 public class LoginResponse implements Serializable {

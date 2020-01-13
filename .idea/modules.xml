@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/hellodaemon/hellodaemon.iml" filepath="$PROJECT_DIR$/hellodaemon/hellodaemon.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_base/lib_base.iml" filepath="$PROJECT_DIR$/lib_base/lib_base.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_calendar/lib_calendar.iml" filepath="$PROJECT_DIR$/lib_calendar/lib_calendar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib_capsule/lib_capsule.iml" filepath="$PROJECT_DIR$/lib_capsule/lib_capsule.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_chart/lib_chart.iml" filepath="$PROJECT_DIR$/lib_chart/lib_chart.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_comm/lib_comm.iml" filepath="$PROJECT_DIR$/lib_comm/lib_comm.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_edit/lib_edit.iml" filepath="$PROJECT_DIR$/lib_edit/lib_edit.iml" />
@@ -17,6 +18,7 @@
       <module fileurl="file://$PROJECT_DIR$/lib_other/lib_other.iml" filepath="$PROJECT_DIR$/lib_other/lib_other.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_setting/lib_setting.iml" filepath="$PROJECT_DIR$/lib_setting/lib_setting.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_splash/lib_splash.iml" filepath="$PROJECT_DIR$/lib_splash/lib_splash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib_user/lib_user.iml" filepath="$PROJECT_DIR$/lib_user/lib_user.iml" />
       <module fileurl="file://$PROJECT_DIR$/test-Memory-capsule.iml" filepath="$PROJECT_DIR$/test-Memory-capsule.iml" />
     </modules>
   </component>

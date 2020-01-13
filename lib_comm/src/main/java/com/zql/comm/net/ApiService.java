@@ -1,6 +1,5 @@
 package com.zql.comm.net;
 
-import com.zql.comm.netbean.request.LoginRequest;
 import com.zql.comm.netbean.response.LoginResponse;
 
 import io.reactivex.Observable;

@@ -64,6 +64,7 @@ ext {
             'dmjdh2'               :'com.daimajia.androidanimations:library:2.3@aar',
             'popumenu'             :'com.lxj:xpopup:1.8.10-x',
             'toptightmenu'         :'com.zaaach:toprightmenu:1.1.2',
+            'bottomBar'            :'com.aurelhubert:ahbottomnavigation:2.3.4',
     ]
 
 
