@@ -2,6 +2,7 @@
     <string name="app_name">lib_user</string>
     <string name="user_notnull">用户名不能为空</string>
     <string name="pass_notnull">密码不能为空</string>
-    <string name="login_success">登陆成功</string>
-    <string name="login_fail">登陆失败</string>
+    <string name="logup_success">登陆成功</string>
+    <string name="logup_fail">登陆失败</string>
+    <string name="user_logup">注册</string>
 </resources>

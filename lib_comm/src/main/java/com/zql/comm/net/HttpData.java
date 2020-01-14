@@ -2,6 +2,7 @@ package com.zql.comm.net;
 
 import com.zql.base.net.HttpClient;
 import com.zql.comm.netbean.request.LoginRequest;
+import com.zql.comm.netbean.response.CapsulesResponse;
 import com.zql.comm.netbean.response.LoginResponse;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -34,6 +35,24 @@ public class HttpData {
                 });
         mCompositeDisposable.add(subscribe);
 
+    }
+
+    public void LoadCapsule(LoginRequest loginRequest, OnHttpRequestListener<CapsulesResponse> listener) {
+        Disposable subscribe = HttpClient.getInstance()
+                .create(ApiService.class)
+                .loadCapsules(loginRequest.getUsername())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(capsulesResponse -> {
+                    if (null != listener){
+                        listener.onHttpRequestSuccess(capsulesResponse);
+                    }
+                }, throwable -> {
+                    if (null != listener){
+                        listener.onHttpRequestFailed(throwable.getMessage());
+                    }
+                });
+        mCompositeDisposable.add(subscribe);
     }
 
     public void Destory(){
