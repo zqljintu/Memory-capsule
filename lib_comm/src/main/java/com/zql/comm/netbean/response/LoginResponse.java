@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class LoginResponse implements Serializable {
 
+    public static final int LOGIN_SUCCESS = 203;
+
     /**
      * error_name : 203
      * sex : 男

@@ -1,43 +1,44 @@
 package com.zql.lib_user.view;
-
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.zql.base.ui.mvp.BaseLifecycleFragment;
-import com.zql.comm.net.HttpData;
-import com.zql.comm.net.OnHttpRequestListener;
-import com.zql.comm.netbean.request.LoginRequest;
-import com.zql.comm.netbean.response.LoginResponse;
+import com.zql.base.utils.FragmentUtils;
 import com.zql.lib_user.R;
+import com.zql.lib_user.view.fragments.LogupFragment;
 
 public class UserFragment extends BaseLifecycleFragment<UserPresenter> implements UserContract.view {
 
-    private TextView mText;
-
-    private Button mButton;
-
-    private HttpData mHttData;
-
     @Override
     protected void initView(View view) {
-        mButton = find(R.id.button_login);
-        mText = find(R.id.text_user);
-        mHttData = new HttpData();
-        mButton.setOnClickListener(v ->
-            mHttData.Login(new LoginRequest("zqlzql","zqlzql"),new OnHttpRequestListener<LoginResponse>() {
-            @Override
-            public void onHttpRequestSuccess(LoginResponse result) {
-                mText.setText(result.toString());
-            }
-
-            @Override
-            public void onHttpRequestFailed(String error) {
-                Log.d("zzzzzzzzzzzz","failed--->" + error);
-            }
-        }));
+        initLogupFragment();
     }
+
+    /**
+     * 进入登陆界面
+     */
+
+    private void initLogupFragment(){
+        FragmentUtils.replace(getChildFragmentManager(), LogupFragment.newInstance(),R.id.container);
+
+    }
+
+    /**
+     * 进入注册界面
+     */
+
+    private void initLoginFragment(){
+
+    }
+
+    /**
+     * 进入退出和注销界面
+     */
+
+    private void initLogoutFragment(){
+
+    }
+
+
 
     @Override
     protected UserPresenter getPresenter() {
@@ -49,11 +50,4 @@ public class UserFragment extends BaseLifecycleFragment<UserPresenter> implement
         return R.layout.fragment_user;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (null != mHttData){
-            mHttData.Destory();
-        }
-    }
 }

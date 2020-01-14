@@ -1,6 +1,8 @@
 package com.zql.lib_net.view;
 
 
+import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +13,13 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.getbase.floatingactionbutton.AddFloatingActionButton;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.enums.PopupAnimation;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
+import com.zql.base.utils.ScreenUtil;
+import com.zql.comm.bean.Means;
+import com.zql.comm.bean.NoteBean;
 import com.zql.comm.data.CommData;
 import com.zql.comm.net.HttpData;
 import com.zql.comm.provider.ICapsuleProvider;
@@ -19,8 +27,10 @@ import com.zql.comm.provider.IUserProvider;
 import com.zql.comm.route.RouteUrl;
 import com.zql.lib_net.R;
 import com.zql.lib_net.adapter.VpAdapter;
+import com.zql.lib_net.menu.TypeMenu;
 
 import java.util.ArrayList;
+
 
 @Route(path = RouteUrl.Url_NetMainActivity)
 public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> implements NetMainContract.view {
@@ -34,6 +44,8 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
     private ImageView mImgCapsule, mImgMore;
 
     private TextView mTextCapsule, mTextMore;
+
+    private AddFloatingActionButton mAdd;
 
 
     private ArrayList<Fragment> mFragments = new ArrayList<>();;
@@ -56,8 +68,10 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
     @Override
     protected void initView() {
         mViewPager = find(R.id.net_viewpager);
+        mAdd = find(R.id.fb_add);
         initNav();
         initVp();
+        mAdd.setOnClickListener(v -> initCenterMenu());
         mHttpData = new HttpData();
         find(R.id.text_local).setOnClickListener(v -> {
                     CommData.setLocalVerson();
@@ -67,6 +81,24 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
         );
     }
 
+    private void initCenterMenu() {
+        int offy = (int) (ScreenUtil.getRealHeight(this) * 0.65f);
+        new XPopup.Builder(getContext())
+                .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
+                .isCenterHorizontal(true)
+                .offsetY(offy)
+                .asCustom(new TypeMenu(this,pos -> {startEditActivity(pos, null); }))
+                .show();
+    }
+
+    private void startEditActivity(int type, NoteBean noteBean){
+        Bundle bundle=new Bundle();
+        bundle.putInt("type",type);
+        if (noteBean!=null){
+            bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
+        }
+        ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle("data",bundle).navigation();
+    }
     private void initVp() {
         if (mCapsuleProvider != null && mCapsuleProvider.getCapsuleFragment() != null){
             mFragments.add(mCapsuleProvider.getCapsuleFragment());
