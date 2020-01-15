@@ -1,4 +1,4 @@
-package com.zql.base.net;
+package com.zql.comm.netbase;
 
 import com.zql.base.BaseApplication;
 import com.zql.base.BuildConfig;
@@ -39,7 +39,7 @@ public class HttpClient {
                 .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-                //.addInterceptor(new HeadInterceptor())
+                .addInterceptor(new HeadInterceptor())//header携带了用户密码
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(BuildConfig.isLogDebug ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE))
                 .build();
 

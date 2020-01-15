@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/con_menu"
-    android:layout_height="150dp"
+    android:layout_height="200dp"
     android:layout_width="match_parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +27,7 @@
         android:layout_height="40dp"
         app:layout_constraintCircle="@id/center"
         app:layout_constraintCircleAngle="60"
-        app:layout_constraintCircleRadius="100dp"
+        app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
     <ImageView
         android:id="@+id/img_type3"
@@ -38,7 +38,7 @@
         android:layout_height="40dp"
         app:layout_constraintCircle="@id/center"
         app:layout_constraintCircleAngle="30"
-        app:layout_constraintCircleRadius="100dp"
+        app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
     <ImageView
         android:id="@+id/img_type2"
@@ -49,7 +49,7 @@
         android:layout_height="40dp"
         app:layout_constraintCircle="@id/center"
         app:layout_constraintCircleAngle="0"
-        app:layout_constraintCircleRadius="100dp"
+        app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
     <ImageView
         android:id="@+id/img_type1"
@@ -60,7 +60,7 @@
         android:layout_height="40dp"
         app:layout_constraintCircle="@id/center"
         app:layout_constraintCircleAngle="330"
-        app:layout_constraintCircleRadius="100dp"
+        app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
     <ImageView
         android:id="@+id/img_type0"
@@ -71,7 +71,7 @@
         android:layout_height="40dp"
         app:layout_constraintCircle="@id/center"
         app:layout_constraintCircleAngle="300"
-        app:layout_constraintCircleRadius="100dp"
+        app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

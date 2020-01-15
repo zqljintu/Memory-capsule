@@ -2,7 +2,6 @@ package com.zql.lib_net.view;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -82,7 +81,7 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
     }
 
     private void initCenterMenu() {
-        int offy = (int) (ScreenUtil.getRealHeight(this) * 0.65f);
+        int offy = (int) (ScreenUtil.getRealHeight(this) * 0.6f);
         new XPopup.Builder(getContext())
                 .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
                 .isCenterHorizontal(true)

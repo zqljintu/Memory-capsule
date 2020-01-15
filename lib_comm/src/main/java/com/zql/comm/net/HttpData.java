@@ -1,6 +1,6 @@
 package com.zql.comm.net;
 
-import com.zql.base.net.HttpClient;
+import com.zql.comm.netbase.HttpClient;
 import com.zql.comm.netbean.request.LoginRequest;
 import com.zql.comm.netbean.request.LogupRequest;
 import com.zql.comm.netbean.response.BaseResponse;

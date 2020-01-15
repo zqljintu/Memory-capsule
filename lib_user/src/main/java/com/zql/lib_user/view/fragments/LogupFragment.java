@@ -1,6 +1,7 @@
 package com.zql.lib_user.view.fragments;
 
 import android.view.View;
+import android.widget.EditText;
 
 import com.zql.base.ui.mvp.BaseLifecycleFragment;
 import com.zql.comm.net.HttpData;
@@ -8,10 +9,13 @@ import com.zql.comm.net.OnHttpRequestListener;
 import com.zql.comm.netbean.request.LogupRequest;
 import com.zql.comm.netbean.response.BaseResponse;
 import com.zql.lib_user.R;
+import com.zql.lib_user.view.UserFragment;
 
 public class LogupFragment extends BaseLifecycleFragment<LogupPresenter> implements LogupContract.view{
 
     private HttpData mHttpData;
+
+    private EditText mEditUser, mEditPass, mEditEmail, mEditSex;
 
 
 
@@ -21,12 +25,18 @@ public class LogupFragment extends BaseLifecycleFragment<LogupPresenter> impleme
 
     @Override
     protected void initView(View view) {
+        mEditUser = find(R.id.edit_user);
+        mEditPass = find(R.id.edit_pass);
+        mEditEmail = find(R.id.edit_email);
+        mEditSex = find(R.id.edit_sex);
+
+
         mHttpData = new HttpData();
         find(R.id.text_logup).setOnClickListener(v -> mHttpData.Logup(new LogupRequest()
-                                .setUsername("zqlswb")
-                                .setPassword("zqlswb")
-                                .setEmail("zqlswb@qq.com")
-                                .setSex("男"),
+                                .setUsername("zqlswc")
+                                .setPassword("zqlswc")
+                                .setEmail("zqlswc@qq.com")
+                                .setSex("女"),
                                 new OnHttpRequestListener<BaseResponse>() {
                     @Override
                     public void onHttpRequestSuccess(BaseResponse result) {
@@ -38,6 +48,11 @@ public class LogupFragment extends BaseLifecycleFragment<LogupPresenter> impleme
 
                     }
             }));
+        find(R.id.text_cancle).setOnClickListener(v -> {
+            if (getParentFragment() instanceof UserFragment){
+                ((UserFragment) getParentFragment()).initLoginFragment();
+            }
+        });
     }
 
 
