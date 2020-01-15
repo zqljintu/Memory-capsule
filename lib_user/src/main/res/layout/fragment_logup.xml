@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
+        android:id="@+id/text_logup"
         android:textSize="50dp"
         android:text="注册"
         android:layout_width="wrap_content"

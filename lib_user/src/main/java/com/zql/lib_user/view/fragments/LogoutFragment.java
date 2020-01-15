@@ -18,6 +18,8 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
     protected void initView(View view) {
         find(R.id.out).setOnClickListener(v -> {
             UserData.setUserIsLogin(false);
+            UserData.setUserName("");
+            UserData.setUserPass("");
             if (getParentFragment() instanceof UserFragment){
                 if (null != getParentFragment()){
                     ((UserFragment)getParentFragment()).initLoginFragment();

@@ -1,55 +1,55 @@
 package com.zql.lib_capsule.view;
 
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.zql.base.ui.mvp.BaseLifecycleFragment;
+import com.zql.base.utils.ToastUtil;
 import com.zql.comm.data.UserData;
-import com.zql.comm.net.HttpData;
-import com.zql.comm.net.OnHttpRequestListener;
-import com.zql.comm.netbean.request.LoginRequest;
 import com.zql.comm.netbean.response.CapsulesResponse;
 import com.zql.lib_capsule.R;
+import com.zql.lib_capsule.adapter.NetCapsuleAdapter;
 
-public class CapsuleFragment extends BaseLifecycleFragment<CapsulePresnter> implements CapsuleContract.view {
+import java.util.ArrayList;
+import java.util.List;
 
-    private Button mButtonGet;
+public class CapsuleFragment extends BaseLifecycleFragment<CapsulePresenter> implements CapsuleContract.view {
 
-    private TextView mText;
+    private RecyclerView mRecyclerview;
 
-    private HttpData mHttpdata;
+    private NetCapsuleAdapter mNetCapsuleAdapter;
 
-
+    private List<CapsulesResponse.ListBean> mData = new ArrayList<>();
 
     @Override
     protected void initView(View view) {
-        mText = find(R.id.capsule);
-        mHttpdata = new HttpData();
-        mButtonGet = find(R.id.getcapsule);
-        mButtonGet.setOnClickListener(v -> {
-            mHttpdata.LoadCapsule(new LoginRequest(UserData.getUserName(), UserData.getUserPass()),
-                    new OnHttpRequestListener<CapsulesResponse>() {
-                        @Override
-                        public void onHttpRequestSuccess(CapsulesResponse result) {
-                            mText.setText(result.toString());
-                        }
-
-                        @Override
-                        public void onHttpRequestFailed(String error) {
-
-                        }
-                    });
-        });
+        mRecyclerview = find(R.id.recycler_net);
+        mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        mNetCapsuleAdapter = new NetCapsuleAdapter(R.layout.item_capsule, mData);
+        mRecyclerview.setAdapter(mNetCapsuleAdapter);
+        if (UserData.getUserIsLogin()){
+            mPresenter.loadCapsuleDataFromService();
+        }else {
+            ToastUtil.showToast("未登录");
+        }
     }
 
     @Override
-    protected CapsulePresnter getPresenter() {
-        return new CapsulePresnter(this);
+    protected CapsulePresenter getPresenter() {
+        return new CapsulePresenter(this);
     }
 
     @Override
     protected int getContentLayoutId() {
         return R.layout.fragment_capsule;
+    }
+
+    @Override
+    public void setCapsuleDataToView(CapsulesResponse data) {
+        mData.clear();
+        mData.addAll(data.getList());
+        mNetCapsuleAdapter.notifyDataSetChanged();
     }
 }

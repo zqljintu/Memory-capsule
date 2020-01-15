@@ -56,4 +56,8 @@ public final class SpUtil {
         return MMKV.defaultMMKV().decodeBool(key, defaultValue);
     }
 
+    public static void removeKey(String key){
+        MMKV.defaultMMKV().remove(key);
+    }
+
 }

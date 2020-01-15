@@ -16,7 +16,7 @@ import java.util.TimeZone;
  * Created by 尽途 on 2018/4/26.
  */
 
-public abstract class Means {
+public class Means {
     public static String NOSTRING="null";
     public static int EDIT = 0;
     public static int CHANGE = 1;
@@ -25,6 +25,13 @@ public abstract class Means {
     public static int LIVE = 2;
     public static int DIARY = 3;
     public static int TRAYEL = 4;
+
+    public static String STR_WORK = "工作";
+    public static String STR_STUDY = "学习";
+    public static String STR_LIVE = "生活";
+    public static String STR_DIARY = "日记";
+    public static String STR_TRAYEL = "旅行";
+
     public static String getNoteStringfromNoteInt(int type){//获取note类型
         switch (type){
             case 0:

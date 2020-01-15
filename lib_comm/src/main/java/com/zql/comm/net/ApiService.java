@@ -1,10 +1,14 @@
 package com.zql.comm.net;
 
+import com.zql.comm.netbean.response.BaseResponse;
 import com.zql.comm.netbean.response.CapsulesResponse;
 import com.zql.comm.netbean.response.LoginResponse;
 
+import java.util.Map;
+
 import io.reactivex.Observable;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -18,6 +22,13 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/api/user_login")
     Observable<LoginResponse> login(@Field("username") String username, @Field("password") String password);
+
+    /**
+     * 注册接口
+     */
+    @FormUrlEncoded
+    @POST("/api/user_loginup")
+    Observable<BaseResponse> logup(@FieldMap Map<String, String> logupMap);
 
     /**
      * 拉取接口

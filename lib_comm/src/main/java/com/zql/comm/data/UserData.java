@@ -62,4 +62,9 @@ public class UserData {
     public static void setUserIsLogin(boolean isLogin){
         SpUtil.putBoolean(USER_ISLOGIN, isLogin);
     }
+
+    public static void cleanUserAndPass(){
+        SpUtil.removeKey(USER_NAME);
+        SpUtil.removeKey(USER_PASS);
+    }
 }
