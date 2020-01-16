@@ -19,6 +19,8 @@ public class HttpClient {
 
     private final long TIME_OUT = 20;
 
+    private boolean isDebug = false;
+
     private static HttpClient instance;
     private final Retrofit mRetrofit;
 
@@ -39,16 +41,23 @@ public class HttpClient {
                 .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .addInterceptor(new HeadInterceptor())//header携带了用户密码
+                .addInterceptor(new HeadInterceptor())//header携带了用户token
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(BuildConfig.isLogDebug ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE))
                 .build();
 
         mRetrofit = new Retrofit.Builder()
                 .client(build)
-                .baseUrl(BaseApplication.getApplication().getString(R.string.baseUrl))
+                .baseUrl(getUrl())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
+
+    private String getUrl(){
+        if (isDebug){
+            return "http://127.0.0.1:8000";
+        }
+        return BaseApplication.getApplication().getString(R.string.baseUrl);
     }
 
 

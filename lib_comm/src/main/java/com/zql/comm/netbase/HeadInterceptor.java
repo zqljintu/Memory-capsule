@@ -18,7 +18,7 @@ public class HeadInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Request newrequest = request.newBuilder()
-                .addHeader("password", UserData.getUserPass())
+                .addHeader("Authentication", UserData.getUserLoginToken())
                 .build();
         Response proceed = chain.proceed(newrequest);
         return proceed;

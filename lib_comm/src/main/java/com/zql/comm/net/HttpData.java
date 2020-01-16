@@ -1,5 +1,6 @@
 package com.zql.comm.net;
 
+import com.zql.comm.bean.Noteinfo;
 import com.zql.comm.netbase.HttpClient;
 import com.zql.comm.netbean.request.LoginRequest;
 import com.zql.comm.netbean.request.LogupRequest;
@@ -23,7 +24,13 @@ public class HttpData {
         mCompositeDisposable = new CompositeDisposable();
     }
 
-    public void Logup( LogupRequest logupRequest, OnHttpRequestListener<BaseResponse> listener) {
+    /**
+     * 注册方法
+     * @param logupRequest
+     * @param listener
+     */
+
+    public void Logup( LogupRequest logupRequest, OnHttpRequestListener<LoginResponse> listener) {
         Map<String, String> map = new HashMap<>();
         map.put("username",logupRequest.getUsername());
         map.put("password",logupRequest.getPassword());
@@ -34,9 +41,9 @@ public class HttpData {
                 .logup(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(baseResponse -> {
+                .subscribe(loginResponse -> {
                     if (null != listener){
-                        listener.onHttpRequestSuccess(baseResponse);
+                        listener.onHttpRequestSuccess(loginResponse);
                     }
                 }, throwable -> {
                     if (null != listener){
@@ -46,6 +53,13 @@ public class HttpData {
         mCompositeDisposable.add(subscribe);
     }
 
+
+
+    /**
+     * 登录方法
+     * @param loginRequest
+     * @param listener
+     */
 
     public void Login(LoginRequest loginRequest,OnHttpRequestListener<LoginResponse> listener){
         Disposable subscribe = HttpClient.getInstance()
@@ -66,10 +80,38 @@ public class HttpData {
 
     }
 
-    public void LoadCapsule(LoginRequest loginRequest, OnHttpRequestListener<CapsulesResponse> listener) {
+
+    /**
+     * 注销方法
+     * @param listener
+     */
+
+    public void Logout(String pass,OnHttpRequestListener<BaseResponse> listener){
         Disposable subscribe = HttpClient.getInstance()
                 .create(ApiService.class)
-                .loadCapsules(loginRequest.getUsername())
+                .logout(pass)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(baseResponse -> {
+                    if (null != listener){
+                        listener.onHttpRequestSuccess(baseResponse);
+                    }
+                }, throwable -> {
+                    if (null != listener){
+                        listener.onHttpRequestFailed(throwable.getMessage());
+                    }
+                });
+        mCompositeDisposable.add(subscribe);
+
+    }
+    /**
+     * 拉取capsules方法
+     * @param listener
+     */
+    public void LoadCapsule(OnHttpRequestListener<CapsulesResponse> listener) {
+        Disposable subscribe = HttpClient.getInstance()
+                .create(ApiService.class)
+                .loadCapsules()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(capsulesResponse -> {
@@ -84,9 +126,102 @@ public class HttpData {
         mCompositeDisposable.add(subscribe);
     }
 
+    /**
+     * 添加capsule方法
+     */
+
+    public void AddCapsule(Noteinfo noteinfo, OnHttpRequestListener<BaseResponse> listener) {
+        Map<String, String> map = new HashMap<>();
+        map.put("capsule_type", noteinfo.getNotetype());
+        map.put("capsule_content", noteinfo.getNoteinfo());
+        map.put("capsule_time", noteinfo.getTime());
+        map.put("capsule_date", noteinfo.getDate());
+        map.put("capsule_location", noteinfo.getLocation());
+        map.put("capsule_person", noteinfo.getPeople());
+        map.put("capsule_image",noteinfo.getPhotopath());
+        Disposable subscribe = HttpClient.getInstance()
+                .create(ApiService.class)
+                .addCapsule(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(baseResponse -> {
+                    if (null != listener){
+                        listener.onHttpRequestSuccess(baseResponse);
+                    }
+                }, throwable -> {
+                    if (null != listener){
+                        listener.onHttpRequestFailed(throwable.getMessage());
+                    }
+                });
+        mCompositeDisposable.add(subscribe);
+    }
+
+    /**
+     * 修改capsule方法
+     */
+
+    public void EditCapsule(Noteinfo noteinfo, OnHttpRequestListener<BaseResponse> listener) {
+        Map<String, String> map = new HashMap<>();
+        map.put("capsule_type", noteinfo.getNotetype());
+        map.put("capsule_content", noteinfo.getNoteinfo());
+        map.put("capsule_time", noteinfo.getTime());
+        map.put("capsule_date", noteinfo.getDate());
+        map.put("capsule_location", noteinfo.getLocation());
+        map.put("capsule_person", noteinfo.getPeople());
+        map.put("capsule_image",noteinfo.getPhotopath());
+        Disposable subscribe = HttpClient.getInstance()
+                .create(ApiService.class)
+                .editCapsule(noteinfo.getId().intValue(), map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(baseResponse -> {
+                    if (null != listener){
+                        listener.onHttpRequestSuccess(baseResponse);
+                    }
+                }, throwable -> {
+                    if (null != listener){
+                        listener.onHttpRequestFailed(throwable.getMessage());
+                    }
+                });
+        mCompositeDisposable.add(subscribe);
+    }
+
+    /**
+     * 删除capsule方法
+     */
+    public void DeleteCapsule(int capsule_pk, OnHttpRequestListener<BaseResponse> listener){
+        Disposable subscribe = HttpClient.getInstance()
+                .create(ApiService.class)
+                .deleteCapsule(capsule_pk)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(baseResponse -> {
+                    if (null != listener){
+                        listener.onHttpRequestSuccess(baseResponse);
+                    }
+                }, throwable -> {
+                    if (null != listener){
+                        listener.onHttpRequestFailed(throwable.getMessage());
+                    }
+                });
+    }
+
     public void Destory(){
         if (null != mCompositeDisposable){
             mCompositeDisposable.clear();
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

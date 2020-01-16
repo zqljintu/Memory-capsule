@@ -50,7 +50,8 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
                 }
             }
         });
-        mButton.setOnClickListener(v -> initLogin(mEditUser.getText().toString(), mEditPass.getText().toString()));
+        mButton.setOnClickListener(v -> initLogin(mEditUser.getText().toString(),
+                mEditPass.getText().toString()));
     }
 
     private void initLogin(String user, String pass) {
@@ -66,10 +67,10 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
             @Override
             public void onHttpRequestSuccess(LoginResponse result) {
                 mText.setText(result.toString());
-                if (result.getError_name() == LoginResponse.LOGIN_SUCCESS){
+                if (result.getCode() == LoginResponse.LOGIN_SUCCESS){
                     UserData.setUserIsLogin(true);
-                    UserData.setUserName(user);
-                    UserData.setUserPass(pass);
+                    UserData.setUserLoginToken(result.getToken());
+                    Log.d("httpzzzzzzz",UserData.getUserLoginToken());
                     ToastUtil.showToast(getString(R.string.logup_success));
                     if (getParentFragment() instanceof UserFragment){
                         if (null != getParentFragment()){

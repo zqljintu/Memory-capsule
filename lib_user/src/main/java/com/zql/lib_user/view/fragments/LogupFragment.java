@@ -7,7 +7,7 @@ import com.zql.base.ui.mvp.BaseLifecycleFragment;
 import com.zql.comm.net.HttpData;
 import com.zql.comm.net.OnHttpRequestListener;
 import com.zql.comm.netbean.request.LogupRequest;
-import com.zql.comm.netbean.response.BaseResponse;
+import com.zql.comm.netbean.response.LoginResponse;
 import com.zql.lib_user.R;
 import com.zql.lib_user.view.UserFragment;
 
@@ -37,9 +37,9 @@ public class LogupFragment extends BaseLifecycleFragment<LogupPresenter> impleme
                                 .setPassword("zqlswc")
                                 .setEmail("zqlswc@qq.com")
                                 .setSex("女"),
-                                new OnHttpRequestListener<BaseResponse>() {
+                                new OnHttpRequestListener<LoginResponse>() {
                     @Override
-                    public void onHttpRequestSuccess(BaseResponse result) {
+                    public void onHttpRequestSuccess(LoginResponse result) {
 
                     }
 

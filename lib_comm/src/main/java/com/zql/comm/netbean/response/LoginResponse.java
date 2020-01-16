@@ -7,22 +7,16 @@ public class LoginResponse implements Serializable {
     public static final int LOGIN_SUCCESS = 203;
 
     /**
-     * error_name : 203
-     * sex : 男
-     * msg : login_success
+     * sex : 女
+     * code : 0
+     * msg : logup_success
+     * token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InpxbHN3YyIsImV4cCI6MTU3OTI1MTMzMSwidXNlcl9pZCI6MX0.9LBS3zfXboByUFukGnYJ8RXjnCAgxK6MoTNdujIZazI
      */
 
-    private int error_name;
     private String sex;
+    private int code;
     private String msg;
-
-    public int getError_name() {
-        return error_name;
-    }
-
-    public void setError_name(int error_name) {
-        this.error_name = error_name;
-    }
+    private String token;
 
     public String getSex() {
         return sex;
@@ -30,6 +24,14 @@ public class LoginResponse implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -40,12 +42,11 @@ public class LoginResponse implements Serializable {
         this.msg = msg;
     }
 
-    @Override
-    public String toString() {
-        return "LoginResponse{" +
-                "error_name=" + error_name +
-                ", sex='" + sex + '\'' +
-                ", msg='" + msg + '\'' +
-                '}';
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

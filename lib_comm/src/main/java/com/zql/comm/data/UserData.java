@@ -15,8 +15,14 @@ public class UserData {
 
     private static final String USER_ISLOGIN = "user_islogin";
 
+    private static final String USER_LOGIN_FIRST = "user_login_first";
+
+    private static final String USER_LOGIN_TOKEN = "user_login_token";
+
+    private static final int OUT_TIME = 1000 *60 *60 *24 *5;//5天
+
     public static boolean getUserIsLogin(){
-        return SpUtil.getBoolean(USER_ISLOGIN);
+        return SpUtil.getBoolean(USER_ISLOGIN,false);
     }
 
     public static String getUserName() {
@@ -25,6 +31,14 @@ public class UserData {
 
     public static String getUserPass() {
         return SpUtil.getString(USER_PASS,"");
+    }
+
+    public static long getUserLoginFirst(){
+        return SpUtil.getLong(USER_LOGIN_FIRST);
+    }
+
+    public static String getUserLoginToken() {
+        return SpUtil.getString(USER_LOGIN_TOKEN,"");
     }
 
     public static String getUserSex() {
@@ -63,8 +77,18 @@ public class UserData {
         SpUtil.putBoolean(USER_ISLOGIN, isLogin);
     }
 
+    public static void setUserLoginFirst(){
+        SpUtil.putLong(USER_LOGIN_FIRST,System.currentTimeMillis());
+    }
+
+    public static void setUserLoginToken(String token){
+        SpUtil.putString(USER_LOGIN_TOKEN, token);
+    }
+
+
     public static void cleanUserAndPass(){
         SpUtil.removeKey(USER_NAME);
         SpUtil.removeKey(USER_PASS);
+        SpUtil.removeKey(USER_ISLOGIN);
     }
 }

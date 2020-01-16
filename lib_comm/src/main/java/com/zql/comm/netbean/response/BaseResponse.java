@@ -2,19 +2,19 @@ package com.zql.comm.netbean.response;
 
 public class BaseResponse {
     /**
-     * error_name : 0
+     * code : 0
      * msg : logup_success
      */
 
-    private int error_name;
+    private int code;
     private String msg;
 
-    public int getError_name() {
-        return error_name;
+    public int getCode() {
+        return code;
     }
 
-    public void setError_name(int error_name) {
-        this.error_name = error_name;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMsg() {
