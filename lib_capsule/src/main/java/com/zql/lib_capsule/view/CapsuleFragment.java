@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zql.base.ui.mvp.BaseLifecycleFragment;
 import com.zql.base.utils.ToastUtil;
+import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.data.UserData;
 import com.zql.comm.netbean.response.CapsulesResponse;
 import com.zql.lib_capsule.R;
 import com.zql.lib_capsule.adapter.NetCapsuleAdapter;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,5 +54,19 @@ public class CapsuleFragment extends BaseLifecycleFragment<CapsulePresenter> imp
         mData.clear();
         mData.addAll(data.getList());
         mNetCapsuleAdapter.notifyDataSetChanged();
+    }
+
+    private void clearCapsuleData(){
+        mData.clear();
+        mNetCapsuleAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe
+    public void onMessageEvent(MessageEvent event){
+        if (event.getMessageevent() == MessageEvent.UPDATE_NETCAPSULE){
+            mPresenter.loadCapsuleDataFromService();
+        }else if (event.getMessageevent() == MessageEvent.UPDATE_LOGOUT){
+            clearCapsuleData();
+        }
     }
 }

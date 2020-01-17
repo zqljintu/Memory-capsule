@@ -1,13 +1,18 @@
 package com.zql.lib_capsule.adapter;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zql.base.utils.TimeUtils;
 import com.zql.comm.bean.Means;
 import com.zql.comm.netbean.response.CapsulesResponse;
+import com.zql.comm.route.RouteUrl;
 import com.zql.lib_capsule.R;
 
 import java.util.Calendar;
@@ -22,11 +27,17 @@ public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBea
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, CapsulesResponse.ListBean item) {
+        ConstraintLayout concenter = helper.itemView.findViewById(R.id.con_center);
         helper.setText(R.id.text_content, item.getFields().getCapsule_content());
         helper.setText(R.id.text_day, showCreateTimeDay(item.getFields().getCapsule_create_time()));
         helper.setText(R.id.text_month, showCreateTimeMonth(item.getFields().getCapsule_create_time()));
         helper.setText(R.id.text_week_day, showCreateTimeWeekDay(item.getFields().getCapsule_create_time()));
         helper.setImageResource(R.id.img_type, getImageTypeRSId(item.getFields().getCapsule_type()));
+        concenter.setOnClickListener(v -> {
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("noteinfo", Means.changefromNetbean(item));
+            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
+        });
     }
 
     private String showCreateTimeDay(String createtime){

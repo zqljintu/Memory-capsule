@@ -2,7 +2,9 @@ package com.zql.lib_user.view.fragments;
 
 import android.view.View;
 
+import com.zql.base.event.EventBusUtil;
 import com.zql.base.ui.mvp.BaseLifecycleFragment;
+import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.data.UserData;
 import com.zql.lib_user.R;
 import com.zql.lib_user.view.UserFragment;
@@ -20,6 +22,7 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
             UserData.setUserIsLogin(false);
             UserData.setUserName("");
             UserData.setUserPass("");
+            EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_LOGOUT));
             if (getParentFragment() instanceof UserFragment){
                 if (null != getParentFragment()){
                     ((UserFragment)getParentFragment()).initLoginFragment();

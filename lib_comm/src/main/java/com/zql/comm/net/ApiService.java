@@ -3,6 +3,7 @@ package com.zql.comm.net;
 import com.zql.comm.netbean.response.BaseResponse;
 import com.zql.comm.netbean.response.CapsulesResponse;
 import com.zql.comm.netbean.response.LoginResponse;
+import com.zql.comm.netbean.response.SizeResponse;
 
 import java.util.Map;
 
@@ -43,17 +44,24 @@ public interface ApiService {
     Observable<CapsulesResponse> loadCapsules();
 
     /**
+     * capsuleSize接口
+     */
+    @FormUrlEncoded
+    @POST("/api/size_capsule")
+    Observable<SizeResponse> sizeCapsule();
+
+    /**
      * 添加接口
      */
     @FormUrlEncoded
-    @POST("/api/add_capsules")
+    @POST("/api/add_capsule")
     Observable<BaseResponse> addCapsule(@FieldMap Map<String, String> capsuleMap);
 
     /**
      * 修改接口
      */
     @FormUrlEncoded
-    @POST("/api/edit_capsules")
+    @POST("/api/edit_capsule")
     Observable<BaseResponse> editCapsule(@Field("capsule_pk") int capsule_pk, @FieldMap Map<String, String> capsuleMap);
 
 

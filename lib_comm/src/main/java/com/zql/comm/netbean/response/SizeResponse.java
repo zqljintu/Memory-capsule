@@ -1,10 +1,8 @@
 package com.zql.comm.netbean.response;
 
-public class BaseResponse {
+public class SizeResponse {
 
-    public static final int ADD_SUCCESS = 206;
-
-    public static final int EDIT_SUCCESS = 213;
+    public static final int SIZE_SUCCESS = 222;
 
     /**
      * code : 0
@@ -13,10 +11,20 @@ public class BaseResponse {
 
     private int code;
     private String msg;
+    private  int size;
+
+    public int getSize(){
+        return size;
+    }
+
+    public void setSize(int size){
+        this.size = size;
+    }
 
     public int getCode() {
         return code;
     }
+
 
     public void setCode(int code) {
         this.code = code;

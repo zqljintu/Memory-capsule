@@ -7,8 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.zql.base.event.EventBusUtil;
 import com.zql.base.ui.mvp.BaseLifecycleFragment;
 import com.zql.base.utils.ToastUtil;
+import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.data.UserData;
 import com.zql.comm.net.HttpData;
 import com.zql.comm.net.OnHttpRequestListener;
@@ -70,10 +72,10 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
                 if (result.getCode() == LoginResponse.LOGIN_SUCCESS){
                     UserData.setUserIsLogin(true);
                     UserData.setUserLoginToken(result.getToken());
-                    Log.d("httpzzzzzzz",UserData.getUserLoginToken());
                     ToastUtil.showToast(getString(R.string.logup_success));
-                    if (getParentFragment() instanceof UserFragment){
-                        if (null != getParentFragment()){
+                    EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_NETCAPSULE));
+                    if (null != getParentFragment()){
+                        if (getParentFragment() instanceof UserFragment){
                             ((UserFragment)getParentFragment()).initLogoutFragment();
                         }
                     }

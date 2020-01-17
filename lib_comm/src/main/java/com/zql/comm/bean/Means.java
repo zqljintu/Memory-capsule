@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.zql.comm.netbean.response.CapsulesResponse;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -54,7 +55,7 @@ public class Means {
     public static void setViewonlick(View view,float X,float Y){
         long dowmTime= SystemClock.uptimeMillis();
         MotionEvent dowmEvent=MotionEvent.obtain(dowmTime,dowmTime,MotionEvent.ACTION_DOWN,X,Y,0);
-        dowmTime+=1000;
+        dowmTime += 1000;
         MotionEvent upEvent=MotionEvent.obtain(dowmTime,dowmTime,MotionEvent.ACTION_UP,X,Y,0);
         view.onTouchEvent(dowmEvent);
         view.onTouchEvent(upEvent);
@@ -136,6 +137,7 @@ public class Means {
         String minute=String.valueOf(calendar.get(Calendar.MINUTE));
         return year+"-"+mounth+"-"+day + "/" + weeks[weekday];
     }
+
     public static int getTheYearoncalendar(){
         Calendar calendar=Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
@@ -157,29 +159,35 @@ public class Means {
     }
     public static Noteinfo changefromNotebean(final NoteBean noteBean){
         Noteinfo noteinfo=new Noteinfo();
-        String info,type,people,date,time,location,photo,createtime;
-        boolean isshow;
-        Long id;
-        id=noteBean.getId();
-        info=noteBean.getNoteinfo();
-        type=noteBean.getNotetype();
-        people=noteBean.getPeople();
-        date=noteBean.getDate();
-        time=noteBean.getTime();
-        location=noteBean.getLocation();
-        photo=noteBean.getPhotopath();
-        createtime=noteBean.getCreatetime();
-        isshow=noteBean.getIsshow();
-        noteinfo.setId(id);
-        noteinfo.setNoteinfo(info);
-        noteinfo.setNotetype(type);
-        noteinfo.setPeople(people);
-        noteinfo.setDate(date);
-        noteinfo.setTime(time);
-        noteinfo.setLocation(location);
-        noteinfo.setPhotopath(photo);
-        noteinfo.setCreatetime(createtime);
-        noteinfo.setIsshow(isshow);
+        noteinfo.setId(noteBean.getId());
+        noteinfo.setNoteinfo(noteBean.getNoteinfo());
+        noteinfo.setNotetype(noteBean.getNotetype());
+        noteinfo.setPeople(noteBean.getPeople());
+        noteinfo.setDate(noteBean.getDate());
+        noteinfo.setTime(noteBean.getTime());
+        noteinfo.setLocation(noteBean.getLocation());
+        noteinfo.setPhotopath(noteBean.getPhotopath());
+        noteinfo.setCreatetime(noteBean.getCreatetime());
+        noteinfo.setIsshow(noteBean.getIsshow());
+        return noteinfo;
+    }
+
+    public static boolean isEmpty(CharSequence str) {
+        return str == null || str.length() == 0 || str.equals("null");
+    }
+
+    public static Noteinfo changefromNetbean(CapsulesResponse.ListBean item){
+        Noteinfo noteinfo=new Noteinfo();
+        noteinfo.setId((long) item.getPk());
+        noteinfo.setNoteinfo(item.getFields().getCapsule_content());
+        noteinfo.setNotetype(item.getFields().getCapsule_type());
+        noteinfo.setPeople(item.getFields().getCapsule_person());
+        noteinfo.setDate(item.getFields().getCapsule_date());
+        noteinfo.setTime(item.getFields().getCapsule_time());
+        noteinfo.setLocation(item.getFields().getCapsule_location());
+        noteinfo.setPhotopath(item.getFields().getCapsule_image());
+        noteinfo.setCreatetime(item.getFields().getCapsule_create_time());
+        noteinfo.setIsshow(true);
         return noteinfo;
     }
 }

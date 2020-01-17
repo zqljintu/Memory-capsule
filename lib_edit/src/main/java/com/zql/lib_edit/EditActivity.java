@@ -29,7 +29,9 @@ import com.jaeger.library.StatusBarUtil;
 import com.joaquimley.faboptions.FabOptions;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.zql.base.event.EventBusUtil;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
+import com.zql.base.utils.ToastUtil;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.bean.NoteBean;
@@ -37,6 +39,8 @@ import com.zql.comm.bean.Noteinfo;
 import com.yuyh.library.imgsel.ISNav;
 import com.yuyh.library.imgsel.common.ImageLoader;
 import com.yuyh.library.imgsel.config.ISListConfig;
+import com.zql.comm.data.CommData;
+import com.zql.comm.data.UserData;
 import com.zql.comm.route.RouteUrl;
 
 
@@ -161,21 +165,28 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
         toolbar_add.setBackgroundColor(list.get(0));
     }
 
+    @Override
+    public void showMessageOnView(String message) {
+        ToastUtil.showToast(message);
+        EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_NETCAPSULE));
+        finish();
+    }
+
     /**
      * //实例化一个edittext
      */
     private void initEdittextView(){
-        materialEditText=(MaterialEditText)this.findViewById(R.id.add_noteinfoedittext);
+        materialEditText = findViewById(R.id.add_noteinfoedittext);
     }
     private void initSwitchbutton(){
-        switchButton_secret=(SwitchButton)this.findViewById(R.id.add_switchbutton_secret);
+        switchButton_secret = findViewById(R.id.add_switchbutton_secret);
     }
 
     /**
      * //实例化保存按钮
      */
     private void initsaveview(){
-        TextView saveview=this.findViewById(R.id.add_savefile);
+        TextView saveview = this.findViewById(R.id.add_savefile);
         saveview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,14 +201,22 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
         if (materialEditText.getText().toString().isEmpty()){
             Toast.makeText(EditActivity.this, "输入框为空，请重新输入", Toast.LENGTH_SHORT).show();
         }else {
-            noteBean.setNoteinfo(materialEditText.getText().toString());
-            noteBean.setCreatetime(Means.getCreatetime());
-            if (switchButton_secret.isChecked()){
-                mPresenter.saveNoteinfotoSecrectDatabase(noteBean);
+            if (CommData.getIsLocalVersion()){
+                noteBean.setNoteinfo(materialEditText.getText().toString());
+                noteBean.setCreatetime(Means.getCreatetime());
+                if (switchButton_secret.isChecked()){
+                    mPresenter.saveNoteinfotoSecrectDatabase(noteBean);
+                }else {
+                    mPresenter.saveNoteinfotoDatabase(noteBean);
+                }
+                finish();
             }else {
-                mPresenter.saveNoteinfotoDatabase(noteBean);
+                if (!UserData.getUserIsLogin()){//用户尚未登陆
+                    return;
+                }
+                noteBean.setNoteinfo(materialEditText.getText().toString());
+                mPresenter.addNoteInfoToService(Means.changefromNotebean(noteBean));
             }
-            finish();
         }
     }
 

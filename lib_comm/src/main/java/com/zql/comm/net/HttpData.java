@@ -7,6 +7,7 @@ import com.zql.comm.netbean.request.LogupRequest;
 import com.zql.comm.netbean.response.BaseResponse;
 import com.zql.comm.netbean.response.CapsulesResponse;
 import com.zql.comm.netbean.response.LoginResponse;
+import com.zql.comm.netbean.response.SizeResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -204,6 +205,28 @@ public class HttpData {
                         listener.onHttpRequestFailed(throwable.getMessage());
                     }
                 });
+        mCompositeDisposable.add(subscribe);
+    }
+
+    /**
+     * 获取Capsule的数量方法
+     */
+    public void SizeCapsule(OnHttpRequestListener<SizeResponse> listener){
+        Disposable subscribe = HttpClient.getInstance()
+                .create(ApiService.class)
+                .sizeCapsule()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(sizeResponse -> {
+                    if (null != listener){
+                        listener.onHttpRequestSuccess(sizeResponse);
+                    }
+                }, throwable -> {
+                    if (null != listener){
+                        listener.onHttpRequestFailed(throwable.getMessage());
+                    }
+                });
+        mCompositeDisposable.add(subscribe);
     }
 
     public void Destory(){
