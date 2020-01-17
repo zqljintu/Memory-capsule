@@ -11,7 +11,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.zql.base.utils.TimeUtils;
 import com.zql.comm.bean.Means;
 import com.zql.comm.netbean.response.CapsulesResponse;
@@ -23,9 +22,12 @@ import java.util.List;
 
 public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBean, BaseViewHolder> {
 
+    private OnMenuClickListener mlistener;
 
-    public NetCapsuleAdapter(int layoutResId, @Nullable List<CapsulesResponse.ListBean> data) {
+
+    public NetCapsuleAdapter(int layoutResId, @Nullable List<CapsulesResponse.ListBean> data, OnMenuClickListener listener) {
         super(layoutResId, data);
+        this.mlistener = listener;
     }
 
     @Override
@@ -48,11 +50,13 @@ public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBea
                             if (i == 0){
                                 detailCapsuleItem(item);
                             }else if (i == 1){
-
+                                editCapsuleItem(item);
                             }else if (i == 2){
-
+                                if (null != mlistener){
+                                    mlistener.onDeleteMenuItemClick(item);
+                                }
                             }else if (i == 3){
-
+                                shareCapsuleItem(item);
                             }else {
 
                             }
@@ -67,15 +71,14 @@ public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBea
         ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
     }
 
-    private void editCapsuleItem(){
-
+    private void editCapsuleItem(CapsulesResponse.ListBean item){
+        Bundle bundle=new Bundle();
+        bundle.putInt("type",10);
+        bundle.putSerializable("noteinfo",Means.changefromNetbean(item));
+        ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle("data",bundle);
     }
 
-    private void deleteCapsuleItem(){
-
-    }
-
-    private void shareCapsuleItem(){
+    private void shareCapsuleItem(CapsulesResponse.ListBean item){
 
     }
 
@@ -118,5 +121,9 @@ public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBea
         }else {
             return R.drawable.icon_study;
         }
+    }
+
+    public interface OnMenuClickListener{
+        void onDeleteMenuItemClick(CapsulesResponse.ListBean bean);
     }
 }

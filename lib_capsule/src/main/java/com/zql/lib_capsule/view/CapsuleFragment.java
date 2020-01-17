@@ -30,7 +30,7 @@ public class CapsuleFragment extends BaseLifecycleFragment<CapsulePresenter> imp
     protected void initView(View view) {
         mRecyclerview = find(R.id.recycler_net);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        mNetCapsuleAdapter = new NetCapsuleAdapter(R.layout.item_capsule, mData);
+        mNetCapsuleAdapter = new NetCapsuleAdapter(R.layout.item_capsule, mData, bean -> mPresenter.deleteCapsuleFromService(bean.getPk()));
         mRecyclerview.setAdapter(mNetCapsuleAdapter);
         if (UserData.getUserIsLogin()){
             mPresenter.loadCapsuleDataFromService();
@@ -54,6 +54,11 @@ public class CapsuleFragment extends BaseLifecycleFragment<CapsulePresenter> imp
         mData.clear();
         mData.addAll(data.getList());
         mNetCapsuleAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        ToastUtil.showToast(message);
     }
 
     private void clearCapsuleData(){

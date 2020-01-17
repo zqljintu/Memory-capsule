@@ -7,9 +7,11 @@ public interface CapsuleContract {
 
     interface view extends IView{
         void setCapsuleDataToView(CapsulesResponse data);//将网络加载到的数据展现在界面上
+        void showMessage(String message);
     }
 
     interface presenter {
         void loadCapsuleDataFromService();//从服务器上拉取capsule数据
+        void deleteCapsuleFromService(int pk);
     }
 }

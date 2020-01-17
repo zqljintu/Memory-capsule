@@ -6,6 +6,8 @@ public class BaseResponse {
 
     public static final int EDIT_SUCCESS = 213;
 
+    public static final int DELETE_SUCCESS = 213;
+
     /**
      * code : 0
      * msg : logup_success

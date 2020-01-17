@@ -5,6 +5,7 @@ import androidx.lifecycle.LifecycleOwner;
 import com.zql.base.ui.mvp.BasePresenter;
 import com.zql.comm.net.HttpData;
 import com.zql.comm.net.OnHttpRequestListener;
+import com.zql.comm.netbean.response.BaseResponse;
 import com.zql.comm.netbean.response.CapsulesResponse;
 
 public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implements CapsuleContract.presenter {
@@ -29,6 +30,25 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
 
                     }
                 });
+    }
+
+    @Override
+    public void deleteCapsuleFromService(int pk) {
+        mHttpdata.DeleteCapsule(pk, new OnHttpRequestListener<BaseResponse>() {
+            @Override
+            public void onHttpRequestSuccess(BaseResponse result) {
+                if (result.getCode() == BaseResponse.DELETE_SUCCESS){
+                    loadCapsuleDataFromService();
+                }else {
+                    getView().showMessage(result.getMsg());
+                }
+            }
+
+            @Override
+            public void onHttpRequestFailed(String error) {
+
+            }
+        });
     }
 
     @Override
