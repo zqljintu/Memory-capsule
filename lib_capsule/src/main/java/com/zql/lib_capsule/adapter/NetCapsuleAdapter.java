@@ -1,6 +1,7 @@
 package com.zql.lib_capsule.adapter;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,6 +10,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.zql.base.utils.TimeUtils;
 import com.zql.comm.bean.Means;
 import com.zql.comm.netbean.response.CapsulesResponse;
@@ -28,16 +31,52 @@ public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBea
     @Override
     protected void convert(@NonNull BaseViewHolder helper, CapsulesResponse.ListBean item) {
         ConstraintLayout concenter = helper.itemView.findViewById(R.id.con_center);
+        ImageView imgmenu = helper.itemView.findViewById(R.id.img_menu);
         helper.setText(R.id.text_content, item.getFields().getCapsule_content());
         helper.setText(R.id.text_day, showCreateTimeDay(item.getFields().getCapsule_create_time()));
         helper.setText(R.id.text_month, showCreateTimeMonth(item.getFields().getCapsule_create_time()));
         helper.setText(R.id.text_week_day, showCreateTimeWeekDay(item.getFields().getCapsule_create_time()));
         helper.setImageResource(R.id.img_type, getImageTypeRSId(item.getFields().getCapsule_type()));
-        concenter.setOnClickListener(v -> {
-            Bundle bundle=new Bundle();
-            bundle.putSerializable("noteinfo", Means.changefromNetbean(item));
-            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
-        });
+        concenter.setOnClickListener(v -> detailCapsuleItem(item));
+        imgmenu.setOnClickListener(v -> showCenterListMenu(helper, item));
+    }
+
+    private void showCenterListMenu(@NonNull BaseViewHolder helper, CapsulesResponse.ListBean item){
+        new XPopup.Builder(helper.itemView.getContext())
+                .asCenterList("",new String[]{"详情","修改","删除","分享"},
+                        (i, s) -> {
+                            if (i == 0){
+                                detailCapsuleItem(item);
+                            }else if (i == 1){
+
+                            }else if (i == 2){
+
+                            }else if (i == 3){
+
+                            }else {
+
+                            }
+                        })
+                .show();
+    }
+
+
+    private void detailCapsuleItem(CapsulesResponse.ListBean item){
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("noteinfo", Means.changefromNetbean(item));
+        ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
+    }
+
+    private void editCapsuleItem(){
+
+    }
+
+    private void deleteCapsuleItem(){
+
+    }
+
+    private void shareCapsuleItem(){
+
     }
 
     private String showCreateTimeDay(String createtime){
