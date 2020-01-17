@@ -100,7 +100,7 @@ public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBea
     private String showCreateTimeWeekDay(String createtime){
         String[] weeks = {"星期天","星期一","星期二","星期三","星期四","星期五","星期六"};
         Calendar calendar = TimeUtils.getDataFromUTCTimeZone(createtime);
-        int wd = calendar.get(Calendar.DAY_OF_WEEK);
+        int wd = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         return weeks[wd];
     }
 
