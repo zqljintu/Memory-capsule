@@ -42,7 +42,7 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
     protected void initView(View view) {
         mButton = find(R.id.button_login);
         mText = find(R.id.text_user);
-        mTextLogup = find(R.id.text_logup);
+        mTextLogup = find(R.id.text_logup_submit);
         initEdit();
         mHttData = new HttpData();
         mTextLogup.setOnClickListener(v -> {
@@ -72,7 +72,7 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
                 if (result.getCode() == LoginResponse.LOGIN_SUCCESS){
                     UserData.setUserIsLogin(true);
                     UserData.setUserLoginToken(result.getToken());
-                    ToastUtil.showToast(getString(R.string.logup_success));
+                    ToastUtil.showToast(getString(R.string.login_success));
                     EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_NETCAPSULE));
                     if (null != getParentFragment()){
                         if (getParentFragment() instanceof UserFragment){

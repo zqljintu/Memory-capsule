@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Memory-capsule.iml" filepath="$PROJECT_DIR$/Memory-capsule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/Memory-capsule-app.iml" filepath="$PROJECT_DIR$/app/Memory-capsule-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MemoryCapsule.iml" filepath="$PROJECT_DIR$/MemoryCapsule.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/hellodaemon/hellodaemon.iml" filepath="$PROJECT_DIR$/hellodaemon/hellodaemon.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_base/lib_base.iml" filepath="$PROJECT_DIR$/lib_base/lib_base.iml" />
@@ -19,7 +18,6 @@
       <module fileurl="file://$PROJECT_DIR$/lib_setting/lib_setting.iml" filepath="$PROJECT_DIR$/lib_setting/lib_setting.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_splash/lib_splash.iml" filepath="$PROJECT_DIR$/lib_splash/lib_splash.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_user/lib_user.iml" filepath="$PROJECT_DIR$/lib_user/lib_user.iml" />
-      <module fileurl="file://$PROJECT_DIR$/test-Memory-capsule.iml" filepath="$PROJECT_DIR$/test-Memory-capsule.iml" />
     </modules>
   </component>
 </project>

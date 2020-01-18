@@ -2,7 +2,23 @@
     <string name="app_name">lib_user</string>
     <string name="user_notnull">用户名不能为空</string>
     <string name="pass_notnull">密码不能为空</string>
-    <string name="logup_success">登陆成功</string>
+    <string name="login_success">登陆成功</string>
     <string name="logup_fail">登陆失败</string>
     <string name="user_logup">注册</string>
+    <string name="logup_usernameinfo">请输入大于六位小于十六位的账号，数字和字母的组合:</string>
+    <string name="logup_passwordinfo">请输入大于六位小于十六位的密码，数字和字母的组合:</string>
+    <string name="logup_passconfirminfo">请输确认密码:</string>
+    <string name="logup_emailinfo">请输入您的邮箱:</string>
+    <string name="logup_usersex">请选择您的性别:</string>
+    <string name="logup_submit">提交</string>
+    <string name="logup_cancle">取消</string>
+    <string name="logup_not_null">请输入相关信息</string>
+    <string name="logup_username_error">账号不符合规则</string>
+    <string name="logup_userpass_error">密码不符合规则</string>
+    <string name="logup_useremail_error">邮箱不符合规则</string>
+    <string name="logup_userpaser_error">密码不符合规则</string>
+    <string name="logup_pass_not_error">两次密码不相同</string>
+    <string name="logup_user_repet">该账号已被注册，请重新输入</string>
+    <string name="logup_success">注册成功</string>
+    <string name="logup_failed">注册失败，请稍后再试</string>
 </resources>

@@ -6,6 +6,10 @@ public class LoginResponse implements Serializable {
 
     public static final int LOGIN_SUCCESS = 203;
 
+    public static final int LOGUP_REPET = 201;
+
+    public static final int LOGUP_SUCCESS = 0;
+
     /**
      * sex : 女
      * code : 0

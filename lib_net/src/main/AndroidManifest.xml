@@ -3,7 +3,9 @@
     package="com.zql.lib_net">
 
     <application>
-        <activity android:name=".view.NetMainActivity"></activity>
+        <activity
+            android:name=".view.NetMainActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

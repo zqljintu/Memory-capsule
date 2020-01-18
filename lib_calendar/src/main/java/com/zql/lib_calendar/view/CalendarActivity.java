@@ -59,7 +59,7 @@ public class CalendarActivity extends BaseLifecycleActivity<CalendarPresenter> i
     }
 
     private void initrecyclerview(){
-        recyclerView=(RecyclerView)this.findViewById(R.id.calendar_recycler);
+        recyclerView = findViewById(R.id.calendar_recycler);
         mPresenter.readNotebeanOnRecycler(Means.getCreatetime());
     }
     private void getIntentExtra(){
@@ -83,7 +83,7 @@ public class CalendarActivity extends BaseLifecycleActivity<CalendarPresenter> i
     @Override
     public void initCalendarViewandgetCreattime(List<String> mlist) {
         DPCManager.getInstance().setDecorTR(mlist);
-        datePicker=(DatePicker)this.findViewById(R.id.calendar_datapicker);
+        datePicker = findViewById(R.id.calendar_datapicker);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             datePicker.getChildAt(0).setBackgroundColor(integer0);
             datePicker.getChildAt(1).setBackgroundColor(integer0);
@@ -98,12 +98,7 @@ public class CalendarActivity extends BaseLifecycleActivity<CalendarPresenter> i
             }
 
         });
-        datePicker.setOnDatePickedListener(new DatePicker.OnDatePickedListener() {
-            @Override
-            public void onDatePicked(String date) {
-                mPresenter.readNotebeanOnRecycler(date);
-            }
-        });
+        datePicker.setOnDatePickedListener(date -> mPresenter.readNotebeanOnRecycler(date));
     }
 
     @Override
@@ -130,7 +125,7 @@ public class CalendarActivity extends BaseLifecycleActivity<CalendarPresenter> i
     }
 
     public void setMainBackgroundIcon(int size) {
-        RelativeLayout relativeLayout=(RelativeLayout)findViewById(R.id.calendar_empty);
+        RelativeLayout relativeLayout = findViewById(R.id.calendar_empty);
         if (size==0){
             relativeLayout.setVisibility(View.VISIBLE);
         }else {

@@ -9,6 +9,7 @@ import com.zql.comm.bean.NoteBean;
 import java.util.List;
 
 public interface CalendarContract {
+
     interface view extends IView{
         Context getCalendarActivity();
         void initCalendarViewandgetCreattime(List<String> mlist);
