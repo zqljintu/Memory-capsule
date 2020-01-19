@@ -71,6 +71,8 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
                 mText.setText(result.toString());
                 if (result.getCode() == LoginResponse.LOGIN_SUCCESS){
                     UserData.setUserIsLogin(true);
+                    UserData.setUserName(mEditUser.getText().toString());
+                    UserData.setUserSex(result.getSex());
                     UserData.setUserLoginToken(result.getToken());
                     ToastUtil.showToast(getString(R.string.login_success));
                     EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_NETCAPSULE));

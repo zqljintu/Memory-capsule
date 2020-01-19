@@ -21,4 +21,6 @@
     <string name="logup_user_repet">该账号已被注册，请重新输入</string>
     <string name="logup_success">注册成功</string>
     <string name="logup_failed">注册失败，请稍后再试</string>
+    <string name="louout_out">退出</string>
+    <string name="louout_reout">注销</string>
 </resources>

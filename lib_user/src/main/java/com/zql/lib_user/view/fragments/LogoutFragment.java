@@ -1,6 +1,8 @@
 package com.zql.lib_user.view.fragments;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zql.base.event.EventBusUtil;
 import com.zql.base.ui.mvp.BaseLifecycleFragment;
@@ -11,6 +13,11 @@ import com.zql.lib_user.view.UserFragment;
 
 public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> implements LogoutContract.view {
 
+    private ImageView mImageUser;
+
+    private TextView mTextUser;
+
+
     public static LogoutFragment newInstance(){
         return new LogoutFragment();
     }
@@ -18,7 +25,15 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
 
     @Override
     protected void initView(View view) {
-        find(R.id.out).setOnClickListener(v -> {
+        mImageUser = find(R.id.img_user);
+        mTextUser = find(R.id.name_user);
+        mTextUser.setText(UserData.getUserName());
+        if (UserData.getUserSex().equals("男")){
+            mImageUser.setImageResource(R.drawable.user_man);
+        }else {
+            mImageUser.setImageResource(R.drawable.user_woman);
+        }
+        find(R.id.text_logoutout).setOnClickListener(v -> {
             UserData.setUserIsLogin(false);
             UserData.setUserName("");
             UserData.setUserPass("");
@@ -30,6 +45,9 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
             }
         });
 
+        find(R.id.text_logoutreout).setOnClickListener(v -> {
+
+        });
     }
 
     @Override
