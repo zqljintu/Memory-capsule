@@ -13,6 +13,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -41,7 +42,7 @@ public interface ApiService {
      * 拉取接口
      */
     @GET("/api/show_capsules")
-    Observable<CapsulesResponse> loadCapsules();
+    Observable<CapsulesResponse> loadCapsules(@Query("page") int page);
 
     /**
      * capsuleSize接口

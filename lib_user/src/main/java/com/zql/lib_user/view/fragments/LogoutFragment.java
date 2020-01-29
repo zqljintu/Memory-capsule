@@ -17,6 +17,10 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
 
     private TextView mTextUser;
 
+    private TextView mTextNickName;
+
+    private TextView mTextUserTitle;
+
 
     public static LogoutFragment newInstance(){
         return new LogoutFragment();
@@ -27,12 +31,16 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
     protected void initView(View view) {
         mImageUser = find(R.id.img_user);
         mTextUser = find(R.id.name_user);
+        mTextNickName = find(R.id.text_nickname);
+        mTextUserTitle = find(R.id.text_usertitle);
         mTextUser.setText(UserData.getUserName());
         if (UserData.getUserSex().equals("男")){
             mImageUser.setImageResource(R.drawable.user_man);
         }else {
             mImageUser.setImageResource(R.drawable.user_woman);
         }
+        mTextUserTitle.setText(UserData.getUserTitle());
+        mTextNickName.setText(UserData.getUserNickname());
         find(R.id.text_logoutout).setOnClickListener(v -> {
             UserData.setUserIsLogin(false);
             UserData.setUserName("");

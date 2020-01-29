@@ -11,7 +11,7 @@ public interface CapsuleContract {
     }
 
     interface presenter {
-        void loadCapsuleDataFromService();//从服务器上拉取capsule数据
+        void loadCapsuleDataFromService(int page);//从服务器上拉取capsule数据
         void deleteCapsuleFromService(int pk);
     }
 }

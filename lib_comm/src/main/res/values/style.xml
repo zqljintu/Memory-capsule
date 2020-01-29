@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="common_custom_dialog" parent="@android:style/Theme.Dialog">
-        <item name="android:background">@drawable/common_bg_ad_rectangle</item>
+        <item name="android:background">@drawable/back_capsule</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>

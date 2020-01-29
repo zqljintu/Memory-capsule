@@ -33,7 +33,7 @@ public class CapsuleFragment extends BaseLifecycleFragment<CapsulePresenter> imp
         mNetCapsuleAdapter = new NetCapsuleAdapter(R.layout.item_capsule, mData, bean -> mPresenter.deleteCapsuleFromService(bean.getPk()));
         mRecyclerview.setAdapter(mNetCapsuleAdapter);
         if (UserData.getUserIsLogin()){
-            mPresenter.loadCapsuleDataFromService();
+            mPresenter.loadCapsuleDataFromService(1);
         }else {
             ToastUtil.showToast("未登录");
         }
@@ -69,7 +69,7 @@ public class CapsuleFragment extends BaseLifecycleFragment<CapsulePresenter> imp
     @Subscribe
     public void onMessageEvent(MessageEvent event){
         if (event.getMessageevent() == MessageEvent.UPDATE_NETCAPSULE){
-            mPresenter.loadCapsuleDataFromService();
+            mPresenter.loadCapsuleDataFromService(1);
         }else if (event.getMessageevent() == MessageEvent.UPDATE_LOGOUT){
             clearCapsuleData();
         }

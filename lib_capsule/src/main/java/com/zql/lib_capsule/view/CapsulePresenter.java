@@ -18,7 +18,7 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
     }
 
     @Override
-    public void loadCapsuleDataFromService() {
+    public void loadCapsuleDataFromService(int page) {
         mHttpdata.LoadCapsule(new OnHttpRequestListener<CapsulesResponse>() {
                     @Override
                     public void onHttpRequestSuccess(CapsulesResponse result) {
@@ -29,7 +29,7 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
                     public void onHttpRequestFailed(String error) {
 
                     }
-                });
+                },page);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
             @Override
             public void onHttpRequestSuccess(BaseResponse result) {
                 if (result.getCode() == BaseResponse.DELETE_SUCCESS){
-                    loadCapsuleDataFromService();
+                    loadCapsuleDataFromService(1);
                 }else {
                     getView().showMessage(result.getMsg());
                 }

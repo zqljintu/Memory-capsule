@@ -109,10 +109,10 @@ public class HttpData {
      * 拉取capsules方法
      * @param listener
      */
-    public void LoadCapsule(OnHttpRequestListener<CapsulesResponse> listener) {
+    public void LoadCapsule(OnHttpRequestListener<CapsulesResponse> listener, int page) {
         Disposable subscribe = HttpClient.getInstance()
                 .create(ApiService.class)
-                .loadCapsules()
+                .loadCapsules(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(capsulesResponse -> {

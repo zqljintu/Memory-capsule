@@ -70,6 +70,16 @@ public class Means {
             return note+"...";
         }
     }
+
+    public static String getNotetexOnCapsuleCard(String note){
+        int length=note.length();
+        if (length>=60){
+            return note.substring(0,60)+"...";
+        }else {
+            return note+"...";
+        }
+    }
+
     public static String getNoteTitleOnNoteinfoActivity(String note){
         int length=note.length();
         if (length<=5){

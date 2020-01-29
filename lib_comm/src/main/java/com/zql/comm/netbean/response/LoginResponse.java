@@ -2,6 +2,7 @@ package com.zql.comm.netbean.response;
 
 import java.io.Serializable;
 
+
 public class LoginResponse implements Serializable {
 
     public static final int LOGIN_SUCCESS = 203;
@@ -10,24 +11,37 @@ public class LoginResponse implements Serializable {
 
     public static final int LOGUP_SUCCESS = 0;
 
+
     /**
-     * sex : 女
-     * code : 0
-     * msg : logup_success
-     * token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InpxbHN3YyIsImV4cCI6MTU3OTI1MTMzMSwidXNlcl9pZCI6MX0.9LBS3zfXboByUFukGnYJ8RXjnCAgxK6MoTNdujIZazI
+     * usertitle : 我好穷啊
+     * token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJvcmlnX2lhdCI6MTU4MDI5NjAwNCwiZXhwIjoxNTgwMzgyNDA0LCJ1c2VybmFtZSI6InpxbHN3YSJ9.A99E9vKQ5_epQ32FPCmlFiLAN24mo1oezwaWVYkux1w
+     * code : 203
+     * msg : login_success
+     * sex : 男
+     * nickname : 尽途
      */
 
-    private String sex;
+    private String usertitle;
+    private String token;
     private int code;
     private String msg;
-    private String token;
+    private String sex;
+    private String nickname;
 
-    public String getSex() {
-        return sex;
+    public String getUsertitle() {
+        return usertitle;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setUsertitle(String usertitle) {
+        this.usertitle = usertitle;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public int getCode() {
@@ -46,11 +60,19 @@ public class LoginResponse implements Serializable {
         this.msg = msg;
     }
 
-    public String getToken() {
-        return token;
+    public String getSex() {
+        return sex;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

@@ -1,6 +1,7 @@
 package com.zql.lib_net.view;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
+import com.jaeger.library.StatusBarUtil;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.enums.PopupAnimation;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
@@ -66,6 +68,7 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
 
     @Override
     protected void initView() {
+        StatusBarUtil.setColor(this,Color.WHITE);
         mViewPager = find(R.id.net_viewpager);
         mAdd = find(R.id.fb_add);
         initNav();

@@ -32,14 +32,14 @@ public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBea
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, CapsulesResponse.ListBean item) {
-        ConstraintLayout concenter = helper.itemView.findViewById(R.id.con_center);
+        ConstraintLayout concapsule = helper.itemView.findViewById(R.id.con_capsule);
         ImageView imgmenu = helper.itemView.findViewById(R.id.img_menu);
-        helper.setText(R.id.text_content, item.getFields().getCapsule_content());
+        helper.setText(R.id.text_content, Means.getNotetexOnCapsuleCard(item.getFields().getCapsule_content()));
         helper.setText(R.id.text_day, showCreateTimeDay(item.getFields().getCapsule_create_time()));
         helper.setText(R.id.text_month, showCreateTimeMonth(item.getFields().getCapsule_create_time()));
         helper.setText(R.id.text_week_day, showCreateTimeWeekDay(item.getFields().getCapsule_create_time()));
         helper.setImageResource(R.id.img_type, getImageTypeRSId(item.getFields().getCapsule_type()));
-        concenter.setOnClickListener(v -> detailCapsuleItem(item));
+        concapsule.setOnClickListener(v -> detailCapsuleItem(item));
         imgmenu.setOnClickListener(v -> showCenterListMenu(helper, item));
     }
 
