@@ -39,6 +39,32 @@ public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBea
         helper.setText(R.id.text_month, showCreateTimeMonth(item.getFields().getCapsule_create_time()));
         helper.setText(R.id.text_week_day, showCreateTimeWeekDay(item.getFields().getCapsule_create_time()));
         helper.setImageResource(R.id.img_type, getImageTypeRSId(item.getFields().getCapsule_type()));
+        helper.setText(R.id.text_size, item.getFields().getCapsule_content().length() + "字");
+        if (Means.isEmpty(item.getFields().getCapsule_date())){
+            helper.setGone(R.id.img_time,false);
+        }else {
+            helper.setVisible(R.id.img_time,true);
+        }
+        if (Means.isEmpty(item.getFields().getCapsule_time())){
+            helper.setGone(R.id.img_clock,false);
+        }else {
+            helper.setVisible(R.id.img_clock,true);
+        }
+        if (Means.isEmpty(item.getFields().getCapsule_person())){
+            helper.setGone(R.id.img_people,false);
+        }else {
+            helper.setVisible(R.id.img_people,true);
+        }
+        if (Means.isEmpty(item.getFields().getCapsule_location())){
+            helper.setGone(R.id.img_location,false);
+        }else {
+            helper.setVisible(R.id.img_location,true);
+        }
+        if (Means.isEmpty(item.getFields().getCapsule_image())){
+            helper.setGone(R.id.img_photo,false);
+        }else {
+            helper.setVisible(R.id.img_photo,true);
+        }
         concapsule.setOnClickListener(v -> detailCapsuleItem(item));
         imgmenu.setOnClickListener(v -> showCenterListMenu(helper, item));
     }
