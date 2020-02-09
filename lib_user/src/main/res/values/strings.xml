@@ -3,6 +3,9 @@
     <string name="user_notnull">用户名不能为空</string>
     <string name="pass_notnull">密码不能为空</string>
     <string name="login_success">登陆成功</string>
+    <string name="login_title">登录</string>
+    <string name="login_username"> &#160;输入账号</string>
+    <string name="login_password"> &#160;输入密码</string>
     <string name="logup_fail">登陆失败</string>
     <string name="user_logup">注册</string>
     <string name="logup_usernameinfo">请输入大于六位小于十六位的账号，数字和字母的组合:</string>

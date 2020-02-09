@@ -21,12 +21,9 @@ import com.zql.lib_user.view.UserFragment;
 
 public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> implements LoginContract.view {
 
-
-    private TextView mText;
-
     private TextView mTextLogup;
 
-    private Button mButton;
+    private TextView mButton;
 
     private HttpData mHttData;
 
@@ -41,7 +38,6 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
     @Override
     protected void initView(View view) {
         mButton = find(R.id.button_login);
-        mText = find(R.id.text_user);
         mTextLogup = find(R.id.text_logup_submit);
         initEdit();
         mHttData = new HttpData();
@@ -68,7 +64,6 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
         mHttData.Login(new LoginRequest(user,pass),new OnHttpRequestListener<LoginResponse>() {
             @Override
             public void onHttpRequestSuccess(LoginResponse result) {
-                mText.setText(result.toString());
                 if (result.getCode() == LoginResponse.LOGIN_SUCCESS){
                     UserData.setUserIsLogin(true);
                     UserData.setUserName(mEditUser.getText().toString());
@@ -90,7 +85,6 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
 
             @Override
             public void onHttpRequestFailed(String error) {
-                mText.setText(error);
                 Log.d("zzzzzzzzzzzz","failed--->" + error);
             }
         });
