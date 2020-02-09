@@ -56,6 +56,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
             android:text="@string/user_logup"
             app:layout_constraintTop_toBottomOf="@id/edit_pass"
             app:layout_constraintEnd_toEndOf="@id/edit_pass"/>

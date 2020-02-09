@@ -4,22 +4,24 @@ import java.util.List;
 
 public class CapsulesResponse {
 
+    public static final int TOKEN_ERROR = 221;
+
     /**
      * list : [{"pk":6,"fields":{"capsule_date":"","capsule_image":"","capsule_person":"","capsule_create_time":"2020-01-13T01:28:47.909Z","capsule_type":"生活","capsule_id":"zqlswa","capsule_content":"对对对","capsule_location":"","capsule_time":""},"model":"memorycapsuleservice.capsule"},{"pk":1,"fields":{"capsule_date":"","capsule_image":"","capsule_person":"","capsule_create_time":"2020-01-08T14:14:41.635Z","capsule_type":"工作","capsule_id":"zqlswa","capsule_content":"001","capsule_location":"","capsule_time":""},"model":"memorycapsuleservice.capsule"}]
-     * error_name : 207
+     * code : 207
      * msg : success
      */
 
-    private int error_name;
+    private int code;
     private String msg;
     private List<ListBean> list;
 
-    public int getError_name() {
-        return error_name;
+    public int getCode() {
+        return code;
     }
 
-    public void setError_name(int error_name) {
-        this.error_name = error_name;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -197,7 +199,7 @@ public class CapsulesResponse {
     @Override
     public String toString() {
         return "CapsulesResponse{" +
-                "error_name=" + error_name +
+                "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", list=" + list.toString() +
                 '}';

@@ -1,8 +1,14 @@
 package com.zql.lib_capsule.view;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.LifecycleOwner;
 
+import com.zql.base.event.BaseEvent;
+import com.zql.base.event.EventBusUtil;
 import com.zql.base.ui.mvp.BasePresenter;
+import com.zql.base.utils.ToastUtil;
+import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.net.HttpData;
 import com.zql.comm.net.OnHttpRequestListener;
 import com.zql.comm.netbean.response.BaseResponse;
@@ -22,7 +28,12 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
         mHttpdata.LoadCapsule(new OnHttpRequestListener<CapsulesResponse>() {
                     @Override
                     public void onHttpRequestSuccess(CapsulesResponse result) {
-                        getView().setCapsuleDataToView(result);
+                        if (result.getCode() == CapsulesResponse.TOKEN_ERROR){
+                            ToastUtil.showToast("token失效");
+                            EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_LOGOUT));
+                        }else {
+                            getView().setCapsuleDataToView(result);
+                        }
                     }
 
                     @Override

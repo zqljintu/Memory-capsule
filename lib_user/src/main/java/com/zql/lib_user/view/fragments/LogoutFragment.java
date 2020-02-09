@@ -45,6 +45,7 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
             UserData.setUserIsLogin(false);
             UserData.setUserName("");
             UserData.setUserPass("");
+            UserData.setUserLoginToken("");
             EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_LOGOUT));
             if (getParentFragment() instanceof UserFragment){
                 if (null != getParentFragment()){

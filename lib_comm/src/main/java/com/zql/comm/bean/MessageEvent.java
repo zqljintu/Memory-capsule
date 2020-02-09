@@ -12,6 +12,8 @@ public class MessageEvent extends BaseEvent {
 
     public final static int UPDATE_LOGOUT = 3;
 
+    public final static int UPDATE_LOGIN = 4;
+
     private int messageevent;
     public MessageEvent(int event){
         this.messageevent=event;
