@@ -2,22 +2,24 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Memory-capsule.iml" filepath="$PROJECT_DIR$/Memory-capsule.iml" group="Memory-capsule" />
+      <module fileurl="file://$PROJECT_DIR$/app/Memory-capsule-app.iml" filepath="$PROJECT_DIR$/app/Memory-capsule-app.iml" group="Memory-capsule/app" />
       <module fileurl="file://$PROJECT_DIR$/MemoryCapsule.iml" filepath="$PROJECT_DIR$/MemoryCapsule.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hellodaemon/hellodaemon.iml" filepath="$PROJECT_DIR$/hellodaemon/hellodaemon.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_base/lib_base.iml" filepath="$PROJECT_DIR$/lib_base/lib_base.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_calendar/lib_calendar.iml" filepath="$PROJECT_DIR$/lib_calendar/lib_calendar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_capsule/lib_capsule.iml" filepath="$PROJECT_DIR$/lib_capsule/lib_capsule.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_chart/lib_chart.iml" filepath="$PROJECT_DIR$/lib_chart/lib_chart.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_comm/lib_comm.iml" filepath="$PROJECT_DIR$/lib_comm/lib_comm.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_edit/lib_edit.iml" filepath="$PROJECT_DIR$/lib_edit/lib_edit.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_info/lib_info.iml" filepath="$PROJECT_DIR$/lib_info/lib_info.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_main/lib_main.iml" filepath="$PROJECT_DIR$/lib_main/lib_main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_net/lib_net.iml" filepath="$PROJECT_DIR$/lib_net/lib_net.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_other/lib_other.iml" filepath="$PROJECT_DIR$/lib_other/lib_other.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_setting/lib_setting.iml" filepath="$PROJECT_DIR$/lib_setting/lib_setting.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_splash/lib_splash.iml" filepath="$PROJECT_DIR$/lib_splash/lib_splash.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_user/lib_user.iml" filepath="$PROJECT_DIR$/lib_user/lib_user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hellodaemon/hellodaemon.iml" filepath="$PROJECT_DIR$/hellodaemon/hellodaemon.iml" group="Memory-capsule/hellodaemon" />
+      <module fileurl="file://$PROJECT_DIR$/lib_base/lib_base.iml" filepath="$PROJECT_DIR$/lib_base/lib_base.iml" group="Memory-capsule/lib_base" />
+      <module fileurl="file://$PROJECT_DIR$/lib_calendar/lib_calendar.iml" filepath="$PROJECT_DIR$/lib_calendar/lib_calendar.iml" group="Memory-capsule/lib_calendar" />
+      <module fileurl="file://$PROJECT_DIR$/lib_capsule/lib_capsule.iml" filepath="$PROJECT_DIR$/lib_capsule/lib_capsule.iml" group="Memory-capsule/lib_capsule" />
+      <module fileurl="file://$PROJECT_DIR$/lib_chart/lib_chart.iml" filepath="$PROJECT_DIR$/lib_chart/lib_chart.iml" group="Memory-capsule/lib_chart" />
+      <module fileurl="file://$PROJECT_DIR$/lib_comm/lib_comm.iml" filepath="$PROJECT_DIR$/lib_comm/lib_comm.iml" group="Memory-capsule/lib_comm" />
+      <module fileurl="file://$PROJECT_DIR$/lib_edit/lib_edit.iml" filepath="$PROJECT_DIR$/lib_edit/lib_edit.iml" group="Memory-capsule/lib_edit" />
+      <module fileurl="file://$PROJECT_DIR$/lib_info/lib_info.iml" filepath="$PROJECT_DIR$/lib_info/lib_info.iml" group="Memory-capsule/lib_info" />
+      <module fileurl="file://$PROJECT_DIR$/lib_main/lib_main.iml" filepath="$PROJECT_DIR$/lib_main/lib_main.iml" group="Memory-capsule/lib_main" />
+      <module fileurl="file://$PROJECT_DIR$/lib_net/lib_net.iml" filepath="$PROJECT_DIR$/lib_net/lib_net.iml" group="Memory-capsule/lib_net" />
+      <module fileurl="file://$PROJECT_DIR$/lib_other/lib_other.iml" filepath="$PROJECT_DIR$/lib_other/lib_other.iml" group="Memory-capsule/lib_other" />
+      <module fileurl="file://$PROJECT_DIR$/lib_setting/lib_setting.iml" filepath="$PROJECT_DIR$/lib_setting/lib_setting.iml" group="Memory-capsule/lib_setting" />
+      <module fileurl="file://$PROJECT_DIR$/lib_splash/lib_splash.iml" filepath="$PROJECT_DIR$/lib_splash/lib_splash.iml" group="Memory-capsule/lib_splash" />
+      <module fileurl="file://$PROJECT_DIR$/lib_user/lib_user.iml" filepath="$PROJECT_DIR$/lib_user/lib_user.iml" group="Memory-capsule/lib_user" />
     </modules>
   </component>
 </project>

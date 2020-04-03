@@ -3,7 +3,6 @@ package com.zql.lib_user.view.fragments;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -16,6 +15,7 @@ import com.zql.comm.net.HttpData;
 import com.zql.comm.net.OnHttpRequestListener;
 import com.zql.comm.netbean.request.LoginRequest;
 import com.zql.comm.netbean.response.LoginResponse;
+import com.zql.comm.util.CapsuleAnimUtil;
 import com.zql.lib_user.R;
 import com.zql.lib_user.view.UserFragment;
 
@@ -54,11 +54,13 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
 
     private void initLogin(String user, String pass) {
         if (TextUtils.isEmpty(user)){
+            CapsuleAnimUtil.begainErrorAnim(mEditUser);
             ToastUtil.showToast(getString(R.string.user_notnull));
             return;
         }
         if (TextUtils.isEmpty(pass)){
             ToastUtil.showToast(getString(R.string.pass_notnull));
+            CapsuleAnimUtil.begainErrorAnim(mEditPass);
             return;
         }
         mHttData.Login(new LoginRequest(user,pass),new OnHttpRequestListener<LoginResponse>() {
@@ -79,6 +81,8 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
                         }
                     }
                 }else {
+                    CapsuleAnimUtil.begainErrorAnim(mEditUser);
+                    CapsuleAnimUtil.begainErrorAnim(mEditPass);
                     ToastUtil.showToast(getString(R.string.logup_fail));
                 }
             }

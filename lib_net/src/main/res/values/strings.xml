@@ -3,4 +3,5 @@
     <string name="net_capsule">胶囊</string>
     <string name="net_user">我的</string>
     <string name="net_add">添加</string>
+    <string name="net_local">本地模式</string>
 </resources>

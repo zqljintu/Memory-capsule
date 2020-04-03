@@ -4,6 +4,7 @@ import com.zql.base.ui.mvp.BasePresenter;
 import com.zql.comm.UserSeting;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.Noteinfo;
+import com.zql.comm.util.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class NoteInfoPresenter extends BasePresenter<NoteInfoContract.view> impl
         if (Means.isEmpty(noteinfo.getCreatetime())) {
 
         } else {
-            tags.add("创建于：" + noteinfo.getCreatetime());
+            tags.add("创建于：" + DateUtils.strToDateLong(noteinfo.getCreatetime()));
         }
         getView().readLabelinfotoNoteTagrroup(tags);
     }

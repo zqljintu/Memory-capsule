@@ -65,6 +65,8 @@ ext {
             'popumenu'             :'com.lxj:xpopup:1.8.10-x',
             'toptightmenu'         :'com.zaaach:toprightmenu:1.1.2',
             'bottomBar'            :'com.aurelhubert:ahbottomnavigation:2.3.4',
+            "easing"               : "com.daimajia.easing:library:2.0@aar",
+            "animations"           : "com.daimajia.androidanimations:library:2.3@aar",
     ]
 
 

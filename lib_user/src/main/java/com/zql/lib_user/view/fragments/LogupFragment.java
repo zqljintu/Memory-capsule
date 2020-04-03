@@ -17,6 +17,7 @@ import com.zql.comm.net.HttpData;
 import com.zql.comm.net.OnHttpRequestListener;
 import com.zql.comm.netbean.request.LogupRequest;
 import com.zql.comm.netbean.response.LoginResponse;
+import com.zql.comm.util.CapsuleAnimUtil;
 import com.zql.lib_user.R;
 import com.zql.lib_user.view.UserFragment;
 
@@ -83,38 +84,48 @@ public class LogupFragment extends BaseLifecycleFragment<LogupPresenter> impleme
     private void initSubmit() {
         if (TextUtils.isEmpty(mEditUser.getText().toString())){
             ToastUtil.showToast(getString(R.string.logup_not_null));
+            CapsuleAnimUtil.begainErrorAnim(mEditUser);
             return;
         }
         if (!RegularUtil.isCorrectUsername(mEditUser.getText().toString())){
             ToastUtil.showToast(getString(R.string.logup_username_error));
+            CapsuleAnimUtil.begainErrorAnim(mEditUser);
             return;
         }
         if (TextUtils.isEmpty(mEditEmail.getText().toString())){
             ToastUtil.showToast(getString(R.string.logup_not_null));
+            CapsuleAnimUtil.begainErrorAnim(mEditEmail);
             return;
         }
         if (!RegularUtil.isCorrectEmail(mEditEmail.getText().toString())){
             ToastUtil.showToast(getString(R.string.logup_useremail_error));
+            CapsuleAnimUtil.begainErrorAnim(mEditEmail);
             return;
         }
         if (TextUtils.isEmpty(mEditPass.getText().toString())){
             ToastUtil.showToast(getString(R.string.logup_not_null));
+            CapsuleAnimUtil.begainErrorAnim(mEditPass);
             return;
         }
         if (!RegularUtil.isCorrectPassword(mEditPass.getText().toString())){
             ToastUtil.showToast(getString(R.string.logup_userpass_error));
+            CapsuleAnimUtil.begainErrorAnim(mEditPass);
             return;
         }
         if (TextUtils.isEmpty(mEditPass.getText().toString())){
             ToastUtil.showToast(getString(R.string.logup_not_null));
+            CapsuleAnimUtil.begainErrorAnim(mEditPass);
             return;
         }
         if (!RegularUtil.isCorrectPassword(mEditPassConfirm.getText().toString())){
             ToastUtil.showToast(getString(R.string.logup_userpaser_error));
+            CapsuleAnimUtil.begainErrorAnim(mEditPassConfirm);
             return;
         }
         if (!mEditPass.getText().toString().equals(mEditPassConfirm.getText().toString())){
             ToastUtil.showToast(getString(R.string.logup_pass_not_error));
+            CapsuleAnimUtil.begainErrorAnim(mEditPass);
+            CapsuleAnimUtil.begainErrorAnim(mEditPassConfirm);
             return;
         }
         mHttpData.Logup(new LogupRequest()

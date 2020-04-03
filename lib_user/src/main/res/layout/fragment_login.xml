@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_title"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/con_top"
         app:layout_constraintEnd_toEndOf="@id/con_top"
@@ -29,7 +29,7 @@
         <EditText
             android:id="@+id/edit_user"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:shadowColor="@color/colorAccent"
             android:hint="@string/login_username"
@@ -43,7 +43,7 @@
         <EditText
             android:id="@+id/edit_pass"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:inputType="textPassword"
             android:layout_marginTop="20dp"
             android:paddingStart="10dp"
@@ -51,13 +51,17 @@
             app:layout_constraintTop_toBottomOf="@id/edit_user"
             android:textCursorDrawable="@drawable/edit_cursor"
             android:background="@drawable/back_edit"/>
+
+
         <TextView
             android:id="@+id/text_logup_submit"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:text="@string/user_logup"
+            android:textColor="#E91E63"
             app:layout_constraintTop_toBottomOf="@id/edit_pass"
             app:layout_constraintEnd_toEndOf="@id/edit_pass"/>
 
@@ -69,7 +73,7 @@
     <TextView
         android:id="@+id/button_login"
         android:textSize="20sp"
-        android:text="@string/logup_submit"
+        android:text="@string/logup_denglu"
         android:layout_width="0sp"
         android:layout_height="45dp"
         android:layout_marginTop="40dp"

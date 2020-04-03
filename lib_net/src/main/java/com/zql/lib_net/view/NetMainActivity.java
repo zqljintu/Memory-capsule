@@ -3,6 +3,7 @@ package com.zql.lib_net.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.zql.base.utils.ScreenUtil;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.NoteBean;
 import com.zql.comm.data.CommData;
+import com.zql.comm.data.UserData;
 import com.zql.comm.net.HttpData;
 import com.zql.comm.provider.ICapsuleProvider;
 import com.zql.comm.provider.IUserProvider;
@@ -59,6 +61,8 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
 
     private VpAdapter mVpAdapter;
 
+    private TextView mTextLocal;
+
 
 
     @Override
@@ -71,11 +75,12 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
         StatusBarUtil.setColor(this,Color.WHITE);
         mViewPager = find(R.id.net_viewpager);
         mAdd = find(R.id.fb_add);
+        mTextLocal = find(R.id.text_local);
         initNav();
         initVp();
         mAdd.setOnClickListener(v -> initCenterMenu());
         mHttpData = new HttpData();
-        find(R.id.text_local).setOnClickListener(v -> {
+        mTextLocal.setOnClickListener(v -> {
                     CommData.setLocalVerson();
                     ARouter.getInstance().build(RouteUrl.Url_MainActivity).navigation();
                     finish();
@@ -84,6 +89,10 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
     }
 
     private void initCenterMenu() {
+        if (!UserData.getUserIsLogin()){
+            mViewPager.setCurrentItem(1);
+            return;
+        }
         int offy = (int) (ScreenUtil.getRealHeight(this) * 0.6f);
         new XPopup.Builder(getContext())
                 .popupAnimation(PopupAnimation.ScaleAlphaFromCenter)
@@ -158,11 +167,13 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
             mTextCapsule.setTextColor(getResources().getColor(R.color.colorFloatingButton));
             mImgMore.setColorFilter(getResources().getColor(R.color.colorMenuBg));
             mTextMore.setTextColor(getResources().getColor(R.color.colorMenuBg));
+            mTextLocal.setVisibility(View.GONE);
         }else {
             mImgCapsule.setColorFilter(getResources().getColor(R.color.colorMenuBg));
             mTextCapsule.setTextColor(getResources().getColor(R.color.colorMenuBg));
             mImgMore.setColorFilter(getResources().getColor(R.color.colorFloatingButton));
             mTextMore.setTextColor(getResources().getColor(R.color.colorFloatingButton));
+            mTextLocal.setVisibility(View.VISIBLE);
         }
     }
 
