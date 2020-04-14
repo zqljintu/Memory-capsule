@@ -67,6 +67,7 @@ ext {
             'bottomBar'            :'com.aurelhubert:ahbottomnavigation:2.3.4',
             "easing"               : "com.daimajia.easing:library:2.0@aar",
             "animations"           : "com.daimajia.androidanimations:library:2.3@aar",
+            "imgpicker"            : 'com.yuyh.imgsel:library:2.0.6',
     ]
 
 

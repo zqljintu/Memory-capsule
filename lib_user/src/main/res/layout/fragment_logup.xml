@@ -4,130 +4,164 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/text_cancle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/logup_cancle"
-        android:textSize="15sp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:textColor="#E91E63"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/logup_title"
-        android:layout_marginTop="40dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <LinearLayout
-        android:id="@+id/lin_top"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="@string/logup_usernameinfo"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
 
-        <EditText
-            android:id="@+id/edit_user"
-            android:paddingStart="5dp"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textCursorDrawable="@drawable/edit_cursor"
-            android:background="@drawable/back_edit"/>
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/text_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logup_cancle"
+                android:textSize="15sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:textColor="#E91E63"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="@string/logup_emailinfo"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logup_title"
+                android:layout_marginTop="40dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        <EditText
-            android:id="@+id/edit_email"
-            android:paddingStart="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textCursorDrawable="@drawable/edit_cursor"
-            android:background="@drawable/back_edit"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="@string/logup_usersex"/>
+            <LinearLayout
+                android:id="@+id/lin_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="100dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-        <org.angmarch.views.NiceSpinner
-            android:id="@+id/spiner_sex"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="12sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="@string/logup_passwordinfo"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/logup_usernameinfo"/>
 
-        <EditText
-            android:id="@+id/edit_pass"
-            android:paddingStart="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:inputType="textPassword"
-            android:textCursorDrawable="@drawable/edit_cursor"
-            android:background="@drawable/back_edit"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="@string/logup_passconfirminfo"/>
+                <EditText
+                    android:id="@+id/edit_user"
+                    android:paddingStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textCursorDrawable="@drawable/edit_cursor"
+                    android:background="@drawable/back_edit"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/logup_userimginfo"/>
 
-        <EditText
-            android:id="@+id/edit_pass_confirm"
-            android:paddingStart="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:inputType="textPassword"
-            android:textCursorDrawable="@drawable/edit_cursor"
-            android:background="@drawable/back_edit"/>
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/edit_userimg"
+                    android:paddingStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textCursorDrawable="@drawable/edit_cursor"
+                    android:background="@drawable/back_edit"/>
 
-    <TextView
-        android:id="@+id/text_logup_submit"
-        android:textSize="20sp"
-        android:text="@string/logup_submit"
-        android:layout_width="0sp"
-        android:layout_height="45dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:textColor="#ffffff"
-        android:background="@drawable/background_submit"
-        app:layout_constraintTop_toBottomOf="@+id/lin_top"
-        app:layout_constraintStart_toStartOf="@id/lin_top"
-        app:layout_constraintEnd_toEndOf="@id/lin_top" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/logup_emailinfo"/>
+
+                <EditText
+                    android:id="@+id/edit_email"
+                    android:paddingStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textCursorDrawable="@drawable/edit_cursor"
+                    android:background="@drawable/back_edit"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/logup_usersex"/>
+
+                <org.angmarch.views.NiceSpinner
+                    android:id="@+id/spiner_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="12sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/logup_passwordinfo"/>
+
+                <EditText
+                    android:id="@+id/edit_pass"
+                    android:paddingStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="textPassword"
+                    android:textCursorDrawable="@drawable/edit_cursor"
+                    android:background="@drawable/back_edit"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/logup_passconfirminfo"/>
+
+                <EditText
+                    android:id="@+id/edit_pass_confirm"
+                    android:paddingStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="textPassword"
+                    android:textCursorDrawable="@drawable/edit_cursor"
+                    android:background="@drawable/back_edit"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_logup_submit"
+                android:textSize="20sp"
+                android:text="@string/logup_submit"
+                android:layout_width="0sp"
+                android:layout_height="45dp"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/background_submit"
+                app:layout_constraintTop_toBottomOf="@+id/lin_top"
+                app:layout_constraintStart_toStartOf="@id/lin_top"
+                app:layout_constraintEnd_toEndOf="@id/lin_top" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toBottomOf="@+id/text_logup_submit"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

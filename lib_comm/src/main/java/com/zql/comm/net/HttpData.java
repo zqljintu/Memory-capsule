@@ -9,13 +9,18 @@ import com.zql.comm.netbean.response.CapsulesResponse;
 import com.zql.comm.netbean.response.LoginResponse;
 import com.zql.comm.netbean.response.SizeResponse;
 
+import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class HttpData {
 
@@ -32,14 +37,24 @@ public class HttpData {
      */
 
     public void Logup( LogupRequest logupRequest, OnHttpRequestListener<LoginResponse> listener) {
-        Map<String, String> map = new HashMap<>();
-        map.put("username",logupRequest.getUsername());
-        map.put("password",logupRequest.getPassword());
-        map.put("email",logupRequest.getEmail());
-        map.put("sex",logupRequest.getSex());
+        File file = null;
+        RequestBody body = null;
+        MultipartBody.Builder builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);//表单类型
+        if (logupRequest.getmUserImg() != null){
+            file = new File(logupRequest.getmUserImg());
+            body = RequestBody.create(MediaType.parse("multipart/form-data"),file);//表单类型
+        }
+        builder.addFormDataPart("username",logupRequest.getUsername());//传入服务器需要的key，和相应value值
+        builder.addFormDataPart("password",logupRequest.getPassword());//传入服务器需要的key，和相应value值
+        builder.addFormDataPart("email",logupRequest.getEmail());//传入服务器需要的key，和相应value值
+        builder.addFormDataPart("sex",logupRequest.getSex());//传入服务器需要的key，和相应value值
+        if (file != null && body != null){
+            builder.addFormDataPart("userimage",file.getName(),body); //添加图片数据，body创建的请求体
+        }
         Disposable subscribe = HttpClient.getInstance()
                 .create(ApiService.class)
-                .logup(map)
+                .logup(builder.build().parts())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(loginResponse -> {

@@ -1,5 +1,7 @@
 package com.zql.comm.netbean.request;
 
+import android.graphics.Bitmap;
+
 public class LogupRequest {
 
     private String username;
@@ -9,6 +11,8 @@ public class LogupRequest {
     private String email;
 
     private String sex;
+
+    private String mUserImg;
 
     public LogupRequest setUsername(String username) {
         this.username = username;
@@ -44,5 +48,13 @@ public class LogupRequest {
 
     public String getSex() {
         return sex;
+    }
+
+    public String getmUserImg() {
+        return mUserImg;
+    }
+
+    public void setmUserImg(String mUserImg) {
+        this.mUserImg = mUserImg;
     }
 }

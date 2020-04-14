@@ -9,6 +9,8 @@ import com.zql.base.event.EventBusUtil;
 import com.zql.base.ui.mvp.BasePresenter;
 import com.zql.base.utils.ToastUtil;
 import com.zql.comm.bean.MessageEvent;
+import com.zql.comm.data.CommData;
+import com.zql.comm.data.UserData;
 import com.zql.comm.net.HttpData;
 import com.zql.comm.net.OnHttpRequestListener;
 import com.zql.comm.netbean.response.BaseResponse;
@@ -25,6 +27,10 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
 
     @Override
     public void loadCapsuleDataFromService(int page) {
+        if (UserData.getUserLoginToken().equals("")){
+            ToastUtil.showToast("请登录");
+            return;
+        }
         mHttpdata.LoadCapsule(new OnHttpRequestListener<CapsulesResponse>() {
                     @Override
                     public void onHttpRequestSuccess(CapsulesResponse result) {

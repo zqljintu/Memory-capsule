@@ -13,6 +13,7 @@
     <string name="logup_passwordinfo">请输入大于六位小于十六位的密码，数字和字母的组合:</string>
     <string name="logup_passconfirminfo">请输确认密码:</string>
     <string name="logup_emailinfo">请输入您的邮箱:</string>
+    <string name="logup_userimginfo">请自定义一个头像:</string>
     <string name="logup_usersex">请选择您的性别:</string>
     <string name="logup_submit">提交</string>
     <string name="logup_denglu">登陆</string>
