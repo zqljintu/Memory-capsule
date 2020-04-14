@@ -33,4 +33,5 @@
     <color name="colorNormal">#868992</color>
     <color name="colorMenuBg">#C5C3C3</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorSplash">#7BD1CE</color>
 </resources>

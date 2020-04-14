@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">lib_splash</string>
+    <string name="splash_start">开始</string>
 </resources>

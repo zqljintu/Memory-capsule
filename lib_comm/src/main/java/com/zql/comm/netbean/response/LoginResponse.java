@@ -19,6 +19,7 @@ public class LoginResponse implements Serializable {
      * token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJvcmlnX2lhdCI6MTU4MDI5NjAwNCwiZXhwIjoxNTgwMzgyNDA0LCJ1c2VybmFtZSI6InpxbHN3YSJ9.A99E9vKQ5_epQ32FPCmlFiLAN24mo1oezwaWVYkux1w
      * code : 203
      * msg : login_success
+     * userimage : xxxx
      * sex : 男
      * nickname : 尽途
      */
@@ -29,6 +30,7 @@ public class LoginResponse implements Serializable {
     private String msg;
     private String sex;
     private String nickname;
+    private String userimage;
 
     public String getUsertitle() {
         return usertitle;
@@ -76,5 +78,13 @@ public class LoginResponse implements Serializable {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getUserimage() {
+        return userimage;
+    }
+
+    public void setUserimage(String userimage) {
+        this.userimage = userimage;
     }
 }

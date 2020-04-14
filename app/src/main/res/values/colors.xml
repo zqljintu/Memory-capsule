@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--主色调-->
+    <color name="comm_title_bar_color">#272423</color>
+
+    <color name="main_bottom_active_color">#272423</color>
+    <color name="main_bottom_normal_color">#929292</color>
+
+    <color name="common_white_color">#fff</color>
+    <color name="dialog">#9A0C0C0C</color>
+</resources>
