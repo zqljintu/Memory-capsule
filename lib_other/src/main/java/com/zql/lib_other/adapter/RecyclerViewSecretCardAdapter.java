@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.route.RouteKey;
 import com.zql.comm.route.RouteUrl;
 import com.zql.lib_other.R;
 import com.zql.lib_other.view.serect.ListSecretPresenter;
@@ -102,8 +103,8 @@ public class RecyclerViewSecretCardAdapter extends RecyclerView.Adapter<Recycler
             @Override
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
-                bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-                ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
+                bundle.putSerializable(RouteKey.CAPSULE_INFO, Means.changefromNotebean(noteBean));
+                ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle(RouteKey.NOTE_INFO,bundle).navigation();
             }
         });
     }

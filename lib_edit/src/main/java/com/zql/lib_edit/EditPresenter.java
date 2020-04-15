@@ -33,7 +33,7 @@ public class EditPresenter extends BasePresenter<EditContract.view> implements E
      */
     @Override
     public void saveNoteinfotoDatabase(NoteBean noteBean) {
-        if (noteBean.getId()!=null){
+        if (noteBean.getId() != null){
             noteInfoModelImp.ChangeNotetoData(noteBean);
         }else {
             noteInfoModelImp.InsertNotetoData(noteBean);

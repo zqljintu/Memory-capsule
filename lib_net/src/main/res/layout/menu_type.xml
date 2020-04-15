@@ -29,6 +29,17 @@
         app:layout_constraintCircleAngle="60"
         app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/note_travel"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/img_type4"
+        app:layout_constraintStart_toStartOf="@id/img_type4"
+        app:layout_constraintEnd_toEndOf="@id/img_type4"/>
+
     <ImageView
         android:id="@+id/img_type3"
         android:padding="10dp"
@@ -40,6 +51,17 @@
         app:layout_constraintCircleAngle="30"
         app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/note_study"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/img_type3"
+        app:layout_constraintStart_toStartOf="@id/img_type3"
+        app:layout_constraintEnd_toEndOf="@id/img_type3"/>
+
     <ImageView
         android:id="@+id/img_type2"
         android:padding="10dp"
@@ -51,6 +73,17 @@
         app:layout_constraintCircleAngle="0"
         app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/note_live"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/img_type2"
+        app:layout_constraintStart_toStartOf="@id/img_type2"
+        app:layout_constraintEnd_toEndOf="@id/img_type2"/>
+
     <ImageView
         android:id="@+id/img_type1"
         android:padding="10dp"
@@ -62,6 +95,17 @@
         app:layout_constraintCircleAngle="330"
         app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/note_diary"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/img_type1"
+        app:layout_constraintStart_toStartOf="@id/img_type1"
+        app:layout_constraintEnd_toEndOf="@id/img_type1"/>
+
     <ImageView
         android:id="@+id/img_type0"
         android:padding="10dp"
@@ -73,5 +117,15 @@
         app:layout_constraintCircleAngle="300"
         app:layout_constraintCircleRadius="150dp"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/note_work"
+        android:textColor="#ffffff"
+        app:layout_constraintTop_toBottomOf="@id/img_type0"
+        app:layout_constraintStart_toStartOf="@id/img_type0"
+        app:layout_constraintEnd_toEndOf="@id/img_type0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

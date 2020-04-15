@@ -49,6 +49,12 @@ public interface ApiService {
     Observable<CapsulesResponse> loadCapsules(@Query("page") int page);
 
     /**
+     * 拉取用户信息
+     */
+    @GET("/api/user_info")
+    Observable<LoginResponse> getUserInfo();
+
+    /**
      * capsuleSize接口
      */
     @FormUrlEncoded

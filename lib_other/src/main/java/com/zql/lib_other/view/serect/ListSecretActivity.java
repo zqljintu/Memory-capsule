@@ -22,6 +22,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.route.RouteKey;
 import com.zql.comm.route.RouteUrl;
 import com.zql.lib_other.R;
 import com.zql.lib_other.adapter.RecyclerViewSecretCardAdapter;
@@ -77,8 +78,8 @@ public class ListSecretActivity extends BaseLifecycleActivity<ListSecretPresente
         main_dialog.setBackgroundColor(color);
         list_dialog_linear_about.setOnClickListener(view -> {
             Bundle bundle=new Bundle();
-            bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
+            bundle.putSerializable(RouteKey.CAPSULE_INFO, Means.changefromNotebean(noteBean));
+            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle(RouteKey.NOTE_INFO,bundle).navigation();
             bottomSheetDialog.dismiss();
         });
         list_dialog_linear_delete.setOnClickListener(view -> {

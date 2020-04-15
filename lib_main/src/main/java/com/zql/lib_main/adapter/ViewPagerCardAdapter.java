@@ -2,6 +2,7 @@ package com.zql.lib_main.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.zql.base.utils.StringUtil;
 import com.zql.comm.UserSeting;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.NoteBean;
+import com.zql.comm.route.RouteKey;
 import com.zql.comm.route.RouteUrl;
 import com.zql.lib_main.R;
 import com.zql.lib_main.view.MainPresenter;
@@ -91,49 +93,41 @@ public class ViewPagerCardAdapter extends PagerAdapter {
         /**
          * 早期开发留下的弊端，必须满足老版本，所以添加photopath.equals("<图片>")||photopath.equals("null")两种状态判断条件
          */
-        switch (type){
-            case "生活":
-                lableview_item_viewpagercard.setImageResource(R.drawable.icon_live);
-                if (photopath.equals("<图片>")||photopath.equals("null")){
-                    imageview_item_viewpagercard.setImageResource(R.drawable.photo_live);
-                }else {
-                    Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
-                }
-                break;
-            case "工作":
-                lableview_item_viewpagercard.setImageResource(R.drawable.icon_work);
-                if (photopath.equals("<图片>")||photopath.equals("null")){
-                    imageview_item_viewpagercard.setImageResource(R.drawable.photo_work);
-                }else {
-                    Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
-                }
-                break;
-            case "日记":
-                lableview_item_viewpagercard.setImageResource(R.drawable.icon_diary);
-                if (photopath.equals("<图片>")||photopath.equals("null")){
-                    imageview_item_viewpagercard.setImageResource(R.drawable.photo_dilary);
-                }else {
-                    Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
-                }
-                break;
-            case "学习":
-                lableview_item_viewpagercard.setImageResource(R.drawable.icon_study);
-                if (photopath.equals("<图片>")||photopath.equals("null")){
-                    imageview_item_viewpagercard.setImageResource(R.drawable.photo_study);
-                }else {
-                    Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
-                }
-                break;
-            case "旅行":
-                lableview_item_viewpagercard.setImageResource(R.drawable.icon_travel);
-                if (photopath.equals("<图片>")||photopath.equals("null")){
-                    imageview_item_viewpagercard.setImageResource(R.drawable.photo_travel);
-                }else {
-                    Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
-                }
-                break;
-            default:
-                break;
+        if (Means.STR_WORK.equals(type)){
+            lableview_item_viewpagercard.setImageResource(R.drawable.icon_work);
+            if (TextUtils.isEmpty(photopath)){
+                imageview_item_viewpagercard.setImageResource(R.drawable.photo_work);
+            }else {
+                Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
+            }
+        }else if (Means.STR_LIVE.equals(type)){
+            lableview_item_viewpagercard.setImageResource(R.drawable.icon_live);
+            if (TextUtils.isEmpty(photopath)){
+                imageview_item_viewpagercard.setImageResource(R.drawable.photo_live);
+            }else {
+                Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
+            }
+        }else if (Means.STR_STUDY.equals(type)){
+            lableview_item_viewpagercard.setImageResource(R.drawable.icon_study);
+            if (TextUtils.isEmpty(photopath)){
+                imageview_item_viewpagercard.setImageResource(R.drawable.photo_study);
+            }else {
+                Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
+            }
+        }else if (Means.STR_DIARY.equals(type)){
+            lableview_item_viewpagercard.setImageResource(R.drawable.icon_diary);
+            if (TextUtils.isEmpty(photopath)){
+                imageview_item_viewpagercard.setImageResource(R.drawable.photo_dilary);
+            }else {
+                Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
+            }
+        }else if (Means.STR_TRAYEL.equals(type)){
+            lableview_item_viewpagercard.setImageResource(R.drawable.icon_travel);
+            if (TextUtils.isEmpty(photopath)){
+                imageview_item_viewpagercard.setImageResource(R.drawable.photo_travel);
+            }else {
+                Glide.with(UserSeting.getApplication()).load(photopath).into(imageview_item_viewpagercard);
+            }
         }
         container.addView(view);
         return view;
@@ -210,8 +204,8 @@ public class ViewPagerCardAdapter extends PagerAdapter {
     private void startNoteinfoActivity(View view,final NoteBean noteBean){
         view.setOnClickListener(view1 -> {
             Bundle bundle=new Bundle();
-            bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
+            bundle.putSerializable(RouteKey.CAPSULE_INFO, Means.changefromNotebean(noteBean));
+            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle(RouteKey.NOTE_INFO,bundle).navigation();
         });
     }
     public View getPrimaryItem(){

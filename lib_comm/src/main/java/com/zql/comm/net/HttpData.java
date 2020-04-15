@@ -244,6 +244,26 @@ public class HttpData {
         mCompositeDisposable.add(subscribe);
     }
 
+    /**
+     * 获取用户相关信息
+     */
+    public void getUserInfo(OnHttpRequestListener<LoginResponse> listener){
+        Disposable subscribe = HttpClient.getInstance()
+                .create(ApiService.class)
+                .getUserInfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(loginResponse -> {
+                    if (listener != null){
+                        listener.onHttpRequestSuccess(loginResponse);
+                    }
+                },throwable -> {
+                    if (listener != null){
+                        listener.onHttpRequestFailed(throwable.getMessage());
+                    }
+                });
+    }
+
     public void Destory(){
         if (null != mCompositeDisposable){
             mCompositeDisposable.clear();

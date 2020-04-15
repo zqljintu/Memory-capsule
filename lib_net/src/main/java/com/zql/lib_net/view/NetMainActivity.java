@@ -27,6 +27,7 @@ import com.zql.comm.data.UserData;
 import com.zql.comm.net.HttpData;
 import com.zql.comm.provider.ICapsuleProvider;
 import com.zql.comm.provider.IUserProvider;
+import com.zql.comm.route.RouteKey;
 import com.zql.comm.route.RouteUrl;
 import com.zql.lib_net.R;
 import com.zql.lib_net.adapter.VpAdapter;
@@ -104,11 +105,11 @@ public class NetMainActivity extends BaseLifecycleActivity<NetMainPresenter> imp
 
     private void startEditActivity(int type, NoteBean noteBean){
         Bundle bundle=new Bundle();
-        bundle.putInt("type",type);
+        bundle.putInt(RouteKey.CAPSULE_TYPE,type);
         if (noteBean!=null){
-            bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
+            bundle.putSerializable(RouteKey.CAPSULE_INFO, Means.changefromNotebean(noteBean));
         }
-        ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle("data",bundle).navigation();
+        ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle(RouteKey.EDIT_DATA,bundle).navigation();
     }
     private void initVp() {
         if (mCapsuleProvider != null && mCapsuleProvider.getCapsuleFragment() != null){

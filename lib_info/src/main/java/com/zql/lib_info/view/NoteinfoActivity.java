@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.zql.base.ui.mvp.BaseLifecycleActivity;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.Noteinfo;
+import com.zql.comm.route.RouteKey;
 import com.zql.comm.route.RouteUrl;
 import com.zql.lib_info.R;
 
@@ -60,8 +63,8 @@ public class NoteinfoActivity extends BaseLifecycleActivity<NoteInfoPresenter> i
      */
     private void getintentExtra(){
         Intent mintent=getIntent();
-        Bundle bundle=mintent.getBundleExtra("info");
-        Noteinfo noteinfo= (Noteinfo) bundle.getSerializable("noteinfo");
+        Bundle bundle=mintent.getBundleExtra(RouteKey.NOTE_INFO);
+        Noteinfo noteinfo= (Noteinfo) bundle.getSerializable(RouteKey.CAPSULE_INFO);
         mPresenter.readDatatoNoteinfo(noteinfo);
     }
     private void initToolbarSeting(){//toolbard的设置
@@ -107,26 +110,19 @@ public class NoteinfoActivity extends BaseLifecycleActivity<NoteInfoPresenter> i
 
     @Override
     public void readPhotopathtoNoteImageview(String photopath,String type) {
-        if (photopath.equals("<图片>")||photopath.equals("null")){
-            switch (type){
-                case "旅行":
-                    imageview_noteinfo.setImageResource(R.drawable.photo_travel);
-                    break;
-                case "学习":
-                    imageview_noteinfo.setImageResource(R.drawable.photo_study);
-                    break;
-                case "工作":
-                    imageview_noteinfo.setImageResource(R.drawable.photo_work);
-                    break;
-                case "日记":
-                    imageview_noteinfo.setImageResource(R.drawable.photo_dilary);
-                    break;
-                case "生活":
-                    imageview_noteinfo.setImageResource(R.drawable.photo_live);
-                    break;
-                default:
-                    imageview_noteinfo.setImageResource(R.drawable.photo_live);
-                    break;
+        if (TextUtils.isEmpty(photopath)){
+            if (Means.STR_WORK.equals(type)){
+                imageview_noteinfo.setImageResource(R.drawable.photo_work);
+            }else if (Means.STR_STUDY.equals(type)){
+                imageview_noteinfo.setImageResource(R.drawable.photo_study);
+            }else if (Means.STR_LIVE.equals(type)){
+                imageview_noteinfo.setImageResource(R.drawable.photo_live);
+            }else if (Means.STR_DIARY.equals(type)){
+                imageview_noteinfo.setImageResource(R.drawable.photo_dilary);
+            }else if (Means.STR_TRAYEL.equals(type)){
+                imageview_noteinfo.setImageResource(R.drawable.photo_travel);
+            }else {
+                imageview_noteinfo.setImageResource(R.drawable.photo_live);
             }
         }else {
             Glide.with(this).load(photopath).into(imageview_noteinfo);

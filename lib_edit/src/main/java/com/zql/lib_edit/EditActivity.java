@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ import com.yuyh.library.imgsel.common.ImageLoader;
 import com.yuyh.library.imgsel.config.ISListConfig;
 import com.zql.comm.data.CommData;
 import com.zql.comm.data.UserData;
+import com.zql.comm.route.RouteKey;
 import com.zql.comm.route.RouteUrl;
 
 
@@ -97,18 +99,18 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
     private void initviewanddata(){
         this.tags=new ArrayList<>();
         this.noteBean=new NoteBean();
-        tags.add("<类型>");
-        tags.add("<人物>");
-        tags.add("<日期>");
-        tags.add("<时间>");
-        tags.add("<地点>");
-        tags.add("<图片>");
-        noteBean.setNotetype("null");//默认为null
-        noteBean.setPeople("null");
-        noteBean.setDate("null");
-        noteBean.setTime("null");
-        noteBean.setLocation("null");
-        noteBean.setPhotopath("null");
+        tags.add("类型");
+        tags.add("人物");
+        tags.add("日期");
+        tags.add("时间");
+        tags.add("地点");
+        tags.add("图片");
+        noteBean.setNotetype("");
+        noteBean.setPeople("");
+        noteBean.setDate("");
+        noteBean.setTime("");
+        noteBean.setLocation("");
+        noteBean.setPhotopath("");
         noteBean.setIsshow(true);
         inittoolbarseting();
         initfloationgButton();
@@ -129,22 +131,22 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
      */
     private void initIntentExtra(){
         Intent mintent=getIntent();
-        Bundle bundle=mintent.getBundleExtra("data");
-        int type=bundle.getInt("type");
+        Bundle bundle=mintent.getBundleExtra(RouteKey.EDIT_DATA);
+        int type=bundle.getInt(RouteKey.CAPSULE_TYPE);
         switch (type){
-            case 0:
+            case RouteKey.CAPSULE_WORK:
                 updateTagsGroup(0,"工作");
                 break;
-            case 1:
+            case RouteKey.CAPSULE_STUDY:
                 updateTagsGroup(0,"学习");
                 break;
-            case 2:
+            case RouteKey.CAPSULE_LIVE:
                 updateTagsGroup(0,"生活");
                 break;
-            case 3:
+            case RouteKey.CAPSULE_DIARY:
                 updateTagsGroup(0,"日记");
                 break;
-            case 4:
+            case RouteKey.CAPSULE_TRAVEL:
                 updateTagsGroup(0,"旅行");
                 break;
             case 10:
@@ -507,19 +509,19 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
         if (!noteinfo.getNotetype().isEmpty()){
             updateTagsGroup(0,noteinfo.getNotetype());
         }
-        if (!noteinfo.getPeople().equals("null")){
+        if (!TextUtils.isEmpty(noteinfo.getPeople())){
             updateTagsGroup(1,noteinfo.getPeople());
         }
-        if (!noteinfo.getDate().equals("null")){
+        if (!TextUtils.isEmpty(noteinfo.getDate())){
             updateTagsGroup(2,noteinfo.getDate());
         }
-        if (!noteinfo.getTime().equals("null")){
+        if (!TextUtils.isEmpty(noteinfo.getTime())){
             updateTagsGroup(3,noteinfo.getTime());
         }
-        if (!noteinfo.getLocation().equals("null")){
+        if (!TextUtils.isEmpty(noteinfo.getLocation())){
             updateTagsGroup(4,noteinfo.getLocation());
         }
-        if (!noteinfo.getPhotopath().equals("图片")||!noteinfo.getPhotopath().equals("null")){
+        if (!TextUtils.isEmpty(noteinfo.getPhotopath())){
             updateTagsGroup(5,noteinfo.getPhotopath());
         }
     }
@@ -553,8 +555,8 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
             case 5:
                 noteBean.setPhotopath(str);
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
         tagGroup.setTags(tags);
     }

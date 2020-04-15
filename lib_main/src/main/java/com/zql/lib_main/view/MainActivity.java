@@ -32,6 +32,7 @@ import com.zql.comm.bean.Means;
 import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.bean.NoteBean;
 import com.zql.comm.data.CommData;
+import com.zql.comm.route.RouteKey;
 import com.zql.comm.route.RouteUrl;
 import com.zql.comm.widget.ChangeTextViewSpace;
 import com.zql.comm.widget.PasswordView.KeyPasswordView;
@@ -156,11 +157,11 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
 
     private void startEditActivity(int type, NoteBean noteBean){
         Bundle bundle=new Bundle();
-        bundle.putInt("type",type);
+        bundle.putInt(RouteKey.CAPSULE_TYPE,type);
         if (noteBean!=null){
-            bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
+            bundle.putSerializable(RouteKey.CAPSULE_INFO, Means.changefromNotebean(noteBean));
         }
-        ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle("data",bundle).navigation();
+        ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle(RouteKey.EDIT_DATA,bundle).navigation();
     }
 
 
@@ -227,8 +228,8 @@ public class MainActivity extends BaseLifecycleActivity<MainPresenter> implement
         main_dialog_linear_change = dialogview.findViewById(R.id.main_dialog_linear_change);
         main_dialog_linear_about.setOnClickListener(view -> {
             Bundle bundle=new Bundle();
-            bundle.putSerializable("noteinfo", Means.changefromNotebean(noteBean));
-            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info", bundle).navigation();
+            bundle.putSerializable(RouteKey.CAPSULE_INFO, Means.changefromNotebean(noteBean));
+            ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle(RouteKey.NOTE_INFO, bundle).navigation();
             bottomSheetDialog.dismiss();
         });
         main_dialog_friendspace.setOnClickListener(view -> {

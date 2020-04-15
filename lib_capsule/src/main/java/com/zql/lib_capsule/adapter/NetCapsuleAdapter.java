@@ -14,6 +14,7 @@ import com.lxj.xpopup.XPopup;
 import com.zql.base.utils.TimeUtils;
 import com.zql.comm.bean.Means;
 import com.zql.comm.netbean.response.CapsulesResponse;
+import com.zql.comm.route.RouteKey;
 import com.zql.comm.route.RouteUrl;
 import com.zql.lib_capsule.R;
 
@@ -93,15 +94,15 @@ public class NetCapsuleAdapter extends BaseQuickAdapter<CapsulesResponse.ListBea
 
     private void detailCapsuleItem(CapsulesResponse.ListBean item){
         Bundle bundle=new Bundle();
-        bundle.putSerializable("noteinfo", Means.changefromNetbean(item));
-        ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle("info",bundle).navigation();
+        bundle.putSerializable(RouteKey.CAPSULE_INFO, Means.changefromNetbean(item));
+        ARouter.getInstance().build(RouteUrl.Url_NoteinfoActivity).withBundle(RouteKey.NOTE_INFO,bundle).navigation();
     }
 
     private void editCapsuleItem(CapsulesResponse.ListBean item){
         Bundle bundle=new Bundle();
-        bundle.putInt("type",10);
-        bundle.putSerializable("noteinfo",Means.changefromNetbean(item));
-        ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle("data",bundle);
+        bundle.putInt(RouteKey.CAPSULE_TYPE,10);
+        bundle.putSerializable(RouteKey.CAPSULE_INFO,Means.changefromNetbean(item));
+        ARouter.getInstance().build(RouteUrl.Url_EditActivity).withBundle(RouteKey.EDIT_DATA,bundle).navigation();
     }
 
     private void shareCapsuleItem(CapsulesResponse.ListBean item){

@@ -67,7 +67,7 @@ public class Means {
         if (length>=20){
             return note.substring(0,20)+"...";
         }else {
-            return note+"...";
+            return note;
         }
     }
 
@@ -76,7 +76,7 @@ public class Means {
         if (length>=60){
             return note.substring(0,60)+"...";
         }else {
-            return note+"...";
+            return note;
         }
     }
 
