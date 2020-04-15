@@ -68,6 +68,7 @@ ext {
             "easing"               : "com.daimajia.easing:library:2.0@aar",
             "animations"           : "com.daimajia.androidanimations:library:2.3@aar",
             "imgpicker"            : 'com.yuyh.imgsel:library:2.0.6',
+            "refreshlayout"        : 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'  //1.0.5及以前版本的老用户升级需谨慎，API改动过大
     ]
 
 

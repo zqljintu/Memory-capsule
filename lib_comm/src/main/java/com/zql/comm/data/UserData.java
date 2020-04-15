@@ -11,6 +11,8 @@ public class UserData {
 
     private static final String USER_NICKNAME = "user_nickname";
 
+    private static final String USER_IMG = "user_img";
+
     private static final String USER_TITLE = "user_title";
 
     private static final String USER_ISLOGIN = "user_islogin";
@@ -85,6 +87,13 @@ public class UserData {
         SpUtil.putString(USER_LOGIN_TOKEN, token);
     }
 
+    public static void setUserImgUrl(String url){
+        SpUtil.putString(USER_IMG, url);
+    }
+
+    public static String getUserImgUrl(){
+        return  SpUtil.getString(USER_IMG,"");
+    }
 
     public static void cleanUserAndPass(){
         SpUtil.removeKey(USER_NAME);

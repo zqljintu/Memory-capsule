@@ -15,6 +15,8 @@ public class CapsulesResponse {
     private int code;
     private String msg;
     private List<ListBean> list;
+    private int page;
+    private int pagecount;
 
     public int getCode() {
         return code;
@@ -38,6 +40,22 @@ public class CapsulesResponse {
 
     public void setList(List<ListBean> list) {
         this.list = list;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPagecount() {
+        return pagecount;
+    }
+
+    public void setPagecount(int pagecount) {
+        this.pagecount = pagecount;
     }
 
     public static class ListBean {

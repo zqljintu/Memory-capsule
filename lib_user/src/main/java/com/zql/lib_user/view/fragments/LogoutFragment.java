@@ -1,13 +1,16 @@
 package com.zql.lib_user.view.fragments;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zql.base.event.EventBusUtil;
 import com.zql.base.ui.mvp.BaseLifecycleFragment;
 import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.data.UserData;
+import com.zql.comm.util.NetUtil;
 import com.zql.lib_user.R;
 import com.zql.lib_user.view.UserFragment;
 
@@ -34,10 +37,14 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
         mTextNickName = find(R.id.text_nickname);
         mTextUserTitle = find(R.id.text_usertitle);
         mTextUser.setText(UserData.getUserName());
-        if (UserData.getUserSex().equals("男")){
-            mImageUser.setImageResource(R.drawable.user_man);
+        if (TextUtils.isEmpty(UserData.getUserImgUrl())){
+            if (UserData.getUserSex().equals("男")){
+                mImageUser.setImageResource(R.drawable.user_man);
+            }else {
+                mImageUser.setImageResource(R.drawable.user_woman);
+            }
         }else {
-            mImageUser.setImageResource(R.drawable.user_woman);
+            Glide.with(this).load(NetUtil.getImageUrl(UserData.getUserImgUrl())).into(mImageUser);
         }
         mTextUserTitle.setText(UserData.getUserTitle());
         mTextNickName.setText(UserData.getUserNickname());

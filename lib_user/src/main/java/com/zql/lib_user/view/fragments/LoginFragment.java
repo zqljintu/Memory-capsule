@@ -73,6 +73,7 @@ public class LoginFragment extends BaseLifecycleFragment<LoginPresenter> impleme
                     UserData.setUserLoginToken(result.getToken());
                     UserData.setUserNickname(result.getNickname());
                     UserData.setUserTitle(result.getUsertitle());
+                    UserData.setUserImgUrl(result.getUserimage());
                     ToastUtil.showToast(getString(R.string.login_success));
                     EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_NETCAPSULE));
                     if (null != getParentFragment()){

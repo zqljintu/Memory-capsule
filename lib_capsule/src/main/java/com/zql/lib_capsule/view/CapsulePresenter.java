@@ -20,16 +20,30 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
 
     private HttpData mHttpdata;
 
+    private int currentPage = 1;
+
+    private int pageCount = 1;
+
     public CapsulePresenter(CapsuleContract.view view) {
         super(view);
         mHttpdata = new HttpData();
     }
 
     @Override
-    public void loadCapsuleDataFromService(int page) {
+    public void loadCapsuleDataFromService(boolean more) {
         if (UserData.getUserLoginToken().equals("")){
             ToastUtil.showToast("请登录");
             return;
+        }
+        if (more){
+            if (currentPage < pageCount){
+                currentPage ++;
+            }else {
+                getView().closeProgress();
+                return;
+            }
+        }else {
+            currentPage = 1;
         }
         mHttpdata.LoadCapsule(new OnHttpRequestListener<CapsulesResponse>() {
                     @Override
@@ -38,7 +52,9 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
                             ToastUtil.showToast("token失效");
                             EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_LOGOUT));
                         }else {
-                            getView().setCapsuleDataToView(result);
+                            pageCount = result.getPagecount();
+                            currentPage = result.getPage();
+                            getView().setCapsuleDataToView(more,result);
                         }
                     }
 
@@ -46,7 +62,7 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
                     public void onHttpRequestFailed(String error) {
 
                     }
-                },page);
+                },currentPage);
     }
 
     @Override
@@ -55,7 +71,7 @@ public class CapsulePresenter extends BasePresenter<CapsuleContract.view> implem
             @Override
             public void onHttpRequestSuccess(BaseResponse result) {
                 if (result.getCode() == BaseResponse.DELETE_SUCCESS){
-                    loadCapsuleDataFromService(1);
+                    loadCapsuleDataFromService(false);
                 }else {
                     getView().showMessage(result.getMsg());
                 }

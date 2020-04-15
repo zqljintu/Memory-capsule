@@ -226,9 +226,12 @@ public class LogupFragment extends BaseLifecycleFragment<LogupPresenter> impleme
                             ToastUtil.showToast(getString(R.string.logup_user_repet));
                         }else if (result.getCode() == LoginResponse.LOGUP_SUCCESS){
                             UserData.setUserIsLogin(true);
-                            UserData.setUserName(mEditUser.getText().toString());
+                            UserData.setUserName(request.getUsername());
                             UserData.setUserSex(result.getSex());
                             UserData.setUserLoginToken(result.getToken());
+                            UserData.setUserImgUrl(result.getUserimage());
+                            UserData.setUserNickname(result.getNickname());
+                            UserData.setUserTitle(result.getUsertitle());
                             EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_NETCAPSULE));
                             ToastUtil.showToast(getString(R.string.logup_success));
                             if (getParentFragment() != null){
