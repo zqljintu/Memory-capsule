@@ -612,4 +612,10 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
     public void finish() {
         super.finish();
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
