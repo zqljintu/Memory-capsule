@@ -8,8 +8,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zql.base.event.EventBusUtil;
 import com.zql.base.ui.mvp.BaseLifecycleFragment;
+import com.zql.base.utils.ToastUtil;
 import com.zql.comm.bean.MessageEvent;
 import com.zql.comm.data.UserData;
+import com.zql.comm.dialog.DialogFactory;
+import com.zql.comm.dialog.OnDialogListener;
 import com.zql.comm.util.NetUtil;
 import com.zql.lib_user.R;
 import com.zql.lib_user.view.UserFragment;
@@ -49,21 +52,44 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
         mTextUserTitle.setText(UserData.getUserTitle());
         mTextNickName.setText(UserData.getUserNickname());
         find(R.id.text_logoutout).setOnClickListener(v -> {
-            UserData.setUserIsLogin(false);
-            UserData.setUserName("");
-            UserData.setUserPass("");
-            UserData.setUserLoginToken("");
-            EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_LOGOUT));
-            if (getParentFragment() instanceof UserFragment){
-                if (null != getParentFragment()){
-                    ((UserFragment)getParentFragment()).initLoginFragment();
-                }
-            }
+            Exit();
         });
 
         find(R.id.text_logoutreout).setOnClickListener(v -> {
-
+            showConfirmPassDialog();
         });
+    }
+
+    private void showConfirmPassDialog(){
+        DialogFactory.createLogoutDialog(getContext(), new OnDialogListener() {
+            @Override
+            public void onConfirm(String pass) {
+                mPresenter.logoutFromService(pass);
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+        });
+    }
+
+    private void Exit(){
+        UserData.setUserIsLogin(false);
+        UserData.setUserName("");
+        UserData.setUserPass("");
+        UserData.setUserLoginToken("");
+        EventBusUtil.postEvent(new MessageEvent(MessageEvent.UPDATE_LOGOUT));
+        if (getParentFragment() instanceof UserFragment){
+            if (null != getParentFragment()){
+                ((UserFragment)getParentFragment()).initLoginFragment();
+            }
+        }
+    }
+
+    @Override
+    public void showToast(String str) {
+        ToastUtil.showToast(str);
     }
 
     @Override
@@ -74,5 +100,10 @@ public class LogoutFragment extends BaseLifecycleFragment<LogoutPresenter> imple
     @Override
     protected int getContentLayoutId() {
         return R.layout.fragment_logout;
+    }
+
+    @Override
+    public void logoutToView() {
+        Exit();
     }
 }

@@ -14,6 +14,7 @@
     <string name="rating_desc">your phone for %1$d days, cleaned \n%1$s junks. Please give us a 5-star!</string>
     <string name="rating_ok">OK</string>
     <string name="battery_btn_freeze">FREEZE</string>
+    <string name="lougout_pass">请输入密码确认</string>
 
     <string name="app_ID">300011869943</string>
     <string name="app_name">记忆胶囊</string>
@@ -23,5 +24,6 @@
     <string name="note_live">生活</string>
     <string name="note_travel">旅行</string>
     <string name="note_diary">日记</string>
+    <string name="log_submit">提交</string>
 
 </resources>
