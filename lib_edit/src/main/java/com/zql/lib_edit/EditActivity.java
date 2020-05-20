@@ -150,11 +150,11 @@ public class EditActivity extends BaseLifecycleActivity<EditPresenter> implement
                 updateTagsGroup(0,"旅行");
                 break;
             case 10:
-                Noteinfo noteinfo=(Noteinfo) bundle.getSerializable("noteinfo");
+                Noteinfo noteinfo=(Noteinfo) bundle.getSerializable(RouteKey.CAPSULE_INFO);
                 loadNoteinfotoEdit(noteinfo);
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
 
     }

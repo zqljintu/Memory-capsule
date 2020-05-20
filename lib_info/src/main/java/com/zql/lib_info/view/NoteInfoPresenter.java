@@ -1,12 +1,17 @@
 package com.zql.lib_info.view;
 
+import android.util.Log;
+
 import com.zql.base.ui.mvp.BasePresenter;
+import com.zql.base.utils.TimeUtils;
 import com.zql.comm.UserSeting;
 import com.zql.comm.bean.Means;
 import com.zql.comm.bean.Noteinfo;
+import com.zql.comm.data.CommData;
 import com.zql.comm.util.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class NoteInfoPresenter extends BasePresenter<NoteInfoContract.view> implements NoteInfoContract.presenter {
@@ -34,7 +39,11 @@ public class NoteInfoPresenter extends BasePresenter<NoteInfoContract.view> impl
         if (Means.isEmpty(noteinfo.getDate())) {
 
         } else {
-            tags.add("指定日期：" + noteinfo.getDate());
+            if (CommData.getIsLocalVersion()){
+                tags.add("指定日期：" + noteinfo.getDate());
+            }else {
+                tags.add("指定日期：" + showTime(noteinfo.getDate()));
+            }
         }
         if (Means.isEmpty(noteinfo.getTime())) {
 
@@ -46,12 +55,35 @@ public class NoteInfoPresenter extends BasePresenter<NoteInfoContract.view> impl
         } else {
             tags.add("指定地点：" + noteinfo.getLocation());
         }
-        if (Means.isEmpty(noteinfo.getCreatetime())) {
-
-        } else {
-            tags.add("创建于：" + DateUtils.strToDateLong(noteinfo.getCreatetime()));
+        if (!Means.isEmpty(noteinfo.getCreatetime())) {
+            if (CommData.getIsLocalVersion()){
+                tags.add("创建于：" + noteinfo.getCreatetime());
+            }else {
+                tags.add(showTime(noteinfo.getCreatetime()));
+            }
         }
         getView().readLabelinfotoNoteTagrroup(tags);
+    }
+
+    private String showTime(String time){
+        Calendar calendar = TimeUtils.getDataFromUTCTimeZone(time);
+        StringBuffer stringBuffer = new StringBuffer();
+        int year = calendar.get(Calendar.YEAR);
+        stringBuffer.append(year + "年");
+        int month = calendar.get(Calendar.MONTH) + 1;
+        if (month < 10){
+            stringBuffer.append( "0" + month + "月");
+        }else {
+            stringBuffer.append(month + "月");
+        }
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        if (day < 10){
+            stringBuffer.append( "0" + day + "日");
+        }else {
+            stringBuffer.append(day + "日");
+        }
+        Log.d("zzzzzzzzzzz",stringBuffer.toString());
+        return stringBuffer.toString();
     }
 
     @Override
